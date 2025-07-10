@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/menu.css" />
+    <title>Build Skill Toram</title>
+</head>
+
+<body>
+    <header class="navbar-container">
+        <div class="logo">
+            <img src="/IMG/LOGO/logo2.png" alt="Lucis_Caelum">
+        </div>
+        <nav class="nav-list">
+            <ul>
+                <li><a href="beranda.html">Beranda</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="kontak.html">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="sim">
+        <form action=""></form>
+        <div class="des">
+            <h1>Deskripsi</h1>
+            <label for="nama">Nama build</label><br>
+            <input type="text" name="nama" id="nama"><br>
+            <label for="deskripsi">Deskripsi</label><br>
+            <textarea name="deskripsi" id="deskripsi"></textarea>
+        </div>
+        <div class="stt">
+            <h1>Stat</h1>
+            <div class="stat">
+                <div>
+                    <label for="str" class="name_stat">STR</label>
+                    <input type="range" name="str" id="str" min="0" max="500" value="0"
+                        oninput="strOut.value = this.value">
+                    <output id="strOut">0</output>
+                </div>
+                <div>
+                    <label for="int" class="name_stat">INT</label>
+                    <input type="range" name="int" id="int" min="0" max="500" value="0"
+                        oninput="intOut.value = this.value">
+                    <output id="intOut">0</output>
+                </div>
+                <div>
+                    <label for="vit" class="name_stat">VIT</label>
+                    <input type="range" name="vit" id="vit" min="0" max="500" value="0"
+                        oninput="vitOut.value = this.value">
+                    <output id="vitOut">0</output>
+                </div>
+                <div>
+                    <label for="agi" class="name_stat">AGI</label>
+                    <input type="range" name="agi" id="agi" min="0" max="500" value="0"
+                        oninput="agiOut.value = this.value">
+                    <output id="agiOut">0</output>
+                </div>
+                <div>
+                    <label for="dex" class="name_stat">DEX</label>
+                    <input type="range" name="dex" id="dex" min="0" max="500" value="0"
+                        oninput="dexOut.value = this.value">
+                    <output id="dexOut">0</output>
+                </div>
+                <div>
+                    <select name="add" id="add" class="name_stat">
+                        <option value="???">???</option>
+                        <option value="CRT">LUK</option>
+                        <option value="LUK">TEC</option>
+                        <option value="MTL">MTL</option>
+                        <option value="TEC">CRT</option>
+                    </select>
+                    <input type="range" name="add" id="add" min="0" max="255" value="0"
+                        oninput="addOut.value = this.value">
+                    <output id="addOut">0</output>
+                </div>
+            </div>
+        </div>
+        <div class="skl">
+            <h1>Skill</h1>
+            <div class="skill_name">
+                <ul class="weap_skill">
+                    <li>
+                        <a class="nested" href="javascript:void(1);">
+                            Weapon Skills
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="#Blade" nav="true">Blade : <span id="spRightBlade">SP
+                                        </span></a></li>
+                                <li><a href="#Shot" nav="true">Shot : <span id="spRightShot">SP
+                                        </span></a></li>
+                                <li><a href="#Magic" nav="true">Magic : <span id="spRightMagic">SP
+                                        </span></a></li>
+                                <li><a href="#Martial" nav="true">Martial : <span id="spRightMartial">SP
+                                        </span></a></li>
+                                <li><a href="#DualSword" nav="true">DualSword : <span id="spRightDualSword">SP
+                                        </span></a></li>
+                                <li><a href="#Halberd" nav="true">Halberd : <span id="spRightHalberd">SP
+                                        </span></a></li>
+                                <li><a href="#Mononofu" nav="true">Mononofu : <span id="spRightMononofu">SP
+                                        </span></a></li>
+                                <li><a href="#BareHand" nav="true">BareHand : <span id="spRightBareHand">SP
+                                        </span></a></li>
+                                <li><a href="#Crusher" nav="true">Crusher : <span id="spRightCrusher">SP
+                                        </span></a></li>
+                                <li><a href="#Sprite" nav="true">Sprite : <span id="spRightSprite">SP
+                                        </span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="buff_skill">
+                    <li>
+                        <a class="nested" href="javascript:void(1);">
+                            Buff Skills
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="#Guard" nav="true">Guard : <span id="spRightGuard">SP
+                                        </span></a></li>
+                                <li><a href="#Shield" nav="true">Shield : <span id="spRightShield">SP
+                                        </span></a></li>
+                                <li><a href="#Dagger" nav="true">Dagger : <span id="spRightDagger">SP
+                                        </span></a></li>
+                                <li><a href="#Knight" nav="true">Knight : <span id="spRightKnight">SP
+                                        </span></a></li>
+                                <li><a href="#Priest" nav="true">Priest : <span id="spRightPriest">SP
+                                        </span></a></li>
+                                <li><a href="#Assassin" nav="true">Assassin : <span id="spRightAssassin">SP
+                                        </span></a></li>
+                                <li><a href="#Wizard" nav="true">Wizard : <span id="spRightWizard">SP
+                                        </span></a></li>
+                                <li><a href="#BareHand" nav="true">BareHand : <span id="spRightBareHand">SP
+                                        </span></a></li>
+                                <li><a href="#DarkPower" nav="true">DarkPower : <span id="spRightDarkPower">SP
+                                        </span></a></li>
+                                <li><a href="#Sprite" nav="true">Sprite : <span id="spRightSprite">SP
+                                        </span></a></li>
+                                <li><a href="#MagicBlade" nav="true">MagicBlade : <span id="spRightMagicBlade">SP
+                                        </span></a></li>
+                                <li><a href="#Ninja" nav="true">Ninja : <span id="spRightNinja">SP
+                                        </span></a></li>
+                                <li><a href="#Partisan" nav="true">Partisan : <span id="spRightPartisan">SP
+                                        </span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="assist_skill">
+                    <li>
+                        <a class="nested" href="javascript:void(1);">
+                            Assist Skills
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="#Survival" nav="true">Survival : <span id="spRightSurvival">SP
+                                        </span></a></li>
+                                <li><a href="#Support" nav="true">Support : <span id="spRightSupport">SP
+                                        </span></a></li>
+                                <li><a href="#Minstrel" nav="true">Minstrel : <span id="spRightMinstrel">SP
+                                        </span></a></li>
+                                <li><a href="#Dancer" nav="true">Dancer : <span id="spRightDancer">SP
+                                        </span></a></li>
+                                <li><a href="#Battle" nav="true">Battle : <span id="spRightBattle">SP
+                                        </span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="other_skill">
+                    <li>
+                        <a class="nested" href="javascript:void(1);">
+                            Other Skills
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><a href="#Smith" nav="true">Smith : <span id="spRightSmith">SP
+                                        </span></a></li>
+                                <li><a href="#Alchemy" nav="true">Alchemy : <span id="spRightAlchemy">SP
+                                        </span></a></li>
+                                <li><a href="#Tamer" nav="true">Tamer : <span id="spRightTamer">SP
+                                        </span></a></li>
+                                <li><a href="#NinjutsuScroll" nav="true">NinjutsuScroll : <span
+                                            id="spRightNinjutsuScroll">SP
+                                        </span></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="skill_tree"></div>
+        </div>
+        </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Lucis_Caelum. All rights reserved.</p>
+    </footer>
+</body>
+
+<script src="../js/skill.js"></script>
+
+</html>

@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Quicksand:wght@500;700&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+    margin: 0;
+    background-color: rgb(226, 226, 226);
+    display: flex;
+    flex-direction: column;
+}
+
+header.navbar-container {
+    max-width: 1200px;
+    width: 100%;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    border-radius: 99px;
+    padding: 20px;
+    padding-block: 1rem;
+    z-index: 999;
+}
+
+header.navbar-container .logo img {
+    width: 150px;
+}
+
+header.navbar-container .nav-list ul {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem 1rem;
+}
+
+header.navbar-container .nav-list li {
+    list-style-type: none;
+}
+
+header.navbar-container .nav-list li a {
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgb(0, 135, 181);
+    padding: .5rem 1.5rem;
+    border-radius: 999px;
+    transition: all .2s ease-in-out;
+}
+
+/* deskripsi */
+.des,
+.stt,
+.skl {
+    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.sim h1 {
+    margin: -3px;
+}
+
+.des input[type="text"] {
+    width: 25%;
+    padding: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.des textarea {
+    width: 75%;
+    height: 120px;
+    padding: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    resize: none;
+}
+
+/* stat */
+.stat {
+    background-color: black;
+    color: white;
+    width: 85%;
+    height: auto;
+    margin: auto;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.stat div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.name_stat {
+    width: 60px;
+    margin-right: 10px;
+}
+
+select.name_stat {
+    height: 24px;
+    padding: 2px 4px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+}
+
+.stat div input[type="range"] {
+    flex: 1;
+}
+
+.stat div output {
+    width: 30px;
+    text-align: right;
+    margin-left: 10px;
+    color: white;
+}
+
+/* skill */
+.skl {
+    font-size: 17px;
+}
+
+.skill_name {
+    width: 250px;
+    background-color: rgb(0, 135, 181);
+    color: white;
+    height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    overflow-y: auto;
+}
+
+.skill_name ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.skill_name li {
+    position: relative;
+}
+
+.skill_name a.nested {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.skill_name a.nested:hover {
+    background-color: rgb(0, 48, 65);
+    border-radius: 5px;
+}
+
+.skill_name a.nested::after {
+    content: ">";
+    transition: transform 0.2s;
+}
+
+.skill_name a.nested.active::after {
+    content: "v";
+}
+
+.skill_name .submenu {
+    display: none;
+    margin-left: 25px;
+    padding-left: 15px;
+    border-left: 3px dashed #ccc;
+}
+
+.skill_name .submenu a {
+    display: block;
+    padding: 6px 0;
+    color: #eee;
+    text-decoration: none;
+}
+
+.skill_name .submenu a:hover {
+    color: #fff;
+}
+
+footer {
+    padding: 20px;
+    color: #fff;
+    background-color: rgb(0, 135, 181);
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    header.navbar-container {
+        flex-direction: column;
+    }
+
+    header.navbar-container .nav-list ul {
+        flex-wrap: wrap;
+        column-gap: .5rem;
+    }
+
+    .des input[type="text"],
+    .des textarea {
+        width: 100%;
+    }
+
+    .stat {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .skill_name {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header.navbar-container .logo img {
+        width: 120px;
+    }
+
+    header.navbar-container .nav-list li a {
+        font-size: 0.95rem;
+    }
+
+    .stat {
+        font-size: 15px;
+    }
+
+    .skill_name {
+        font-size: 16px;
+    }
+}
