@@ -130,6 +130,14 @@ select.name_stat {
 /* skill */
 .skl {
     font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.skill_set {
+    display: flex;
+    gap: 10px;
 }
 
 .skill_name {
@@ -196,57 +204,26 @@ select.name_stat {
     color: #fff;
 }
 
+.skill_tree {
+    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    width: 900px;
+    position: relative;
+}
+
+.canvasContainer {
+    background-color: black;
+    color: white;
+    box-sizing: border-box;
+    width: auto;
+    display: inline-block;
+    position: relative;
+}
+
 footer {
     padding: 20px;
     color: #fff;
     background-color: rgb(0, 135, 181);
-}
-
-@media (max-width: 768px) {
-    body {
-        flex-direction: column;
-    }
-
-    header.navbar-container {
-        flex-direction: column;
-    }
-
-    header.navbar-container .nav-list ul {
-        flex-wrap: wrap;
-        column-gap: .5rem;
-    }
-
-    .des input[type="text"],
-    .des textarea {
-        width: 100%;
-    }
-
-    .stat {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .skill_name {
-        width: 100%;
-        height: auto;
-        border-radius: 0;
-    }
-}
-
-@media (max-width: 480px) {
-    header.navbar-container .logo img {
-        width: 120px;
-    }
-
-    header.navbar-container .nav-list li a {
-        font-size: 0.95rem;
-    }
-
-    .stat {
-        font-size: 15px;
-    }
-
-    .skill_name {
-        font-size: 16px;
-    }
 }

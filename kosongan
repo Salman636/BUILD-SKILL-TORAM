@@ -1,0 +1,125 @@
+document.addEventListener("DOMContentLoaded", function () {
+  // Semua skill container
+  const containers = document.querySelectorAll(".canvasContainer");
+
+  // Buat canvas di masing-masing container
+  containers.forEach((container) => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 900;
+    canvas.height = 800;
+    canvas.style.backgroundColor = "black";
+    container.appendChild(canvas);
+    container.style.display = "none";
+  });
+
+  // Data skill -> array gambar
+  const skillImages = {
+    Blade: [...],
+    Shot: [...],
+    Magic: [...]
+  };
+
+  let activeSkill = null;
+  let draggingIndex = null;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  // ⬇️ DI SINI kamu taruh mapping ukuran canvas
+  const canvasSizes = {
+    Blade: 500,
+    Shot: 800,
+    Magic: 600
+  };
+
+  const skillLinks = document.querySelectorAll(".submenu a");
+  skillLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const skillId = this.getAttribute("href").substring(1);
+
+      containers.forEach((container) => (container.style.display = "none"));
+      const container = document.getElementById("canvas_" + skillId);
+      if (!container) return;
+
+      container.style.display = "block";
+      const canvas = container.querySelector("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // ⬇️ Atur tinggi canvas berdasarkan mapping
+      canvas.height = canvasSizes[skillId] || 800;
+
+      // (lanjutkan kode lainnya...)
+document.addEventListener("DOMContentLoaded", function () {
+  // Semua skill container
+  const containers = document.querySelectorAll(".canvasContainer");
+
+  // Buat canvas di masing-masing container
+  containers.forEach(container => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 600;
+    canvas.style.border = "1px solid #ccc";
+    container.appendChild(canvas);
+
+    container.style.display = "none";
+  });
+
+  // Data skill -> array gambar
+  const skillImages = {
+    Blade: [
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/astute.png", x: 50, y: 50, w: 100, h: 100 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/trigger_slash.png", x: 200, y: 80, w: 100, h: 100 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/sword_tempest.png", x: 400, y: 120, w: 100, h: 100 }
+    ],
+    Shot: [
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/arrow_rain.png", x: 60, y: 60, w: 100, h: 100 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/quick_draw.png", x: 250, y: 100, w: 100, h: 100 }
+    ],
+    Magic: [
+      { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magic_arrow.png", x: 100, y: 100, w: 100, h: 100 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magic_wall.png", x: 300, y: 150, w: 100, h: 100 }
+    ]
+    // tambahkan skill lain di sini
+  };
+
+  const skillLinks = document.querySelectorAll(".submenu a");
+
+  skillLinks.forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const skillId = this.getAttribute("href").substring(1);
+
+      // Sembunyikan semua
+      containers.forEach(container => {
+        container.style.display = "none";
+      });
+
+      // Tampilkan yang sesuai
+      const container = document.getElementById("canvas_" + skillId);
+      if (container) {
+        container.style.display = "block";
+
+        const canvas = container.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Bersihkan dulu
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const images = skillImages[skillId];
+
+        if (images && images.length) {
+          images.forEach(data => {
+            const img = new Image();
+            img.src = data.src;
+            img.onload = function () {
+              ctx.drawImage(img, data.x, data.y, data.w, data.h);
+            };
+          });
+        } else {
+          console.warn("Tidak ada gambar untuk skill:", skillId);
+        }
+      }
+    });
+  });
+});
