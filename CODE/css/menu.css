@@ -263,9 +263,13 @@ footer {
 
     .skill_tree {
         flex: 1;
-        overflow-x: auto;
+        overflow-x: 100%;
         margin: 0;
         padding: 0;
+    }
+
+    canvas {
+        margin-left: 500px;
     }
 
     .des input[type="text"],
