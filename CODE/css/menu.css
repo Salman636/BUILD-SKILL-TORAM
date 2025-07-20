@@ -69,7 +69,7 @@ header.navbar-container .nav-list li a {
 }
 
 .des input[type="text"] {
-    width: 100%;
+    width: 250px;
     max-width: 300px;
     padding: 6px;
     font-size: 14px;
@@ -77,7 +77,7 @@ header.navbar-container .nav-list li a {
 }
 
 .des textarea {
-    width: 75%;
+    width: 900px;
     height: 120px;
     padding: 6px;
     font-size: 14px;
@@ -90,8 +90,8 @@ header.navbar-container .nav-list li a {
 .stat {
     background-color: black;
     color: white;
-    width: 85%;
-    height: auto;
+    width: 1000px;
+    height: 100%;
     margin: auto;
     font-size: 17px;
     border-radius: 5px;
@@ -102,6 +102,7 @@ header.navbar-container .nav-list li a {
     display: flex;
     align-items: center;
     margin-bottom: 5px;
+    position: relative;
 }
 
 .name_stat {
@@ -146,7 +147,7 @@ select.name_stat {
     width: 250px;
     background-color: rgb(0, 135, 181);
     color: white;
-    height: 100vh;
+    height: 450px;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
@@ -211,19 +212,26 @@ select.name_stat {
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
-    width: 900px;
+    width: 70%;
     position: relative;
 }
 
 .canvasContainer {
-    background-color: black;
     color: white;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
+    min-height: 425px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow-x: auto;
-    display: inline-block;
-    position: relative;
+}
+
+.canvasContainer h3 {
+    padding-left: 5px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    margin: 0;
 }
 
 footer {
@@ -232,16 +240,19 @@ footer {
     background-color: rgb(0, 135, 181);
 }
 
-@media screen and (max-width: 768px) {
+.skill_name,
+.skill_tree {
+    transition: all .3s ease;
+}
+
+@media screen and (max-width: 1100px) {
     header.navbar-container {
         flex-direction: column;
-        padding: 10px;
-        text-align: center;
     }
 
     header.navbar-container .nav-list ul {
-        flex-direction: column;
-        gap: 0.5rem;
+        flex-wrap: wrap;
+        column-gap: .5rem;
     }
 
     .skill_name {
@@ -251,7 +262,7 @@ footer {
     }
 
     .skill_tree {
-        width: 100%;
+        flex: 1;
         overflow-x: auto;
     }
 
