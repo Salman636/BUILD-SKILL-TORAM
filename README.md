@@ -4,8 +4,8 @@ Sebuah koleksi simpel tools dan panduan untuk membantu pemain **Toram Online** d
 
 ## 📦 Fitur
 
-- **Skill Build Simulator
+- skill Build Simulator
   Hitung Penggunaan SP dan stat pada build kamu untuk dibagikan kepada orang lain.
 
-#UNDER DEV NOT FINISH YET
+##UNDER DEV NOT FINISH YET
 
