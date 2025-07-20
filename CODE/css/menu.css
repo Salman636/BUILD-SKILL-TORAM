@@ -264,6 +264,8 @@ footer {
     .skill_tree {
         flex: 1;
         overflow-x: auto;
+        margin: 0;
+        padding: 0;
     }
 
     .des input[type="text"],
@@ -274,4 +276,5 @@ footer {
     .stat {
         width: 100%;
     }
+
 }
