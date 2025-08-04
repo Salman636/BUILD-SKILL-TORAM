@@ -30,21 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Buat canvas di masing-masing container
   containers.forEach(container => {
-    const canvas = document.createElement("canvas");
-    canvas.style.backgroundColor = "black";
+    const canvasLines = document.createElement("canvas");
+    canvasLines.classList.add("skillLines");
+    const canvasIcons = document.createElement("canvas");
+    canvasIcons.classList.add("skillIcons");
 
-    container.appendChild(canvas);
+    container.appendChild(canvasLines);
+    container.appendChild(canvasIcons);
     container.style.display = "none";
   });
 
   // Data skill -> array gambar
   const skillImages = {
     Blade: [
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hammerslam.png", x: 50, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/cleavingattack.png", x: 250, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/stormblaze.png", x: 350, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gardeblade.png", x: 450, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/ogreslash.png", x: 550, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hardhit.png", x: 50, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/astute.png", x: 150, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/tiggerslash.png", x: 250, y: 175, w: 50, h: 50 },
@@ -63,19 +61,24 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/warcry.png", x: 350, y: 487.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/berserk.png", x: 450, y: 487.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gladiate.png", x: 550, y: 487.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swiftattack.png", x: 450, y: 612.5, w: 50, h: 50 }
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swiftattack.png", x: 450, y: 612.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hammerslam.png", x: 50, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/cleavingattack.png", x: 250, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/stormblaze.png", x: 350, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gardeblade.png", x: 450, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/ogreslash.png", x: 550, y: 50, w: 50, h: 50 }
     ],
     Shot: [
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/piercingshot.png", x: 550, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/snipe.png", x: 350, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/vanquisher.png", x: 650, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/powershot.png", x: 50, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/bullseye.png", x: 150, y: 237.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/snipe.png", x: 350, y: 112.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/piercingshot.png", x: 550, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/vanquisher.png", x: 650, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/arrowrain.png", x: 250, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/crossfire.png", x: 450, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/twinstorm.png", x: 550, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/retrogradeshot.png", x: 550, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/quickloader.png", x: 650, y: 237.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/quickloader.png", x: 650, y: 250, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/moebashot.png", x: 150, y: 362.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/paralysisshot.png", x: 250, y: 362.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/smokedust.png", x: 350, y: 362.5, w: 50, h: 50 },
@@ -115,8 +118,8 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/powerwave.png", x: 350, y: 425, w: 50, h: 50 },
       { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/maximizer.png", x: 450, y: 425, w: 50, h: 50 },
       { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/mpcharge.png", x: 550, y: 425, w: 50, h: 50 },
-      { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/enchantedbarriers.png", x: 550, y: 550, w: 50, h: 50 },
-      { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", x: 350, y: 550, w: 50, h: 50 }
+      { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", x: 550, y: 550, w: 50, h: 50 },
+      { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/enchantedbarriers.png", x: 350, y: 550, w: 50, h: 50 }
     ],
     Martial: [
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/smash.png", x: 50, y: 175, w: 50, h: 50 },
@@ -124,16 +127,16 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/shellbreak.png", x: 250, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/heavysmash.png", x: 350, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/chariot.png", x: 450, y: 112.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/mountainpress.png", x: 650, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/abstractarms.png", x: 550, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/mountainpress.png", x: 650, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/sonicwave.png", x: 150, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/earthbind.png", x: 250, y: 237.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/seismicstomp.png", x: 650, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/triplekick.png", x: 350, y: 237.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/flashblink.png", x: 550, y: 362.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/rush.png", x: 450, y: 237.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/spinsweep.png", x: 650, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/asuraaura.png", x: 550, y: 237.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/seismicstomp.png", x: 650, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/spinsweep.png", x: 650, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/flashblink.png", x: 550, y: 362.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/martialmastery.png", x: 50, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/martialdiscipline.png", x: 350, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/chakra.png", x: 450, y: 425, w: 50, h: 50 },
@@ -146,8 +149,8 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/dualswordmastery.png", x: 50, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/twinslash.png", x: 150, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/spinningslash.png", x: 250, y: 112.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/aerialcut.png", x: 550, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/phantomslash.png", x: 350, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/aerialcut.png", x: 550, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/crossparry.png", x: 150, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/chargingslash.png", x: 250, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/shadowstep.png", x: 350, y: 237.5, w: 50, h: 50 },
@@ -162,16 +165,16 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/saberaura.png", x: 450, y: 487.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/crescentsaber.png", x: 550, y: 487.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/aerialslay.png", x: 450, y: 612.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/stingblade.png", x: 650, y: 550, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/horizoncut.png", x: 550, y: 612.5, w: 50, h: 50 }
+      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/horizoncut.png", x: 550, y: 612.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/stingblade.png", x: 650, y: 550, w: 50, h: 50 }
     ],
     Halberd: [
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/flashstab.png", x: 50, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/cannonspear.png", x: 150, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/dragontail.png", x: 250, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/diveimpact.png", x: 350, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/dragontooth.png", x: 450, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/draconiccharge.png", x: 550, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/diveimpact.png", x: 350, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/deadlyspear.png", x: 150, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/strikestab.png", x: 350, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/chronosdrive.png", x: 450, y: 237.5, w: 50, h: 50 },
@@ -214,19 +217,19 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/guts.png", x: 550, y: 550, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/bouncingblade.png", x: 350, y: 675, w: 50, h: 50 }
     ],
-    BareHand: [
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/qicharge.png", x: 50, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/lionrage.png", x: 150, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ultimalionsrage.png", x: 250, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ravingstorm.png", x: 150, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ultimaraving.png", x: 250, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/internalelixir.png", x: 150, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/clashofenmity.png", x: 250, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/internalelixir.png", x: 350, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/qicharge.png", x: 250, y: 425, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/hiddentalent.png", x: 350, y: 425, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/unarmedmastery.png", x: 50, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/earthshaker.png", x: 350, y: 112.5, w: 50, h: 50 }
+    Unarmed: [
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/unarmedmastery.png", x: 50, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/lionrage.png", x: 150, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/ultimalionsrage.png", x: 250, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/earthshaker.png", x: 350, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/qicharge.png", x: 50, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/ravingstorm.png", x: 150, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/ultimaraving.png", x: 250, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/internalelixir.png", x: 150, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/clashofenmity.png", x: 250, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/internalelixir.png", x: 350, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/qicharge.png", x: 250, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/UNARMED/hiddentalent.png", x: 350, y: 425, w: 50, h: 50 }
     ],
     Crusher: [
       { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/forefistpunch.png", x: 50, y: 50, w: 50, h: 50 },
@@ -241,10 +244,10 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/terrablast.png", x: 350, y: 300, w: 50, h: 50 }
     ],
     Sprite: [
-      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/autodevice.png", x: 50, y: 237.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/expressaid.png", x: 150, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/microheal.png", x: 250, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/resurrection.png", x: 350, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/microheal.png", x: 250, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/expressaid.png", x: 150, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/autodevice.png", x: 50, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/enhance.png", x: 250, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/stabiliz.png", x: 350, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/spriteshield.png", x: 350, y: 300, w: 50, h: 50 },
@@ -544,6 +547,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
   };
 
+  const skillConnections = {
+    Blade: [[0, 1], [1, 2], [2, 3], [3, 5], [5, 6], [6, 18]],
+    Shot: [[0, 1], [1, 2], [3, 4], [4, 5], [5, 6], [6, 7]],
+    // Tambahkan koneksi sesuai hubungan antar-skill
+  };
+
   const defaultSize = { width: 800, height: 800 };
 
   const canvasSizes = {
@@ -554,7 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
     DualSword: { width: 725, height: 687.5 },
     Halberd: { width: 625, height: 750 },
     Mononofu: { width: 625, height: 750 },
-    BareHand: { width: 425, height: 500 },
+    Unarmed: { width: 425, height: 500 },
     Crusher: { width: 425, height: 375 },
     Sprite: { width: 425, height: 500 },
     Guard: { width: 325, height: 375 },
@@ -580,223 +589,72 @@ document.addEventListener("DOMContentLoaded", function () {
     NinjutsuScroll: { width: 825, height: 125 },
   };
 
-  const skillConnections = {
-    Blade: {
-      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [6, 7], [7, 8], [8, 9], [7, 10], [10, 11], [12, 13], [13, 14], [13, 15], [15, 16], [17, 18], [18, 19], [18, 20], [20, 21], [21, 22]],
-      splits: [[5, 6], [5, 12],]
-    },
-    Shot: {
-      lines: [[0, 1], [1, 2], [2, 3], [2, 4], [1, 5], [5, 6], [6, 9], [10, 11], [11, 12], [12, 13], [13, 14], [13, 15], [16, 17], [17, 18], [18, 19], [19, 20], [16, 21], [16, 22], [22, 23]],
-      splits: [[6, 7], [6, 8], [0, 10]]
-    },
-    Magic: {
-      lines: [[1, 2], [2, 3], [3, 4], [4, 5], [4, 6], [7, 8], [8, 9], [9, 10], [10, 11], [9, 12], [13, 14], [14, 15], [15, 16], [17, 18], [18, 19], [19, 20], [20, 21],],
-      splits: [[0, 1], [0, 7], [20, 22]]
-    },
-    Martial: {
-      lines: [[1, 2], [2, 3], [3, 4], [4, 5], [4, 6], [7, 8], [8, 9], [8, 10], [10, 11], [10, 12], [12, 13], [12, 14], [15, 16], [16, 17], [17, 18], [19, 20]],
-      splits: [[0, 1], [0, 7]]
-    },
-    DualSword: {
-      lines: [[0, 1], [1, 2], [2, 3], [2, 4], [5, 6], [6, 7], [7, 8], [11, 12], [12, 13], [14, 15], [15, 16], [16, 17], [15, 18], [18, 19], [18, 20]],
-      splits: [[0, 5], [0, 11], [0, 14], [8, 9], [8, 10]]
-    },
-    Halberd: {
-      lines: [[0, 1], [1, 2], [2, 3], [2, 4], [2, 5], [6, 7], [7, 8], [8, 9], [6, 10], [10, 11], [11, 12], [12, 13], [14, 15], [15, 16], [17, 18], [18, 19], [19, 20]],
-      splits: [[0, 6]]
-    },
-    Mononofu: {
-      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [6, 7], [8, 9], [9, 10], [11, 12], [12, 13], [14, 15], [15, 16], [16, 17], [15, 18], [18, 19], [19, 20], [20, 21]],
-      splits: [[3, 6], [11, 14],]
-    },
-    BareHand: {
-      lines: [[1, 2], [3, 4], [5, 6], [6, 7], [0, 8], [8, 9]],
-      splits: [[0, 1], [0, 3], [0, 5]]
-    },
-    Crusher: {
-      lines: [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [7, 8], [8, 9]],
-      splits: [[4, 7]]
-    },
-    Sprite: {
-      lines: [],
-      splits: [[0, 1], [1, 2], [2, 3], [1, 4], [4, 5], [4, 6], [0, 7], [7, 8], [8, 9]]
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    a: {
-      lines: [],
-      splits: []
-    },
-    NinjutsuScroll: {
-      lines: [],
-      splits: []
-    }
-  };
-
   const bgOff = new Image();
   const bgOn = new Image();
   bgOff.src = "/IMG/SKILL/back-off.png";
   bgOn.src = "/IMG/SKILL/back-on.png";
 
+  // Tombol menu klik handler
   const skillLinks = document.querySelectorAll(".submenu a");
-
   skillLinks.forEach(link => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
-
       const skillId = this.getAttribute("href").substring(1);
 
-      // Sembunyikan semua
-      containers.forEach(container => {
-        container.style.display = "none";
-      });
+      containers.forEach(container => container.style.display = "none");
 
-      // Tampilkan yang sesuai
       const container = document.getElementById("canvas_" + skillId);
-      if (container) {
-        container.style.display = "";
-        const canvas = container.querySelector("canvas");
-        const ctx = canvas.getContext("2d");
-        const size = canvasSizes[skillId] || defaultSize;
-        canvas.width = size.width;
-        canvas.height = size.height;
+      container.style.display = "block";
 
-        const images = skillImages[skillId];
-        const lines = skillConnections[skillId];
-        const skillStates = new Array(images.length).fill(false);
-
-        function drawAllSkills() {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.strokeStyle = "white";
-          ctx.lineWidth = 2;
-          const padding = 5;
-
-          for (const branch in skillConnections) {
-            const { lines, splits } = skillConnections[skillId];
-
-            lines.forEach(([fromIdx, toIdx]) => {
-              const from = images[fromIdx];
-              const to = images[toIdx];
-
-              const fromX = from.x + from.w / 2;
-              const fromY = from.y + from.h / 2;
-              const toX = to.x + to.w / 2;
-              const toY = to.y + to.h / 2;
-
-              ctx.beginPath();
-              ctx.moveTo(fromX, fromY);
-              ctx.lineTo(fromX, toY);
-              ctx.lineTo(toX, toY);
-              ctx.stroke();
-            });
-
-            splits.forEach(([fromIdx, toIdx]) => {
-              const from = images[fromIdx];
-              const to = images[toIdx];
-
-              const fromX = from.x + from.w / 2;
-              const fromY = from.y + from.h / 2;
-              const toX = to.x + to.w / 2;
-              const toY = to.y + to.h / 2;
-
-              ctx.beginPath();
-              ctx.moveTo(fromX, fromY);
-              ctx.lineTo(fromX + 50, fromY);
-              ctx.lineTo(fromX + 50, toY);
-              ctx.lineTo(toX, toY);
-              ctx.stroke();
-            });
-          }
-
-          images.forEach((data, index) => {
-            const bg = skillStates[index] ? bgOn : bgOff;
-
-            const bgX = data.x - padding;
-            const bgY = data.y - padding;
-            const bgW = data.w + padding * 2;
-            const bgH = data.h + padding * 2;
-
-            if (bg.complete) {
-              ctx.drawImage(bg, bgX, bgY, bgW, bgH);
-            } else {
-              bg.onload = () => {
-                ctx.drawImage(bg, bgX, bgY, bgW, bgH);
-              };
-            }
-
-            const icon = new Image();
-            icon.src = data.src;
-            if (icon.complete) {
-              ctx.drawImage(icon, data.x, data.y, data.w, data.h);
-            } else {
-              icon.onload = function () {
-                ctx.drawImage(icon, data.x, data.y, data.w, data.h);
-              };
-            }
-          });
-        }
-
-        let loadedCount = 0;
-        function tryDraw() {
-          if (bgOff.complete && bgOn.complete) {
-            drawAllSkills();
-          } else {
-            bgOff.onload = tryDraw;
-            bgOn.onload = tryDraw;
-          }
-        }
-        tryDraw();
-
-        canvas.onclick = function (event) {
-          const rect = canvas.getBoundingClientRect();
-          const x = event.clientX - rect.left;
-          const y = event.clientY - rect.top;
-
-          images.forEach((data, index) => {
-            if (
-              x >= data.x && x <= data.x + data.w &&
-              y >= data.y && y <= data.y + data.h
-            ) {
-              skillStates[index] = !skillStates[index];
-              drawAllSkills();
-            }
-          });
-        };
-      }
+      drawSkillsAndLines(container, skillId);
     });
-  })
-})
+  });
+
+  function drawSkillsAndLines(container, skillId) {
+    const iconsCanvas = container.querySelector(".skillIcons");
+    const linesCanvas = container.querySelector(".skillLines");
+    const size = canvasSizes[skillId] || defaultSize;
+    iconsCanvas.width = linesCanvas.width = size.width;
+    iconsCanvas.height = linesCanvas.height = size.height;
+    container.style.width = size.width + "px";
+    container.style.height = size.height + "px";
+
+    const iconsCtx = iconsCanvas.getContext("2d");
+    const linesCtx = linesCanvas.getContext("2d");
+
+    iconsCtx.clearRect(0, 0, iconsCanvas.width, iconsCanvas.height);
+    linesCtx.clearRect(0, 0, linesCanvas.width, linesCanvas.height);
+
+    const skills = skillImages[skillId];
+
+    // Gambar garis koneksi antar-skill
+    if (skillConnections[skillId]) {
+      linesCtx.strokeStyle = "white";
+      linesCtx.lineWidth = 2;
+
+      skillConnections[skillId].forEach(([fromIdx, toIdx]) => {
+        const from = skills[fromIdx];
+        const to = skills[toIdx];
+
+        const fromX = from.x + from.w / 2;
+        const fromY = from.y + from.h / 2;
+        const toX = to.x + to.w / 2;
+        const toY = to.y + to.h / 2;
+
+        linesCtx.beginPath();
+        linesCtx.moveTo(fromX, fromY);
+        linesCtx.lineTo(toX, toY);
+        linesCtx.stroke();
+      });
+    }
+
+    // Gambar ikon skill
+    skills.forEach(skill => {
+      const img = new Image();
+      img.src = skill.src;
+      img.onload = () => {
+        iconsCtx.drawImage(img, skill.x, skill.y, skill.w, skill.h);
+      };
+    });
+  }
+});

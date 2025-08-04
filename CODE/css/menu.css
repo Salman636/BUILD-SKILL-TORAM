@@ -62,6 +62,7 @@ header.navbar-container .nav-list li a {
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
+    max-width: 1500px;
 }
 
 .sim h1 {
@@ -212,7 +213,8 @@ select.name_stat {
     border-radius: 10px;
     margin: 20px;
     padding: 20px;
-    width: 70%;
+    width: 75%;
+    max-width: 1050px;
     position: relative;
 }
 
@@ -224,6 +226,7 @@ select.name_stat {
     justify-content: center;
     align-items: center;
     overflow-x: auto;
+    position: relative;
 }
 
 .canvasContainer h3 {
@@ -232,6 +235,7 @@ select.name_stat {
     top: 20px;
     left: 20px;
     margin: 0;
+
 }
 
 footer {
