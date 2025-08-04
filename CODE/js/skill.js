@@ -261,10 +261,10 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/GUARD/mirageevasion.png", x: 250, y: 300, w: 50, h: 50 }
     ],
     Shield: [
+      { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldmastery.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldbash.png", x: 150, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldcannon.png", x: 250, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardstrike.png", x: 350, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldmastery.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/forceshield.png", x: 150, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/magicalshield.png", x: 250, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shielduppercut.png", x: 150, y: 300, w: 50, h: 50 },
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldrepair.png", x: 350, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/belagerung.png", x: 450, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/protection.png", x: 50, y: 425, w: 50, h: 50 },
-      { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/protection.png", x: 150, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/aegis.png", x: 150, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardian.png", x: 350, y: 425, w: 50, h: 50 }
     ],
     Dagger: [
@@ -323,9 +323,9 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holygrace.png", x: 450, y: 300, w: 50, h: 50 }
     ],
     Assassin: [
-      { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/sicarius.png", x: 350, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/assassinstab.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/backstep.png", x: 150, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/sicarius.png", x: 350, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/arcanestrike.png", x: 250, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/assassinstab.png", x: 450, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/evasion.png", x: 50, y: 300, w: 50, h: 50 },
@@ -340,8 +340,8 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/venominjection.png", x: 450, y: 425, w: 50, h: 50 }
     ],
     Wizard: [
-      { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/lightning.png", x: 250, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/familia.png", x: 50, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/lightning.png", x: 250, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/blizzard.png", x: 250, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/meteorstrike.png", x: 350, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/imperialray.png", x: 450, y: 175, w: 50, h: 50 },
@@ -421,14 +421,14 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", x: 150, y: 425, w: 50, h: 50 }
     ],
     Survival: [
-      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/playdead.png", x: 50, y: 112.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/saferest.png", x: 150, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/fightershigh.png", x: 250, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/hpboost.png", x: 250, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/expgainup.png", x: 50, y: 237.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/fightershigh.png", x: 250, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/shortrest.png", x: 150, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/mpboost.png", x: 250, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/soberanalysis.png", x: 250, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/playdead.png", x: 50, y: 112.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/expgainup.png", x: 50, y: 237.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/droprateup.png", x: 50, y: 362.5, w: 50, h: 50 }
     ],
     Support: [
@@ -447,9 +447,9 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/ASSIST_SKILL/SUPPORT/fastreaction.png", x: 450, y: 300, w: 50, h: 50 },
     ],
     Minstrel: [
-      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", x: 350, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/healing.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fairy.png", x: 150, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", x: 350, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", x: 350, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/life.png", x: 150, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fantasy.png", x: 250, y: 300, w: 50, h: 50 },
@@ -621,45 +621,85 @@ document.addEventListener("DOMContentLoaded", function () {
       lines: [],
       splits: [[0, 1], [1, 2], [2, 3], [1, 4], [4, 5], [4, 6], [0, 7], [7, 8], [8, 9]]
     },
-    a: {
-      lines: [],
+    Guard: {
+      lines: [[0, 1], [0, 2], [3, 4], [3, 5]],
       splits: []
     },
-    a: {
-      lines: [],
+    Shield: {
+      lines: [[1, 2], [2, 3], [0, 4], [4, 5], [6, 7], [7, 8], [10, 11], [11, 12]],
+      splits: [[0, 1], [0, 6]]
+    },
+    Dagger: {
+      lines: [[1, 2], [2, 3], [4, 5], [6, 7], [7, 8], [9, 10]],
+      splits: [[0, 1], [0, 4], [7, 9]]
+    },
+    Knight: {
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [6, 10], [10, 11], [12, 13], [13, 14]],
       splits: []
     },
-    a: {
-      lines: [],
+    Priest: {
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [6, 11], [11, 12], [12, 13], [13, 14]],
       splits: []
     },
-    a: {
-      lines: [],
+    Assassin: {
+      lines: [[0, 1], [1, 2], [1, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12], [12, 13], [13, 14]],
       splits: []
     },
-    a: {
-      lines: [],
+    Wizard: {
+      lines: [[0, 1], [0, 2], [2, 3], [3, 4], [4, 5], [0, 6], [6, 7], [7, 8], [8, 9]],
+      splits: [[6, 11], [11, 12], [12, 13], [13, 14]]
+    },
+    Hunter: {
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [10, 11], [12, 13], [14, 15], [15, 16]],
+      splits: [[11, 12], [11, 14]]
+    },
+    DarkPower: {
+      lines: [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7]],
       splits: []
     },
-    a: {
-      lines: [],
+    MagicBlade: {
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12], [12, 13], [13, 14]],
       splits: []
     },
-    a: {
-      lines: [],
+    Ninja: {
+      lines: [[0, 1], [0, 2], [2, 3]],
       splits: []
     },
-    a: {
-      lines: [],
+    Partisan: {
+      lines: [[0, 1], [1, 2], [4, 5], [5, 6], [7, 8]],
       splits: []
     },
-    a: {
-      lines: [],
+    Survival: {
+      lines: [[0, 2], [3, 4]],
+      splits: [[0, 1], [3, 5]]
+    },
+    Support: {
+      lines: [[1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [9, 10], [10, 11], [11, 12]],
       splits: []
     },
-    a: {
-      lines: [],
+    Minstrel: {
+      lines: [[0, 1], [1, 2], [1, 3], [4, 5]],
+      splits: [[0, 4]]
+    },
+    Dancer: {
+      lines: [[0, 1], [1, 2], [1, 3], [5, 6]],
+      splits: [[0, 4]]
+    },
+    Battle: {
+      lines: [[0, 1], [1, 2], [2, 3], [3, 4], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12], [12, 13], [13, 14]],
       splits: []
+    },
+    Smith: {
+      lines: [[1, 2], [2, 3], [3, 4], [4, 5], [0, 6], [6, 7], [7, 8], [9, 10], [10, 11], [12, 13], [13, 14], [14, 15]],
+      splits: [[0, 1], [0, 9], [9, 12]]
+    },
+    Alchemy: {
+      lines: [[1, 2], [2, 3], [3, 4], [4, 5], [0, 6], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12], [12, 13]],
+      splits: [[0, 1], [0, 10]]
+    },
+    Tamer: {
+      lines: [[0, 1], [1, 2], [3, 4], [5, 6]],
+      splits: [[0, 3], [0, 5]]
     },
     NinjutsuScroll: {
       lines: [],
@@ -701,7 +741,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function drawAllSkills() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.strokeStyle = "white";
+          ctx.strokeStyle = "gray";
           ctx.lineWidth = 2;
           const padding = 5;
 
