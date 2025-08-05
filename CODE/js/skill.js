@@ -734,9 +734,16 @@ document.addEventListener("DOMContentLoaded", function () {
         canvas.width = size.width;
         canvas.height = size.height;
 
+
         const images = skillImages[skillId];
-        const skillStates = new Array(images.length).fill(false);
+        const allConnections = [...skillConnections[skillId].lines, ...skillConnections[skillId].splits];
         let hoveredSkillIndex = null;
+        const globalSkillLevels = {};
+        const skillStates = new Array(images.length).fill(false);
+        if (!globalSkillLevels[skillId]) {
+          globalSkillLevels[skillId] = new Array(images.length).fill(0);
+        }
+        const skillLevels = globalSkillLevels[skillId];
 
         function getAllPathsToNode(lines, targetIndex) {
           const parents = {};
@@ -764,8 +771,6 @@ document.addEventListener("DOMContentLoaded", function () {
           dfs(targetIndex);
           return path;
         }
-
-        const allConnections = [...skillConnections[skillId].lines, ...skillConnections[skillId].splits];
 
         function drawAllSkills() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -881,11 +886,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 ctx.drawImage(icon, data.x, data.y, data.w, data.h);
               };
             }
+
+            const text = skillLevels[index].toString();
+            const textX = data.x + data.w / 2;
+            const textY = data.y + data.h + 20;
+
+            ctx.font = "15px Arial";
+            const metrics = ctx.measureText(text);
+            const textWidth = metrics.width;
+            const textHeight = 16;
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+            ctx.fillRect(textX - textWidth / 2 - 4, textY - textHeight + 4, textWidth + 8, textHeight);
+
+            ctx.fillStyle = "white";
+            ctx.textAlign = "center";
+            ctx.fillText(text, textX, textY);
           });
         }
 
-
-        let loadedCount = 0;
         function tryDraw() {
           if (bgOff.complete && bgOn.complete) {
             drawAllSkills();
@@ -895,6 +914,39 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
         tryDraw();
+
+        let selectedSkillIndex = null;
+        let isLevelUpMode = true;
+
+        document.getElementById("btnToggle").onclick = () => {
+          isLevelUpMode = !isLevelUpMode;
+          document.getElementById("btnToggle").innerText = isLevelUpMode ? "Level +" : "Level -";
+        };
+
+        function getAllChildrenFromNode(allConnections, startIndex) {
+          const graph = {};
+          allConnections.forEach(([from, to]) => {
+            if (!graph[from]) graph[from] = [];
+            graph[from].push(to);
+          });
+
+          const visited = new Set();
+          const result = [];
+
+          function dfs(node) {
+            if (visited.has(node)) return;
+            visited.add(node);
+            if (graph[node]) {
+              for (const child of graph[node]) {
+                result.push(child);
+                dfs(child);
+              }
+            }
+          }
+
+          dfs(startIndex);
+          return result;
+        }
 
         canvas.onclick = function (event) {
           const rect = canvas.getBoundingClientRect();
@@ -906,11 +958,83 @@ document.addEventListener("DOMContentLoaded", function () {
               x >= data.x && x <= data.x + data.w &&
               y >= data.y && y <= data.y + data.h
             ) {
-              skillStates[index] = !skillStates[index];
+              selectedSkillIndex = index;
+
+              if (isLevelUpMode) {
+                if (skillLevels[index] < 10) {
+                  skillLevels[index] += 1;
+                  skillStates[index] = true;
+
+                  const path = getAllPathsToNode(allConnections, index);
+                  path.forEach(([fromIdx, toIdx]) => {
+                    skillStates[fromIdx] = true;
+                    skillLevels[fromIdx] = Math.max(skillLevels[fromIdx], 5);
+                  });
+                }
+              } else {
+                if (skillLevels[index] > 0) {
+                  skillLevels[index] -= 1;
+                  if (skillLevels[index] === 0) {
+                    skillStates[index] = false;
+                  }
+
+                  const children = getAllChildrenFromNode(allConnections, index);
+                  children.forEach((childIdx) => {
+                    const parentList = allConnections
+                      .filter(([from, to]) => to === childIdx)
+                      .map(([from]) => from);
+
+                    const valid = parentList.every(parentIdx => skillLevels[parentIdx] >= 5);
+                    if (!valid) {
+                      skillLevels[childIdx] = 0;
+                      skillStates[childIdx] = false;
+                    }
+                  });
+                }
+              }
+
               drawAllSkills();
             }
           });
         };
+
+        canvas.addEventListener("contextmenu", function (event) {
+          event.preventDefault();
+          const rect = canvas.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          images.forEach((data, index) => {
+            if (
+              x >= data.x && x <= data.x + data.w &&
+              y >= data.y && y <= data.y + data.h
+            ) {
+              if (skillLevels[index] > 0) {
+                skillLevels[index] -= 1;
+                if (skillLevels[index] === 0) {
+                  skillStates[index] = false;
+                }
+
+                const children = getAllChildrenFromNode(allConnections, index);
+                children.forEach((childIdx) => {
+                  const parentList = allConnections
+                    .filter(([from, to]) => to === childIdx)
+                    .map(([from]) => from);
+
+                  const valid = parentList.every(parentIdx => skillLevels[parentIdx] >= 5);
+                  if (!valid) {
+                    skillLevels[childIdx] = 0;
+                    skillStates[childIdx] = false;
+                  }
+                });
+
+
+                drawAllSkills();
+              }
+            }
+          });
+        });
+
 
         canvas.addEventListener("mousemove", (event) => {
           const rect = canvas.getBoundingClientRect();
@@ -937,7 +1061,6 @@ document.addEventListener("DOMContentLoaded", function () {
             drawAllSkills();
           }
         });
-
       }
     });
   })

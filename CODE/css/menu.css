@@ -249,6 +249,34 @@ footer {
     transition: all .3s ease;
 }
 
+#skillControls {
+    margin-top: 12px;
+    gap: 10px;
+}
+
+#skillControls button {
+    background-color: rgb(0, 135, 181);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease-in-out;
+}
+
+#skillControls button:hover {
+    background-color: rgb(0, 110, 160);
+    transform: scale(1.05);
+}
+
+#skillControls button:active {
+    background-color: rgb(0, 95, 140);
+    transform: scale(0.98);
+}
+
 @media screen and (max-width: 1100px) {
     header.navbar-container {
         flex-direction: column;
