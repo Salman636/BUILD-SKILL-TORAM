@@ -706,6 +706,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  let hoveredSkillIndex = null;
+  let selectedSkillIndex = null;
+  let isLevelUpMode = true;
+  const globalSkillLevels = {};
+  const globalSkillStates = {};
+
+  document.getElementById("btnToggle").onclick = () => {
+    isLevelUpMode = !isLevelUpMode;
+    document.getElementById("btnToggle").innerText = isLevelUpMode ? "Level +" : "Level -";
+  };
+
   const bgOff = new Image();
   const bgOn = new Image();
   bgOff.src = "/IMG/SKILL/back-off.png";
@@ -737,13 +748,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const images = skillImages[skillId];
         const allConnections = [...skillConnections[skillId].lines, ...skillConnections[skillId].splits];
-        let hoveredSkillIndex = null;
-        const globalSkillLevels = {};
-        const skillStates = new Array(images.length).fill(false);
+
         if (!globalSkillLevels[skillId]) {
           globalSkillLevels[skillId] = new Array(images.length).fill(0);
         }
+        if (!globalSkillStates[skillId]) {
+          globalSkillStates[skillId] = new Array(images.length).fill(false);
+        }
+
         const skillLevels = globalSkillLevels[skillId];
+        const skillStates = globalSkillStates[skillId];
 
         function getAllPathsToNode(lines, targetIndex) {
           const parents = {};
@@ -915,13 +929,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         tryDraw();
 
-        let selectedSkillIndex = null;
-        let isLevelUpMode = true;
+        document.getElementById("btnReset").onclick = () => {
+          for (let i = 0; i < skillLevels.length; i++) {
+            skillLevels[i] = 0;
+            skillStates[i] = false;
+          }
 
-        document.getElementById("btnToggle").onclick = () => {
-          isLevelUpMode = !isLevelUpMode;
-          document.getElementById("btnToggle").innerText = isLevelUpMode ? "Level +" : "Level -";
+          drawAllSkills();
+          updateSPDisplay(skillId, skillLevels);
         };
+
+        function updateSPDisplay(skillId, skillLevels) {
+          const totalSP = skillLevels.reduce((sum, lvl) => sum + lvl, 0);
+          const span = document.getElementById(`spRight${skillId}`);
+          if (span) {
+            span.textContent = `${totalSP} SP`;
+          }
+        }
+
+        function updateTotalSP() {
+          let total = 0;
+          for (const levels of Object.values(globalSkillLevels)) {
+            total += levels.reduce((sum, lvl) => sum + lvl, 0);
+          }
+          document.getElementById("spRightTotal").textContent = `${total} SP`;
+        }
 
         function getAllChildrenFromNode(allConnections, startIndex) {
           const graph = {};
@@ -994,6 +1026,8 @@ document.addEventListener("DOMContentLoaded", function () {
               }
 
               drawAllSkills();
+              updateSPDisplay(skillId, skillLevels);
+              updateTotalSP();
             }
           });
         };
@@ -1028,13 +1062,13 @@ document.addEventListener("DOMContentLoaded", function () {
                   }
                 });
 
-
                 drawAllSkills();
+                updateSPDisplay(skillId, skillLevels);
+                updateTotalSP();
               }
             }
           });
         });
-
 
         canvas.addEventListener("mousemove", (event) => {
           const rect = canvas.getBoundingClientRect();
@@ -1065,4 +1099,24 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   })
 })
+
+document.getElementById("btnSavePDF").addEventListener("click", () => {
+  const formElement = document.getElementById("skillForm");
+
+  html2canvas(formElement).then(canvas => {
+    const imgData = canvas.toDataURL("image/png");
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pageWidth;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("Skill_Form.pdf");
+  });
+});
 

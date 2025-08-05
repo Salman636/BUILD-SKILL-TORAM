@@ -155,6 +155,13 @@ select.name_stat {
     overflow-y: auto;
 }
 
+.skill_name h4 {
+    margin: 3px;
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+}
+
 .skill_name ul {
     list-style: none;
     padding-left: 0;
@@ -249,12 +256,13 @@ footer {
     transition: all .3s ease;
 }
 
-#skillControls {
+.skillControls {
+    display: flex;
     margin-top: 12px;
     gap: 10px;
 }
 
-#skillControls button {
+.skillControls button {
     background-color: rgb(0, 135, 181);
     color: white;
     border: none;
@@ -263,18 +271,34 @@ footer {
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
+    border: black solid 1px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
     transition: all 0.2s ease-in-out;
 }
 
-#skillControls button:hover {
+.skillControls button:hover {
     background-color: rgb(0, 110, 160);
     transform: scale(1.05);
 }
 
-#skillControls button:active {
+.skillControls button:active {
     background-color: rgb(0, 95, 140);
     transform: scale(0.98);
+}
+
+#btnSavePDF {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgb(47, 255, 82);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 999
 }
 
 @media screen and (max-width: 1100px) {
