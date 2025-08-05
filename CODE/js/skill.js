@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     container.style.display = "none";
   });
 
-  // Data skill -> array gambar
   const skillImages = {
     Blade: [
       { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hammerslam.png", x: 50, y: 50, w: 50, h: 50 },
@@ -736,52 +735,127 @@ document.addEventListener("DOMContentLoaded", function () {
         canvas.height = size.height;
 
         const images = skillImages[skillId];
-        const lines = skillConnections[skillId];
         const skillStates = new Array(images.length).fill(false);
+        let hoveredSkillIndex = null;
+
+        function getAllPathsToNode(lines, targetIndex) {
+          const parents = {};
+
+          lines.forEach(([from, to]) => {
+            if (!parents[to]) parents[to] = [];
+            parents[to].push(from);
+          });
+
+          const visited = new Set();
+          const path = [];
+
+          function dfs(node) {
+            if (visited.has(node)) return;
+            visited.add(node);
+
+            if (parents[node]) {
+              for (const parent of parents[node]) {
+                dfs(parent);
+                path.unshift([parent, node]);
+              }
+            }
+          }
+
+          dfs(targetIndex);
+          return path;
+        }
+
+        const allConnections = [...skillConnections[skillId].lines, ...skillConnections[skillId].splits];
 
         function drawAllSkills() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.strokeStyle = "gray";
-          ctx.lineWidth = 2;
           const padding = 5;
 
-          for (const branch in skillConnections) {
-            const { lines, splits } = skillConnections[skillId];
+          // Path aktif
+          let activeLines = [];
+          const activeSkills = skillStates
+            .map((state, index) => (state ? index : null))
+            .filter((i) => i !== null);
 
-            lines.forEach(([fromIdx, toIdx]) => {
-              const from = images[fromIdx];
-              const to = images[toIdx];
+          activeSkills.forEach((activeIdx) => {
+            const path = getAllPathsToNode(allConnections, activeIdx);
+            activeLines.push(...path);
+          });
 
-              const fromX = from.x + from.w / 2;
-              const fromY = from.y + from.h / 2;
-              const toX = to.x + to.w / 2;
-              const toY = to.y + to.h / 2;
-
-              ctx.beginPath();
-              ctx.moveTo(fromX, fromY);
-              ctx.lineTo(fromX, toY);
-              ctx.lineTo(toX, toY);
-              ctx.stroke();
-            });
-
-            splits.forEach(([fromIdx, toIdx]) => {
-              const from = images[fromIdx];
-              const to = images[toIdx];
-
-              const fromX = from.x + from.w / 2;
-              const fromY = from.y + from.h / 2;
-              const toX = to.x + to.w / 2;
-              const toY = to.y + to.h / 2;
-
-              ctx.beginPath();
-              ctx.moveTo(fromX, fromY);
-              ctx.lineTo(fromX + 50, fromY);
-              ctx.lineTo(fromX + 50, toY);
-              ctx.lineTo(toX, toY);
-              ctx.stroke();
-            });
+          // Path hover
+          let hoverLines = [];
+          if (hoveredSkillIndex !== null) {
+            hoverLines = getAllPathsToNode(allConnections, hoveredSkillIndex);
           }
 
+          const { lines, splits } = skillConnections[skillId];
+
+          // Garis biasa
+          lines.forEach(([fromIdx, toIdx]) => {
+            const from = images[fromIdx];
+            const to = images[toIdx];
+            if (!from || !to) return;
+
+            const fromX = from.x + from.w / 2;
+            const fromY = from.y + from.h / 2;
+            const toX = to.x + to.w / 2;
+            const toY = to.y + to.h / 2;
+
+            const isActivePath = activeLines.some(([f, t]) => f === fromIdx && t === toIdx);
+            const isHoverPath = hoverLines.some(([f, t]) => f === fromIdx && t === toIdx);
+
+            if (isActivePath) {
+              ctx.strokeStyle = "white";
+              ctx.lineWidth = 3;
+            } else if (isHoverPath) {
+              ctx.strokeStyle = "orange";
+              ctx.lineWidth = 3;
+            } else {
+              ctx.strokeStyle = "gray";
+              ctx.lineWidth = 1;
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(fromX, toY);
+            ctx.lineTo(toX, toY);
+            ctx.stroke();
+          });
+
+          // Garis split
+          splits.forEach(([fromIdx, toIdx]) => {
+            const from = images[fromIdx];
+            const to = images[toIdx];
+            if (!from || !to) return;
+
+            const fromX = from.x + from.w / 2;
+            const fromY = from.y + from.h / 2;
+            const toX = to.x + to.w / 2;
+            const toY = to.y + to.h / 2;
+
+            const isActivePath = activeLines.some(([f, t]) => f === fromIdx && t === toIdx);
+            const isHoverPath = hoverLines.some(([f, t]) => f === fromIdx && t === toIdx);
+
+            if (isActivePath) {
+              ctx.strokeStyle = "white";
+              ctx.lineWidth = 3;
+            } else if (isHoverPath) {
+              ctx.strokeStyle = "orange";
+              ctx.lineWidth = 3;
+            } else {
+              ctx.strokeStyle = "gray";
+              ctx.lineWidth = 1;
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(fromX + 50, fromY);
+            ctx.lineTo(fromX + 50, toY);
+            ctx.lineTo(toX, toY);
+            ctx.stroke();
+          });
+
+          // Gambar skill background dan icon
           images.forEach((data, index) => {
             const bg = skillStates[index] ? bgOn : bgOff;
 
@@ -810,6 +884,7 @@ document.addEventListener("DOMContentLoaded", function () {
           });
         }
 
+
         let loadedCount = 0;
         function tryDraw() {
           if (bgOff.complete && bgOn.complete) {
@@ -836,7 +911,35 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
         };
+
+        canvas.addEventListener("mousemove", (event) => {
+          const rect = canvas.getBoundingClientRect();
+          const x = event.clientX - rect.left;
+          const y = event.clientY - rect.top;
+
+          let found = false;
+
+          images.forEach((data, index) => {
+            if (
+              x >= data.x && x <= data.x + data.w &&
+              y >= data.y && y <= data.y + data.h
+            ) {
+              if (hoveredSkillIndex !== index) {
+                hoveredSkillIndex = index;
+                drawAllSkills();
+              }
+              found = true;
+            }
+          });
+
+          if (!found && hoveredSkillIndex !== null) {
+            hoveredSkillIndex = null;
+            drawAllSkills();
+          }
+        });
+
       }
     });
   })
 })
+
