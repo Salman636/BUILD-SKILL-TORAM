@@ -949,7 +949,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function updateTotalSP() {
           let total = 0;
-          for (const levels of Object.values(globalSkillLevels)) {
+          for (const [treeId, levels] of Object.entries(globalSkillLevels)) {
+            if (treeId === "NinjutsuScroll") continue;
             total += levels.reduce((sum, lvl) => sum + lvl, 0);
           }
           document.getElementById("spRightTotal").textContent = `${total} SP`;
@@ -1120,23 +1121,5 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 })
 
-document.getElementById("btnSavePDF").addEventListener("click", () => {
-  const formElement = document.getElementById("skillForm");
-
-  html2canvas(formElement).then(canvas => {
-    const imgData = canvas.toDataURL("image/png");
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF("p", "mm", "a4");
-
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pageWidth;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-    pdf.save("Skill_Form.pdf");
-  });
-});
+// PRINT
 
