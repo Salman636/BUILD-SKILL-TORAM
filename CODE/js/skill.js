@@ -1054,6 +1054,7 @@ document.addEventListener("DOMContentLoaded", function () {
               x >= data.x && x <= data.x + data.w &&
               y >= data.y && y <= data.y + data.h
             ) {
+              // NinjutsuScroll: langsung reset
               if (skillId === "NinjutsuScroll") {
                 if (skillLevels[index] > 0) {
                   skillLevels[index] = 0;
@@ -1064,20 +1065,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 return;
               }
+
               if (skillLevels[index] > 0) {
+                // Kurangi 1 poin dulu
                 skillLevels[index] -= 1;
                 if (skillLevels[index] === 0) {
                   skillStates[index] = false;
                 }
 
+                // Setelah dikurangi, periksa semua anak dari skill ini
                 const children = getAllChildrenFromNode(allConnections, index);
+
                 children.forEach((childIdx) => {
                   const parentList = allConnections
                     .filter(([from, to]) => to === childIdx)
                     .map(([from]) => from);
 
-                  const valid = parentList.every(parentIdx => skillLevels[parentIdx] >= 5);
-                  if (!valid) {
+                  // Cek apakah SEMUA parent level-nya < 5
+                  const stillValid = parentList.some(parentIdx => skillLevels[parentIdx] >= 5);
+
+                  if (!stillValid) {
                     skillLevels[childIdx] = 0;
                     skillStates[childIdx] = false;
                   }
@@ -1090,6 +1097,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
         });
+
 
         canvas.addEventListener("mousemove", (event) => {
           if (temporarilyDisableHover) return;
