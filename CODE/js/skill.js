@@ -993,15 +993,25 @@ document.addEventListener("DOMContentLoaded", function () {
               selectedSkillIndex = index;
 
               if (isLevelUpMode) {
-                if (skillLevels[index] < 10) {
-                  skillLevels[index] += 1;
-                  skillStates[index] = true;
+                if (skillId === "NinjutsuScroll") {
+                  const activeCount = skillStates.filter(state => state).length;
 
-                  const path = getAllPathsToNode(allConnections, index);
-                  path.forEach(([fromIdx, toIdx]) => {
-                    skillStates[fromIdx] = true;
-                    skillLevels[fromIdx] = Math.max(skillLevels[fromIdx], 5);
-                  });
+                  if (activeCount >= 3 && !skillStates[index]) return;
+                  if (skillLevels[index] >= 1) return;
+
+                  skillLevels[index] = 1;
+                  skillStates[index] = true;
+                } else {
+                  if (skillLevels[index] < 10) {
+                    skillLevels[index] += 1;
+                    skillStates[index] = true;
+
+                    const path = getAllPathsToNode(allConnections, index);
+                    path.forEach(([fromIdx, toIdx]) => {
+                      skillStates[fromIdx] = true;
+                      skillLevels[fromIdx] = Math.max(skillLevels[fromIdx], 5);
+                    });
+                  }
                 }
               } else {
                 if (skillLevels[index] > 0) {
@@ -1043,6 +1053,16 @@ document.addEventListener("DOMContentLoaded", function () {
               x >= data.x && x <= data.x + data.w &&
               y >= data.y && y <= data.y + data.h
             ) {
+              if (skillId === "NinjutsuScroll") {
+                if (skillLevels[index] > 0) {
+                  skillLevels[index] = 0;
+                  skillStates[index] = false;
+                  drawAllSkills();
+                  updateSPDisplay(skillId, skillLevels);
+                  updateTotalSP();
+                }
+                return;
+              }
               if (skillLevels[index] > 0) {
                 skillLevels[index] -= 1;
                 if (skillLevels[index] === 0) {
