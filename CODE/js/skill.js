@@ -1140,10 +1140,18 @@ document.addEventListener("DOMContentLoaded", function () {
       else logo.onload = resolve;
     });
 
-    doc.addImage(logo, "PNG", marginX, currentY - 10, 20, 20);
+    const logoWidth = 40;
+    const logoHeight = 40;
+
+    doc.addImage(logo, "PNG", marginX, currentY - 10, logoWidth, logoHeight);
+
+    // Geser teks judul agar tetap inline dengan logo
     doc.setFontSize(20);
-    doc.text("SHARE YOUR BUILD 😊", marginX + 25, currentY + 3);
-    currentY += 25;
+    doc.text("SHARE YOUR BUILD ", marginX + logoWidth + 10, currentY + 5);
+
+    // Naikkan currentY sesuai tinggi logo
+    currentY += logoHeight + 5; doc.setFontSize(20);
+
 
     // === NAMA BUILD & DESKRIPSI ===
     doc.setFontSize(14);
