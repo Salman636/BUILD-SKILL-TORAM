@@ -93,6 +93,8 @@ main .content .content-description p {
 main .content .content-image {
     flex: 1;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main .content .content-image img {
@@ -101,14 +103,18 @@ main .content .content-image img {
     width: 500px;
 }
 
+main .content .content-image a img {
+    margin: auto;
+    width: 250px;
+}
+
 footer {
     padding: 20px;
     color: #fff;
     background-color: rgb(0, 135, 181);
 }
 
-/* Layar kecil: tablet dan HP (≤768px) */
-@media (max-width: 768px) {
+@media screen and (max-width: 1100px) {
     main {
         flex-direction: column;
         padding: 1.5rem 1rem;
@@ -146,24 +152,6 @@ footer {
         flex-wrap: wrap;
         column-gap: .5rem;
     }
-}
 
-/* Layar sangat kecil: HP kecil (≤480px) */
-@media (max-width: 480px) {
-    header.navbar-container .logo img {
-        width: 100px;
-    }
 
-    main .content .content-description h1 {
-        font-size: 1.2rem;
-    }
-
-    main .content .content-description p {
-        font-size: 1rem;
-    }
-
-    footer {
-        text-align: center;
-        font-size: 0.9rem;
-    }
 }
