@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/CODE/css/menu.css" />
     <title>Build Skill Toram</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
@@ -89,10 +90,6 @@
                 <div class="skill_set">
                     <div class="skill_name">
                         <h4>Total Skill: <span id="spRightTotal">SP</span></h4>
-
-                        <div class="skillControls" style="margin-top: 8px;">
-                            <button id="btnReset">Reset</button>
-                        </div>
 
                         <ul class="weap_skill">
                             <li>
@@ -300,13 +297,13 @@
 
             </div>
         </form>
+
         <div class="skillControls" style="margin-top: 8px;">
+            <button id="btnReset">Reset</button>
             <button id="btnToggle">Level +</button>
+            <button id="btnSavePDF">💾 Save</button>
         </div>
 
-        <button id="btnSavePDF">
-            💾 Save
-        </button>
     </main>
 
     <footer>

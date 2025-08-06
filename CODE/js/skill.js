@@ -1122,4 +1122,33 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 // PRINT
+const namaBuild = document.getElementById("namaBuild").value;
+const deskripsi = document.getElementById("deskripsi").value;
+const stat = getSelectedStat();
+const skillData = getSkillData();
+const totalSP = calculateTotalSP(skillData);
+const usesNinjutsuScroll = checkNinjutsuScroll();
+const filteredSkillTree = skillData.filter(skill => skill.sp !== 0);
 
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF();
+
+doc.text("SHARE YOUR BUILD 😊", 10, 10);
+doc.text(`Nama Build : ${namaBuild}`, 10, 20);
+doc.text(`Deskripsi : ${deskripsi}`, 10, 30);
+doc.text(`STAT : ${stat}`, 10, 40);
+doc.text(`Total Skill Poin : ${totalSP}`, 10, 50);
+
+doc.text("SKILL :", 10, 60);
+let y = 70;
+filteredSkillTree.forEach(skill => {
+  doc.text(`- ${skill.name}: ${skill.sp} SP`, 10, y);
+  y += 10;
+});
+
+if (usesNinjutsuScroll) {
+  doc.text("Menggunakan: Ninjutsu Scroll", 10, y);
+}
+
+doc.save(`${namaBuild}.pdf`);
