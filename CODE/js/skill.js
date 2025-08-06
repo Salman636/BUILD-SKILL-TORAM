@@ -1122,8 +1122,12 @@ document.addEventListener("DOMContentLoaded", function () {
   })
   document.getElementById("btnSavePDF").addEventListener("click", async () => {
     const { jsPDF } = window.jspdf;
-    const doc = new jsPDF("p", "mm", "a4");
-
+    const doc = new jsPDF({
+      orientation: "p",
+      unit: "mm",
+      format: "a4",
+      compress: true
+    });
     const namaBuild = document.getElementById("nama").value || "Untitled Build";
     const deskripsi = document.getElementById("deskripsi").value;
     const totalSPText = document.getElementById("spRightTotal").textContent;
@@ -1145,14 +1149,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const logoHeight = 40;
 
     doc.addImage(logo, "PNG", marginX, currentY - 10, logoWidth, logoHeight);
-
-    // Geser teks judul agar tetap inline dengan logo
     doc.setFontSize(20);
     doc.text("SHARE YOUR BUILD ", marginX + logoWidth + 10, currentY + 5);
-
-    // Naikkan currentY sesuai tinggi logo
-    currentY += logoHeight + 5; doc.setFontSize(20);
-
+    currentY += logoHeight + 5;
 
     // === NAMA BUILD & DESKRIPSI ===
     doc.setFontSize(14);
@@ -1173,11 +1172,12 @@ document.addEventListener("DOMContentLoaded", function () {
     doc.text("STAT :", marginX, currentY);
     currentY += 8;
 
-    const barFullWidth = 80;
-    const barHeight = 5;
-    const maxValue = 255;
-
     const statElements = document.querySelectorAll(".stat div");
+    const barFullWidth = 80;
+    const barHeight = 8;
+    const barColor = [0, 135, 181];
+    const maxBarValue = 255; // Semua bar disamakan ke skala ini
+
     statElements.forEach(statDiv => {
       const label = statDiv.querySelector("label, select");
       const output = statDiv.querySelector("output");
@@ -1185,35 +1185,40 @@ document.addEventListener("DOMContentLoaded", function () {
         const name = label.value || label.textContent.trim();
         const value = parseInt(output.value || output.textContent.trim());
 
+        const isMysteryStat = name === "???";
+        const maxOriginal = isMysteryStat ? 255 : 510;
+
+        // Konversi ke skala 255 agar semua bar proporsional
+        const normalizedValue = (value / maxOriginal) * maxBarValue;
+
         // Label stat
         doc.setFontSize(12);
         doc.setTextColor(0);
-        doc.text(name, marginX + 5, currentY + 4);
+        doc.text(name, marginX + 5, currentY + 6);
 
-        // Hitung posisi bar & angka
-        const barX = marginX + 35;
+        // Hitung posisi bar
+        const barX = marginX + 30;
         const barY = currentY;
-        const barValue = Math.min(value, maxValue);
-        const filledW = (barValue / maxValue) * barFullWidth;
+        const filledW = (normalizedValue / maxBarValue) * barFullWidth;
 
-        // Bar background
-        doc.setFillColor(230, 230, 230);
-        doc.rect(barX, barY, barFullWidth, barHeight, "F");
+        // Bar latar (putih + outline hitam)
+        doc.setDrawColor(0);
+        doc.setLineWidth(0.5);
+        doc.setFillColor(255, 255, 255); // putih
+        doc.roundedRect(barX, barY, barFullWidth, barHeight, 4, 4, "FD");
 
-        // Filled bar
-        doc.setFillColor(70, 130, 180);
-        doc.rect(barX, barY, filledW, barHeight, "F");
+        // Bar isi
+        if (value > 0) {
+          doc.setFillColor(...barColor);
+          doc.roundedRect(barX, barY, filledW, barHeight, 4, 4, "F");
+        }
 
-        // Text di akhir bar
-        const valueText = `${value}`;
-        const valueTextX = barX + barFullWidth - doc.getTextWidth(valueText);
-        const valueTextY = barY + barHeight - 0.5;
-
-        doc.setFontSize(10);
+        // Tampilkan nilai asli (bukan yang di-normalisasi)
+        doc.setFontSize(12);
         doc.setTextColor(0);
-        doc.text(valueText, valueTextX, valueTextY);
+        doc.text(value.toString(), barX + barFullWidth + 10, currentY + 6);
 
-        currentY += 8;
+        currentY += 12;
       }
     });
 
@@ -1228,52 +1233,47 @@ document.addEventListener("DOMContentLoaded", function () {
     currentY += 10;
 
     // === SKILL TREE CANVAS ===
-    const canvasScale = 6.2; // sedikit lebih kecil
+    const canvasScale = 7.0;
     const spacingBetweenSkillTrees = 12;
 
     temporarilyDisableHover = true;
+    hoveredSkillIndex = null;
 
-    for (const skillTreeId in globalSkillLevels) {
-      const canvasWrapper = document.getElementById(`canvas_${skillTreeId}`);
-      const canvas = canvasWrapper?.querySelector("canvas");
-      if (!canvas) continue;
+    const canvasContainers = document.querySelectorAll(".canvasContainer");
 
-      // Reset hover state secara langsung
-      if (typeof hoveredSkillIndex !== "undefined") {
-        hoveredSkillIndex = null;
-      }
+    canvasContainers.forEach(container => {
+      const skillTreeId = container.id.replace("canvas_", "");
 
-      // Cari ulang fungsi drawAllSkills
-      if (typeof drawAllSkills === "function") {
-        drawAllSkills(); // Gambar ulang tanpa efek hover
-      }
+      const levels = globalSkillLevels[skillTreeId];
+      const totalSP = levels?.reduce((sum, val) => sum + val, 0) || 0;
+      if (totalSP === 0) return;
 
-      const imgData = canvas.toDataURL("image/png");
+      const canvas = container.querySelector("canvas");
+      if (!canvas) return;
+
+      if (typeof drawAllSkills === "function") drawAllSkills();
+
+      const imgData = canvas.toDataURL("image/jpeg", 0.7);
       const imgHeight = canvas.height / canvasScale;
       const imgWidth = canvas.width / canvasScale;
 
-      // Page break jika perlu
       if (currentY + imgHeight + 30 > 280) {
         doc.addPage();
         currentY = 20;
       }
 
-      // Background hitam
       doc.setFillColor(0, 0, 0);
       doc.rect(marginX - 5, currentY - 5, imgWidth + 20, imgHeight + 25, "F");
 
-      // Judul skill tree
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(13);
       doc.text(`${skillTreeId} Skill Tree`, marginX, currentY + 5);
 
-      // Gambar
       doc.addImage(imgData, "PNG", marginX, currentY + 8, imgWidth, imgHeight);
       currentY += imgHeight + spacingBetweenSkillTrees + 20;
 
-      // Reset warna teks
       doc.setTextColor(0, 0, 0);
-    }
+    });
 
     // === FOOTER ===
     const pageCount = doc.internal.getNumberOfPages();

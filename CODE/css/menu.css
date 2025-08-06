@@ -325,3 +325,9 @@ footer {
     }
 
 }
+
+@media print {
+    .hover-line {
+        display: none !important;
+    }
+}
