@@ -707,6 +707,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   let hoveredSkillIndex = null;
+  let temporarilyDisableHover = false;
   let selectedSkillIndex = null;
   let isLevelUpMode = true;
   const globalSkillLevels = {};
@@ -723,7 +724,6 @@ document.addEventListener("DOMContentLoaded", function () {
   bgOn.src = "/IMG/SKILL/back-on.png";
 
   const skillLinks = document.querySelectorAll(".submenu a");
-
   skillLinks.forEach(link => {
     link.addEventListener("click", function (e) {
       e.preventDefault();
@@ -1092,6 +1092,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         canvas.addEventListener("mousemove", (event) => {
+          if (temporarilyDisableHover) return;
           const rect = canvas.getBoundingClientRect();
           const x = event.clientX - rect.left;
           const y = event.clientY - rect.top;
@@ -1230,14 +1231,22 @@ document.addEventListener("DOMContentLoaded", function () {
     const canvasScale = 6.2; // sedikit lebih kecil
     const spacingBetweenSkillTrees = 12;
 
-    for (const skillTreeId in globalSkillLevels) {
-      const skillLevels = globalSkillLevels[skillTreeId];
-      const totalSP = skillLevels.reduce((sum, lvl) => sum + lvl, 0);
-      if (totalSP === 0) continue;
+    temporarilyDisableHover = true;
 
+    for (const skillTreeId in globalSkillLevels) {
       const canvasWrapper = document.getElementById(`canvas_${skillTreeId}`);
       const canvas = canvasWrapper?.querySelector("canvas");
       if (!canvas) continue;
+
+      // Reset hover state secara langsung
+      if (typeof hoveredSkillIndex !== "undefined") {
+        hoveredSkillIndex = null;
+      }
+
+      // Cari ulang fungsi drawAllSkills
+      if (typeof drawAllSkills === "function") {
+        drawAllSkills(); // Gambar ulang tanpa efek hover
+      }
 
       const imgData = canvas.toDataURL("image/png");
       const imgHeight = canvas.height / canvasScale;
