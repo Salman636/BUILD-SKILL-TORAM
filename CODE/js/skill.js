@@ -1119,36 +1119,155 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   })
+  document.getElementById("btnSavePDF").addEventListener("click", async () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("p", "mm", "a4");
+
+    const namaBuild = document.getElementById("nama").value || "Untitled Build";
+    const deskripsi = document.getElementById("deskripsi").value;
+    const totalSPText = document.getElementById("spRightTotal").textContent;
+    const fileName = `${namaBuild}.pdf`;
+
+    const marginX = 15;
+    const contentWidth = 180;
+    let currentY = 20;
+
+    // === HEADER ===
+    const logo = new Image();
+    logo.src = "/IMG/LOGO/logo1.png";
+    await new Promise((resolve) => {
+      if (logo.complete) resolve();
+      else logo.onload = resolve;
+    });
+
+    doc.addImage(logo, "PNG", marginX, currentY - 10, 20, 20);
+    doc.setFontSize(20);
+    doc.text("SHARE YOUR BUILD 😊", marginX + 25, currentY + 3);
+    currentY += 25;
+
+    // === NAMA BUILD & DESKRIPSI ===
+    doc.setFontSize(14);
+    doc.text("Nama Build :", marginX, currentY);
+    doc.setFontSize(13);
+    doc.text(namaBuild, marginX + 40, currentY);
+    currentY += 10;
+
+    doc.setFontSize(13);
+    doc.text("Deskripsi :", marginX, currentY);
+    currentY += 6;
+    const splitDescription = doc.splitTextToSize(deskripsi, contentWidth);
+    doc.text(splitDescription, marginX, currentY);
+    currentY += splitDescription.length * 6 + 5;
+
+    // === STAT SECTION ===
+    doc.setFontSize(13);
+    doc.text("STAT :", marginX, currentY);
+    currentY += 8;
+
+    const barFullWidth = 80;
+    const barHeight = 5;
+    const maxValue = 255;
+
+    const statElements = document.querySelectorAll(".stat div");
+    statElements.forEach(statDiv => {
+      const label = statDiv.querySelector("label, select");
+      const output = statDiv.querySelector("output");
+      if (label && output) {
+        const name = label.value || label.textContent.trim();
+        const value = parseInt(output.value || output.textContent.trim());
+
+        // Label stat
+        doc.setFontSize(12);
+        doc.setTextColor(0);
+        doc.text(name, marginX + 5, currentY + 4);
+
+        // Hitung posisi bar & angka
+        const barX = marginX + 35;
+        const barY = currentY;
+        const barValue = Math.min(value, maxValue);
+        const filledW = (barValue / maxValue) * barFullWidth;
+
+        // Bar background
+        doc.setFillColor(230, 230, 230);
+        doc.rect(barX, barY, barFullWidth, barHeight, "F");
+
+        // Filled bar
+        doc.setFillColor(70, 130, 180);
+        doc.rect(barX, barY, filledW, barHeight, "F");
+
+        // Text di akhir bar
+        const valueText = `${value}`;
+        const valueTextX = barX + barFullWidth - doc.getTextWidth(valueText);
+        const valueTextY = barY + barHeight - 0.5;
+
+        doc.setFontSize(10);
+        doc.setTextColor(0);
+        doc.text(valueText, valueTextX, valueTextY);
+
+        currentY += 8;
+      }
+    });
+
+    // === SKILL SECTION ===
+    currentY += 5;
+    doc.setFontSize(13);
+    doc.text("SKILL :", marginX, currentY);
+    currentY += 8;
+
+    doc.setFontSize(12);
+    doc.text(`Total Skill Point : ${totalSPText}`, marginX + 5, currentY);
+    currentY += 10;
+
+    // === SKILL TREE CANVAS ===
+    const canvasScale = 6.2; // sedikit lebih kecil
+    const spacingBetweenSkillTrees = 12;
+
+    for (const skillTreeId in globalSkillLevels) {
+      const skillLevels = globalSkillLevels[skillTreeId];
+      const totalSP = skillLevels.reduce((sum, lvl) => sum + lvl, 0);
+      if (totalSP === 0) continue;
+
+      const canvasWrapper = document.getElementById(`canvas_${skillTreeId}`);
+      const canvas = canvasWrapper?.querySelector("canvas");
+      if (!canvas) continue;
+
+      const imgData = canvas.toDataURL("image/png");
+      const imgHeight = canvas.height / canvasScale;
+      const imgWidth = canvas.width / canvasScale;
+
+      // Page break jika perlu
+      if (currentY + imgHeight + 30 > 280) {
+        doc.addPage();
+        currentY = 20;
+      }
+
+      // Background hitam
+      doc.setFillColor(0, 0, 0);
+      doc.rect(marginX - 5, currentY - 5, imgWidth + 20, imgHeight + 25, "F");
+
+      // Judul skill tree
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(13);
+      doc.text(`${skillTreeId} Skill Tree`, marginX, currentY + 5);
+
+      // Gambar
+      doc.addImage(imgData, "PNG", marginX, currentY + 8, imgWidth, imgHeight);
+      currentY += imgHeight + spacingBetweenSkillTrees + 20;
+
+      // Reset warna teks
+      doc.setTextColor(0, 0, 0);
+    }
+
+    // === FOOTER ===
+    const pageCount = doc.internal.getNumberOfPages();
+    for (let i = 1; i <= pageCount; i++) {
+      doc.setPage(i);
+      doc.setFontSize(10);
+      doc.setTextColor(150);
+      doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", marginX, 287);
+    }
+
+    doc.save(fileName);
+  });
+
 })
-
-// PRINT
-const namaBuild = document.getElementById("namaBuild").value;
-const deskripsi = document.getElementById("deskripsi").value;
-const stat = getSelectedStat();
-const skillData = getSkillData();
-const totalSP = calculateTotalSP(skillData);
-const usesNinjutsuScroll = checkNinjutsuScroll();
-const filteredSkillTree = skillData.filter(skill => skill.sp !== 0);
-
-const { jsPDF } = window.jspdf;
-
-const doc = new jsPDF();
-
-doc.text("SHARE YOUR BUILD 😊", 10, 10);
-doc.text(`Nama Build : ${namaBuild}`, 10, 20);
-doc.text(`Deskripsi : ${deskripsi}`, 10, 30);
-doc.text(`STAT : ${stat}`, 10, 40);
-doc.text(`Total Skill Poin : ${totalSP}`, 10, 50);
-
-doc.text("SKILL :", 10, 60);
-let y = 70;
-filteredSkillTree.forEach(skill => {
-  doc.text(`- ${skill.name}: ${skill.sp} SP`, 10, y);
-  y += 10;
-});
-
-if (usesNinjutsuScroll) {
-  doc.text("Menggunakan: Ninjutsu Scroll", 10, y);
-}
-
-doc.save(`${namaBuild}.pdf`);
