@@ -1229,8 +1229,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const statBoxWidth = 190;
     const statBoxPadding = 5;
     const barFullWidth = 100;
-    const barHeight = 8;
-    const barColor = ["green"];
+    const barHeight = 4;
+    const barColor = ["lime"];
     const maxBarValue = 255;
 
     const statElements = document.querySelectorAll(".stat div");
@@ -1273,7 +1273,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Bar
         const barX = marginX + 25;
-        const barY = currentY;
+        const barY = currentY + 3;
         const filledW = (normalizedValue / maxBarValue) * barFullWidth;
 
         // Latar bar
