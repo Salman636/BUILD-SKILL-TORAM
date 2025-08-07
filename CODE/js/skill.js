@@ -1128,6 +1128,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   })
+
   document.getElementById("btnSavePDF").addEventListener("click", async () => {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF({
@@ -1136,6 +1137,7 @@ document.addEventListener("DOMContentLoaded", function () {
       format: "a4",
       compress: true
     });
+
     const namaBuild = document.getElementById("nama").value || "Untitled Build";
     const deskripsi = document.getElementById("deskripsi").value;
     const totalSPText = document.getElementById("spRightTotal").textContent;
@@ -1143,7 +1145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const marginX = 15;
     const contentWidth = 180;
-    let currentY = 20;
+    let currentY = 5;
 
     // === HEADER ===
     const logo = new Image();
@@ -1155,36 +1157,102 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const logoWidth = 40;
     const logoHeight = 40;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const centerX = pageWidth / 2;
 
-    doc.addImage(logo, "PNG", marginX, currentY - 10, logoWidth, logoHeight);
-    doc.setFontSize(20);
-    doc.text("SHARE YOUR BUILD ", marginX + logoWidth + 10, currentY + 5);
-    currentY += logoHeight + 5;
+    // Gambar logo di kiri
+    doc.addImage(logo, "PNG", marginX, currentY, logoWidth, logoHeight);
+
+    // Tulis teks "SHARE YOUR BUILD" di tengah
+    doc.setFont("times", "bold");
+    doc.setFontSize(30);
+    doc.setTextColor(0, 135, 181);
+    const titleText = "SHARE YOUR BUILD";
+    const textWidth = doc.getTextWidth(titleText);
+    doc.text(titleText, (centerX - textWidth / 2) + 15, currentY + logoHeight / 2 + 3);
+
+    // Tambah garis ganda di bawah header
+    const lineY = currentY + logoHeight;
+    doc.setDrawColor(0, 135, 181);
+    doc.setLineWidth(1);
+    doc.line(marginX, lineY, pageWidth - marginX, lineY);
+    doc.setLineWidth(0.5);
+    doc.line(marginX, lineY + 2, pageWidth - marginX, lineY + 2);
+
+    currentY = lineY + 15;
 
     // === NAMA BUILD & DESKRIPSI ===
     doc.setFontSize(14);
+    doc.setTextColor(0, 135, 181);
     doc.text("Nama Build :", marginX, currentY);
     doc.setFontSize(13);
+    doc.setTextColor(0);
     doc.text(namaBuild, marginX + 40, currentY);
+
     currentY += 10;
 
     doc.setFontSize(13);
+    doc.setTextColor(0, 135, 181);
     doc.text("Deskripsi :", marginX, currentY);
     currentY += 6;
+
+    // Siapkan teks
+    doc.setFontSize(12);
+    doc.setTextColor(0);
     const splitDescription = doc.splitTextToSize(deskripsi, contentWidth);
-    doc.text(splitDescription, marginX, currentY);
-    currentY += splitDescription.length * 6 + 5;
+
+    // Hitung tinggi kotak
+    const lineHeight = 6;
+    const boxPadding = 4;
+    const boxHeight = splitDescription.length * lineHeight + boxPadding * 2;
+    const boxY = currentY - 2;
+
+    // Gambar kotak: background putih + outline biru
+    doc.setDrawColor(0, 135, 181);
+    doc.setFillColor(255, 255, 255);
+    doc.roundedRect(marginX - 2, boxY, contentWidth + 4, boxHeight, 3, 3, "FD");
+
+    // Tulis teks deskripsi di dalam kotak
+    doc.setTextColor(0);
+    doc.text(splitDescription, marginX, currentY + boxPadding);
+    currentY += boxHeight + 10;
 
     // === STAT SECTION ===
     doc.setFontSize(13);
+    doc.setTextColor(0, 135, 181);
     doc.text("STAT :", marginX, currentY);
-    currentY += 8;
+    currentY += 5;
+
+    // Ukuran kotak hitam
+    const statBoxX = marginX - 5;
+    const statBoxY = currentY;
+    const statBoxWidth = 190;
+    const statBoxPadding = 5;
+    const barFullWidth = 100;
+    const barHeight = 8;
+    const barColor = ["green"];
+    const maxBarValue = 255;
 
     const statElements = document.querySelectorAll(".stat div");
-    const barFullWidth = 80;
-    const barHeight = 8;
-    const barColor = [0, 135, 181];
-    const maxBarValue = 255; // Semua bar disamakan ke skala ini
+
+    let tempY = currentY + statBoxPadding;
+    let statBoxHeight = 0;
+
+    statElements.forEach(statDiv => {
+      const label = statDiv.querySelector("label, select");
+      const output = statDiv.querySelector("output");
+      if (label && output) {
+        statBoxHeight += 12;
+      }
+    });
+    statBoxHeight += statBoxPadding * 2;
+
+    // Gambar background kotak hitam
+    doc.setFillColor(0, 0, 0);
+    doc.setDrawColor(60);
+    doc.roundedRect(statBoxX, statBoxY, statBoxWidth, statBoxHeight, 5, 5, "FD");
+
+    currentY += statBoxPadding;
 
     statElements.forEach(statDiv => {
       const label = statDiv.querySelector("label, select");
@@ -1196,47 +1264,50 @@ document.addEventListener("DOMContentLoaded", function () {
         const isMysteryStat = name === "???";
         const maxOriginal = isMysteryStat ? 255 : 510;
 
-        // Konversi ke skala 255 agar semua bar proporsional
         const normalizedValue = (value / maxOriginal) * maxBarValue;
 
         // Label stat
-        doc.setFontSize(12);
-        doc.setTextColor(0);
-        doc.text(name, marginX + 5, currentY + 6);
+        doc.setFontSize(11);
+        doc.setTextColor(255, 255, 255);
+        doc.text(name, marginX, currentY + 6);
 
-        // Hitung posisi bar
-        const barX = marginX + 30;
+        // Bar
+        const barX = marginX + 25;
         const barY = currentY;
         const filledW = (normalizedValue / maxBarValue) * barFullWidth;
 
-        // Bar latar (putih + outline hitam)
+        // Latar bar
         doc.setDrawColor(0);
         doc.setLineWidth(0.5);
-        doc.setFillColor(255, 255, 255); // putih
-        doc.roundedRect(barX, barY, barFullWidth, barHeight, 4, 4, "FD");
+        doc.setFillColor(255, 255, 255);
+        doc.roundedRect(barX, barY, barFullWidth, barHeight, 3, 3, "FD");
 
-        // Bar isi
+        // Isi bar 
         if (value > 0) {
           doc.setFillColor(...barColor);
-          doc.roundedRect(barX, barY, filledW, barHeight, 4, 4, "F");
+          doc.roundedRect(barX, barY, filledW, barHeight, 3, 3, "F");
         }
 
-        // Tampilkan nilai asli (bukan yang di-normalisasi)
-        doc.setFontSize(12);
-        doc.setTextColor(0);
+        // Nilai stat
+        doc.setFontSize(11);
+        doc.setTextColor(255, 255, 255);
         doc.text(value.toString(), barX + barFullWidth + 10, currentY + 6);
 
         currentY += 12;
       }
     });
 
+    currentY += 10;
+
     // === SKILL SECTION ===
     currentY += 5;
     doc.setFontSize(13);
+    doc.setTextColor(0, 135, 181);
     doc.text("SKILL :", marginX, currentY);
     currentY += 8;
 
     doc.setFontSize(12);
+    doc.setTextColor(0);
     doc.text(`Total Skill Point : ${totalSPText}`, marginX + 5, currentY);
     currentY += 10;
 
@@ -1284,13 +1355,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // === FOOTER ===
+    const footerHeight = 10;
     const pageCount = doc.internal.getNumberOfPages();
     for (let i = 1; i <= pageCount; i++) {
       doc.setPage(i);
+
+      // 1. Gambar background footer
+      doc.setFillColor(0, 135, 181); // Warna biru
+      doc.rect(0, 287, pageWidth, footerHeight, "F");
+
+      // 2. Tulis teks di atas background
       doc.setFontSize(10);
-      doc.setTextColor(150);
-      doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", marginX, 287);
+      doc.setTextColor(255, 255, 255); // Putih
+      doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", marginX, 293);
     }
+
 
     doc.save(fileName);
   });
