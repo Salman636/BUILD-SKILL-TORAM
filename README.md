@@ -7,5 +7,7 @@ Sebuah koleksi simpel tools dan panduan untuk membantu pemain **Toram Online** d
 - Skill Build Simulator
   Hitung penggunaan SP dan STAT yang digunakan pada build kamu untuk dibagikan kepada orang lain.
 
-# UNDER DEV NOT FINISH YET
+# SELAMAT MENCOBA
 
+Jika kalian ingin menyisihkan uang kalian untuk ku bisa [Klik Ini](https://tako.id/Alfarisi636)
+Rp. 1000 dari kalian sangat berharga untuk ku
