@@ -10,4 +10,4 @@ Sebuah koleksi simpel tools dan panduan untuk membantu pemain **Toram Online** d
 # SELAMAT MENCOBA
 
 Jika kalian ingin menyisihkan uang kalian untuk ku bisa [Klik Ini](https://tako.id/Alfarisi636)
-Rp. 1000 dari kalian sangat berharga untuk ku
+Rp. 1000 dari kalian sangat berharga untuk ku.
