@@ -1187,7 +1187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     doc.text("Nama Build :", marginX, currentY);
     doc.setFontSize(13);
     doc.setTextColor(0);
-    doc.text(namaBuild, marginX + 40, currentY);
+    doc.text(namaBuild, marginX + 30, currentY);
 
     currentY += 10;
 
