@@ -23,6 +23,25 @@ document.querySelectorAll(".nested").forEach(function (toggle) {
   });
 });
 
+document.querySelectorAll(".stat div").forEach(div => {
+  const range = div.querySelector('input[type="range"]');
+  const number = div.querySelector('input[type="number"]');
+  if (range && number) {
+    range.addEventListener("input", () => {
+      number.value = range.value;
+    });
+    number.addEventListener("input", () => {
+      if (parseInt(number.value) > parseInt(number.max)) {
+        number.value = number.max;
+      }
+      if (parseInt(number.value) < parseInt(number.min)) {
+        number.value = number.min;
+      }
+      range.value = number.value;
+    });
+  }
+});
+
 // weap skill
 document.addEventListener("DOMContentLoaded", function () {
   // Semua skill container

@@ -41,45 +41,39 @@
                 <div class="stat">
                     <div>
                         <label for="str" class="name_stat">STR</label>
-                        <input type="range" name="str" id="str" min="1" max="510" value="1"
-                            oninput="strOut.value = this.value">
-                        <output id="strOut">1</output>
+                        <input type="range" id="str" min="1" max="510" value="1" oninput="strOut.value=this.value">
+                        <input type="number" id="strOut" min="1" max="510" value="1" oninput="str.value=this.value">
                     </div>
                     <div>
                         <label for="int" class="name_stat">INT</label>
-                        <input type="range" name="int" id="int" min="1" max="510" value="1"
-                            oninput="intOut.value = this.value">
-                        <output id="intOut">1</output>
+                        <input type="range" id="int" min="1" max="510" value="1" oninput="intOut.value=this.value">
+                        <input type="number" id="intOut" min="1" max="510" value="1" oninput="int.value=this.value">
                     </div>
                     <div>
                         <label for="vit" class="name_stat">VIT</label>
-                        <input type="range" name="vit" id="vit" min="1" max="510" value="1"
-                            oninput="vitOut.value = this.value">
-                        <output id="vitOut">1</output>
+                        <input type="range" id="vit" min="1" max="510" value="1" oninput="vitOut.value=this.value">
+                        <input type="number" id="vitOut" min="1" max="510" value="1" oninput="vit.value=this.value">
                     </div>
                     <div>
                         <label for="agi" class="name_stat">AGI</label>
-                        <input type="range" name="agi" id="agi" min="1" max="510" value="1"
-                            oninput="agiOut.value = this.value">
-                        <output id="agiOut">1</output>
+                        <input type="range" id="agi" min="1" max="510" value="1" oninput="agiOut.value=this.value">
+                        <input type="number" id="agiOut" min="1" max="510" value="1" oninput="agi.value=this.value">
                     </div>
                     <div>
                         <label for="dex" class="name_stat">DEX</label>
-                        <input type="range" name="dex" id="dex" min="1" max="510" value="1"
-                            oninput="dexOut.value = this.value">
-                        <output id="dexOut">1</output>
+                        <input type="range" id="dex" min="1" max="510" value="1" oninput="dexOut.value=this.value">
+                        <input type="number" id="dexOut" min="1" max="510" value="1" oninput="dex.value=this.value">
                     </div>
                     <div>
-                        <select name="add" id="add" class="name_stat">
+                        <select id="addSelect" class="name_stat">
                             <option value="???">???</option>
                             <option value="CRT">CRT</option>
                             <option value="LUK">LUK</option>
                             <option value="MTL">MTL</option>
                             <option value="TEC">TEC</option>
                         </select>
-                        <input type="range" name="add" id="add" min="0" max="255" value="0"
-                            oninput="addOut.value = this.value">
-                        <output id="addOut">0</output>
+                        <input type="range" id="add" min="0" max="255" value="0" oninput="addOut.value=this.value">
+                        <input type="number" id="addOut" min="0" max="255" value="0" oninput="add.value=this.value">
                     </div>
                 </div>
             </div>
