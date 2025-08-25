@@ -1259,7 +1259,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     statElements.forEach(statDiv => {
       const label = statDiv.querySelector("label, select");
-      const output = statDiv.querySelector("output");
+      const output = statDiv.querySelector("input[type=number], output");
+
       if (label && output) {
         statBoxHeight += 12;
       }
@@ -1275,7 +1276,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     statElements.forEach(statDiv => {
       const label = statDiv.querySelector("label, select");
-      const output = statDiv.querySelector("output");
+      const output = statDiv.querySelector("input[type=number], output");
+
       if (label && output) {
         const name = label.value || label.textContent.trim();
         const value = parseInt(output.value || output.textContent.trim());
