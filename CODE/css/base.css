@@ -10,29 +10,32 @@ body {
     height: 100vh;
     font-family: 'Quicksand', sans-serif;
     margin: 0;
-    background-color: rgb(226, 226, 226);
+    background-color: rgb(39, 38, 38);
     display: flex;
     flex-direction: column;
 }
 
 header.navbar-container {
+    margin-top: 10px;
     max-width: 1200px;
     width: 100%;
     margin-inline: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    box-shadow: 0 2px 8px 2px rgb(8, 107, 255);
     border-radius: 99px;
     padding: 20px;
     padding-block: 1rem;
     z-index: 999;
+    position: relative;
 }
 
 header.navbar-container .logo img {
-    width: 150px;
+    width: 250px;
 }
 
+/* Menu utama */
 header.navbar-container .nav-list ul {
     padding-left: 0;
     display: flex;
@@ -42,25 +45,74 @@ header.navbar-container .nav-list ul {
 
 header.navbar-container .nav-list li {
     list-style-type: none;
+    position: relative;
 }
 
 header.navbar-container .nav-list li a {
     text-decoration: none;
+}
+
+header.navbar-container .nav-list li a span {
     font-size: 1.05rem;
     font-weight: 500;
-    color: rgb(0, 135, 181);
+    color: white;
     padding: .5rem 1.5rem;
     border-radius: 999px;
     transition: all .2s ease-in-out;
 }
 
+/* Hover effect */
+header.navbar-container .nav-list li a span:hover {
+    background-color: rgb(8, 107, 255);
+    color: white;
+}
+
+/* Dropdown */
+header.navbar-container .dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    margin-top: .5rem;
+    background-color: rgb(39, 38, 38);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1000;
+    padding: 0;
+}
+
+header.navbar-container .dropdown .dropdown-content li {
+    width: 100%;
+}
+
+header.navbar-container .dropdown .dropdown-content li a {
+    display: block;
+    padding: .7rem 1rem;
+    text-decoration: none;
+    color: white;
+    transition: background 0.2s ease-in-out;
+}
+
+header.navbar-container .dropdown .dropdown-content li a:hover {
+    background-color: rgb(8, 107, 255);
+    color: white;
+}
+
+/* Hover untuk buka submenu */
+header.navbar-container .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
 main {
+    flex: 1;
     max-width: 1200px;
     width: 100%;
     margin-inline: auto;
     padding: 2rem 4rem;
-    flex: 1;
-
+    min-height: calc(100vh - 200px);
     display: flex;
     align-items: center;
 }
@@ -73,11 +125,11 @@ main .content {
 
 main .content .content-description {
     flex: 1;
-    color: rgb(0, 135, 181);
+    color: white;
 }
 
 main .content .content-description h1 {
-    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    box-shadow: 0 2px 8px 2px rgb(8, 107, 255);
     border-radius: 10px;
     padding: 20px;
 }
@@ -85,7 +137,7 @@ main .content .content-description h1 {
 main .content .content-description p {
     line-height: 1.7rem;
     font-size: 1.2rem;
-    box-shadow: 0 2px 8px 2px rgb(0, 135, 181);
+    box-shadow: 0 2px 8px 2px rgb(8, 107, 255);
     border-radius: 10px;
     padding: 20px;
 }
@@ -100,7 +152,7 @@ main .content .content-image {
 main .content .content-image img {
     margin: auto;
     min-width: 250px;
-    width: 500px;
+    width: 300px;
 }
 
 main .content .content-image a img {
@@ -111,7 +163,7 @@ main .content .content-image a img {
 footer {
     padding: 20px;
     color: #fff;
-    background-color: rgb(0, 135, 181);
+    background-color: rgb(8, 107, 255);
 }
 
 @media screen and (max-width: 1100px) {

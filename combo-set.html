@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CODE/css/combo.css" />
+    <title>Build Skill Toram</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <header class="navbar-container">
+        <div class="logo">
+            <img src="/IMG/LOGO/logo2.png" alt="Lucis_Caelum">
+        </div>
+        <nav class="nav-list">
+            <ul>
+                <li><a href="index.html"><span>Beranda</span></a></li>
+                <li class="dropdown">
+                    <a href="menu.html"><span>Menu</span></a>
+                    <ul class="dropdown-content">
+                        <li><a href="build-skill.html">Build Skill</a></li>
+                        <li><a href="combo-set.html">Combo Set</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="kontak.html"><span>Kontak</span></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="combos" id="combos-container">
+            <h1>Set Combo</h1>
+
+            <div class="add-combo">
+                <button id="add-combo-btn">+</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <h2>Atur Combo</h2>
+            <p>Silakan pilih skill untuk combo ini.</p>
+            <div class="popup-skill">
+                <div class="skill_name">
+                    <input type="text" id="searchInput" placeholder="Cari Skills...">
+                    <ul id="skillList">
+                        <li><a href="#Blade">Blade Skill</a></li>
+                        <li><a href="#Shot">Shot Skill</a></li>
+                        <li><a href="#Magic">Magic Skill</a></li>
+                        <li><a href="#Martial">Martial Skill</a></li>
+                        <li><a href="#DualSword">DualSword Skill</a></li>
+                        <li><a href="#Halberd">Halberd Skill</a></li>
+                        <li><a href="#Mononofu">Mononofu Skill</a></li>
+                        <li><a href="#BareHand">BareHand Skill</a></li>
+                        <li><a href="#Crusher">Crusher Skill</a></li>
+                        <li><a href="#Sprite">Sprite Skill</a></li>
+                        <li><a href="#Shield">Shield Skill</a></li>
+                        <li><a href="#Dagger">Dagger Skill</a></li>
+                        <li><a href="#Knight">Knight Skill</a></li>
+                        <li><a href="#Priest">Priest Skill</a></li>
+                        <li><a href="#Assassin">Assassin Skill</a></li>
+                        <li><a href="#Wizard">Wizard Skill</a></li>
+                        <li><a href="#Hunter">Hunter Skill</a></li>
+                        <li><a href="#DarkPower">DarkPower Skill</a></li>
+                        <li><a href="#MagicBlade">MagicBlade Skill</a></li>
+                        <li><a href="#NinjutsuScroll">NinjutsuScroll Skill</a></li>
+                        <li><a href="#Partisan">Partisan Skill</a></li>
+                        <li><a href="#Minstrel">Minstrel Skill</a></li>
+                        <li><a href="#Dancer">Dancer Skill</a></li>
+                    </ul>
+                </div>
+                <div class="skill-img">
+                    <div id="canvas_Blade" class="canvasContainer">
+                        <h3>Blade Skill</h3>
+                    </div>
+                    <div id="canvas_Shot" class="canvasContainer">
+                        <h3>Shot Skill</h3>
+                    </div>
+                    <div id="canvas_Magic" class="canvasContainer">
+                        <h3>Magic Skill</h3>
+                    </div>
+                    <div id="canvas_Martial" class="canvasContainer">
+                        <h3>Martial Skill</h3>
+                    </div>
+                    <div id="canvas_DualSword" class="canvasContainer">
+                        <h3>DualSword Skill</h3>
+                    </div>
+                    <div id="canvas_Halberd" class="canvasContainer">
+                        <h3>Halberd Skill</h3>
+                    </div>
+                    <div id="canvas_Mononofu" class="canvasContainer">
+                        <h3>Mononofu Skill</h3>
+                    </div>
+                    <div id="canvas_BareHand" class="canvasContainer">
+                        <h3>BareHand Skill</h3>
+                    </div>
+                    <div id="canvas_Crusher" class="canvasContainer">
+                        <h3>Crusher Skill</h3>
+                    </div>
+                    <div id="canvas_Sprite" class="canvasContainer">
+                        <h3>Sprite Skill</h3>
+                    </div>
+                    <div id="canvas_Shield" class="canvasContainer">
+                        <h3>Shield Skill</h3>
+                    </div>
+                    <div id="canvas_Dagger" class="canvasContainer">
+                        <h3>Dagger Skill</h3>
+                    </div>
+                    <div id="canvas_Knight" class="canvasContainer">
+                        <h3>Knight Skill</h3>
+                    </div>
+                    <div id="canvas_Priest" class="canvasContainer">
+                        <h3>Priest Skill</h3>
+                    </div>
+                    <div id="canvas_Assassin" class="canvasContainer">
+                        <h3>Assassin Skill</h3>
+                    </div>
+                    <div id="canvas_Wizard" class="canvasContainer">
+                        <h3>Wizard Skill</h3>
+                    </div>
+                    <div id="canvas_Hunter" class="canvasContainer">
+                        <h3>Hunter Skill</h3>
+                    </div>
+                    <div id="canvas_DarkPower" class="canvasContainer">
+                        <h3>Dark Power Skill</h3>
+                    </div>
+                    <div id="canvas_MagicBlade" class="canvasContainer">
+                        <h3>Magic Blade Skill</h3>
+                    </div>
+                    <div id="canvas_NinjutsuScroll" class="canvasContainer">
+                        <h3>Ninjutsu Scroll</h3>
+                    </div>
+                    <div id="canvas_Partisan" class="canvasContainer">
+                        <h3>Partisan Skill</h3>
+                    </div>
+                    <div id="canvas_Minstrel" class="canvasContainer">
+                        <h3>Minstrel Skill</h3>
+                    </div>
+                    <div id="canvas_Dancer" class="canvasContainer">
+                        <h3>Dancer Skill</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Lucis_Caelum. All rights reserved.</p>
+    </footer>
+</body>
+
+<script src=" /CODE/js/skill.js"></script>
+<script src="/CODE/js/combo.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const dropdownLink = document.querySelector(".dropdown > a");
+
+        if (dropdownLink) {
+            dropdownLink.addEventListener("click", (event) => {
+                event.preventDefault();
+            });
+        }
+    });
+</script>
+
+</html>

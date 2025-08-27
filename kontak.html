@@ -15,9 +15,16 @@
         </div>
         <nav class="nav-list">
             <ul>
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="menu.html">Menu</a></li>
-                <li><a href="kontak.html">Kontak</a></li>
+                <li><a href="index.html"><span>Beranda</span></a></li>
+                <li class="dropdown">
+                    <a href="menu.html"><span>Menu</span></a>
+                    <ul class="dropdown-content">
+                        <li><a href="build-skill.html">Build Skill</a></li>
+                        <li><a href="combo-set.html">Combo Set</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="kontak.html"><span>Kontak</span></a></li>
             </ul>
         </nav>
     </header>
@@ -42,5 +49,17 @@
         <p>&copy; 2025 Lucis_Caelum. All rights reserved.</p>
     </footer>
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const dropdownLink = document.querySelector(".dropdown > a");
+
+        if (dropdownLink) {
+            dropdownLink.addEventListener("click", (event) => {
+                event.preventDefault();
+            });
+        }
+    });
+</script>
 
 </html>
