@@ -344,10 +344,11 @@ footer {
     }
 
     #skillList {
-        height: 150px;
+        max-height: 150px;
     }
 
     .skill-img {
-        height: 200px;
+        height: auto;
+        min-height: 200px;
     }
 }
