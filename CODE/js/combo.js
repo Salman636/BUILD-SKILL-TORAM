@@ -45,9 +45,9 @@ function createCombo() {
     <h2>Combo ${comboCount}</h2>
     <input type="text" maxlength="40" placeholder="Masukkan nama combo...">
     <div class="border">
-        <button class="set-combo-btn">Set Combo</button>
         ${skillsHTML}
     </div>
+    <button class="set-combo-btn">Set Combo</button>
     `;
 
     // kalau ada tombol hapus
@@ -80,6 +80,280 @@ window.onclick = (e) => {
 };
 
 // === Skill ===
+const skills = {
+    Blade: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hardhit.png", name: "Hard Hit" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/astute.png", name: "Astute" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/tiggerslash.png", name: "Trigger Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/sonicblade.png", name: "Sonic Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/spiralair.png", name: "Spiral Air" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swordtempest.png", name: "Sword Tempest" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/busterblade.png", name: "Buster Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/meteorbreaker.png", name: "Meteor Breaker" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/rampage.png", name: "Rampage" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/berserk.png", name: "Berserk" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/warcry.png", name: "Warcry" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swiftattack.png", name: "Swift Attack" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/ogreslash.png", name: "Ogre Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/stormblaze.png", name: "Storm Blaze" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/hammerslam.png", name: "Hammer Slam" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/cleavingattack.png", name: "Cleaving Attack" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/lunarslash.png", name: "Lunar Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gardeblade.png", name: "Gardening Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gladiate.png", name: "Gladiate" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/aurablade.png", name: "Aura Blade" }
+    ],
+    Shot: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/powershot.png", name: "Power Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/bullseye.png", name: "Bullseye" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/paralysisshot.png", name: "Paralysis Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/moebashot.png", name: "Moeba Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/smokedust.png", name: "Smoke Dust" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/arrowrain.png", name: "Arrow Rain" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/armbreak.png", name: "Arm Break" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/snipe.png", name: "Snipe" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/crossfire.png", name: "Cross Fire" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/twinstorm.png", name: "Twin Storm" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/fatalshot.png", name: "Fatal Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/retrogradeshot.png", name: "Retrograde Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/piercingshot.png", name: "Piercing Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/spreadshot.png", name: "Spread Shot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/parabolacannon.png", name: "Parabola Cannon" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/vanquisher.png", name: "Vanquisher" },
+    ],
+    Magic: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/arrows.png", name: "Magic: Arrows" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/javelin.png", name: "Magic: Javelin" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/lances.png", name: "Magic: Lances" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/wall.png", name: "Magic: Wall" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/blast.png", name: "Magic: Blast" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/storm.png", name: "Magic: Storm" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/impact.png", name: "Magic: Impact" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/finale.png", name: "Magic: Finale" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/burst.png", name: "Magic: Burst" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/crash.png", name: "Magic: Crash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/laser.png", name: "Magic: Laser" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magiccannon.png", name: "Magic Cannon" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", name: "Guardian Beam" }
+    ],
+    Martial: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/smash.png", name: "Smash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/bash.png", name: "Bash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/shellbreak.png", name: "Shell Break" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/heavysmash.png", name: "Heavy Smash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/chariot.png", name: "Chariot" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/mountainpress.png", name: "Mountain Press" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/sonicwave.png", name: "Sonic Wave" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/earthbind.png", name: "Earthbind" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/seismicstomp.png", name: "Seismic Stomp" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/triplekick.png", name: "Triple Kick" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/flashblink.png", name: "Flash Blink" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/rush.png", name: "Rush" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/spinsweep.png", name: "Spin Sweep" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/chakra.png", name: "Chakra" },
+    ],
+    DualSword: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/twinslash.png", name: "Twin Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/spinningslash.png", name: "Spinning Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/aerialcut.png", name: "Aerial Cut" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/phantomslash.png", name: "Phantom Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/crossparry.png", name: "Cross Parry" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/chargingslash.png", name: "Charging Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/shadowstep.png", name: "Shadow Step" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/shiningcross.png", name: "Shining Cross" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/lunarmisfortune.png", name: "Lunar Misfortune" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/twinbusterblade.png", name: "Twin Buster Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/flashblast.png", name: "Flash Blast" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/stormreaper.png", name: "Storm Reaper" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/crescentsaber.png", name: "Crescent Saber" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/aerialslay.png", name: "Aerial Slay" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/stingblade.png", name: "Sting Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/horizoncut.png", name: "Horizon Cut" },
+    ],
+    Halberd: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/flashstab.png", name: "Flash Stab" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/cannonspear.png", name: "Cannon Spear" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/dragontail.png", name: "Dragon Tail" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/dragontooth.png", name: "Dragon Tooth" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/draconiccharge.png", name: "Draconic Charge" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/diveimpact.png", name: "Dive Impact" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/deadlyspear.png", name: "Deadly Spear" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/strikestab.png", name: "Strike Stab" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/chronosdrive.png", name: "Chronos Drive" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/infinitedimension.png", name: "Infinite Dimension" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/punishray.png", name: "Punish Ray" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/blitzspike.png", name: "Blitz Spike" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/lightninghail.png", name: "Lightning Hail" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/thorshammer.png", name: "Thor's Hammer" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/tornadolance.png", name: "Tornado Lance" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/busterlance.png", name: "Buster Lance" },
+    ],
+    Mononofu: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/issen.png", name: "Issen" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/pulseblade.png", name: "Pulse Blade" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/triplethrust.png", name: "Triple Thrust" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/hassohappa.png", name: "Hasso Happa" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/tenryuransei.png", name: "Tenryu Ransei" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/kasumisetsugetsuka.png", name: "Kasumi Setsu Getsu Ka" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/garyoutensei.png", name: "Garyou Tensei" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/shadowlessslash.png", name: "Shadowless Slash" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/pomelstrike.png", name: "Pommel Strike" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/magadachi.png", name: "Magadachi" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/zanteisettetsu.png", name: "Zantei Settetsu" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/kairikiranshin.png", name: "Kairiki Ranshin" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/dauntless.png", name: "Dauntless" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/auspiciouswind.png", name: "Auspicious Wind" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/guts.png", name: "Guts" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/zephyrrush.png", name: "Zephyr Rush" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/bouncingblade.png", name: "Bouncing Blade" }
+    ],
+    BareHand: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/qicharge.png", name: "Qi Charge" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/lionrage.png", name: "Lion Rage" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ultimalionsrage.png", name: "Ultima Lion's Rage" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ravingstorm.png", name: "Raving Storm" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ultimaraving.png", name: "Ultima Raving Storm" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/clashofenmity.png", name: "Clash of Enmity" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/hiddentalent.png", name: "Hidden Talent" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/earthshaker.png", name: "Earthshaker" }
+    ],
+    Crusher: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/forefistpunch.png", name: "Forefist Punch" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/goliathpunch.png", name: "Goliath Punch" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/godhand.png", name: "God Hand" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/floatingkick.png", name: "Floating Kick" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/geyserkick.png", name: "Geyser Kick" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/combination.png", name: "Combination" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/annihilator.png", name: "Annihilator" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/terrablast.png", name: "Terra Blast" }
+    ],
+    Sprite: [
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/astrallance.png", name: "Astral Lance" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", name: "Magic Vulcan" }
+    ],
+    Shield: [
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldbash.png", name: "Shield Bash" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldcannon.png", name: "Shield Cannon" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardstrike.png", name: "Guard Strike" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shielduppercut.png", name: "Shield Uppercut" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/dualshields.png", name: "Dual Shields" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldrepair.png", name: "Shield Repair" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/belagerung.png", name: "Belagerung" },
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardian.png", name: "Guardian" }
+    ],
+    Dagger: [
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/throwingknife.png", name: "Throwing Knife" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/spikedart.png", name: "Spike Dart" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/gatlingknife.png", name: "Gatling Knife" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/poisondagger.png", name: "Poison Dagger" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/mailbreaker.png", name: "Mail Breaker" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", name: "Flincher Knife" }
+    ],
+    Knight: [
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/assaultattack.png", name: "Assault Attack" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/fareth.png", name: "Fareth" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/provoke.png", name: "Provoke" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/ragesword.png", name: "Rage Sword" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/bindingstrike.png", name: "Binding Strike" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/blinksword.png", name: "Blink Sword" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/sonicthrust.png", name: "Sonic Thrust" },
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/revenir.png", name: "Revenir" },
+    ],
+    Priest: [
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holyfist.png", name: "Holy Fist" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holylight.png", name: "Holy Light" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/staffthrust.png", name: "Staff Thrust" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/exorcism.png", name: "Exorcism" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/nemesis.png", name: "Nemesis" },
+    ],
+    Assassin: [
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/assassinstab.png", name: "Assassin Stab" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/backstep.png", name: "Backstep" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/sicarius.png", name: "Sicarius" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/arcanestrike.png", name: "Arcane Strike" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/assaultchase.png", name: "Assault Chase" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/venominjection.png", name: "Venom Injection" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/venomthief.png", name: "Venom Thief" },
+        { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/deathreception.png", name: "Death Reception" },
+    ],
+    Wizard: [
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/lightning.png", name: "Lightning" },
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/blizzard.png", name: "Blizzard" },
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/meteorstrike.png", name: "Meteor Strike" },
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/imperialray.png", name: "Imperial Ray" },
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/crystallaser.png", name: "Crystal Laser" },
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/shift.png", name: "Shift" },
+    ],
+    Hunter: [
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/kick.png", name: "Kick" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/sunrisearrow.png", name: "Sunrise Arrow" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/magicarrow.png", name: "Magic Arrow" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/satellitearrow.png", name: "Satellite Arrow" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/sleeptrap.png", name: "Sleep Trap" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/beartrap.png", name: "Bear Trap" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/landmine.png", name: "Land Mine" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/darktrap.png", name: "Dark Trap" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/homingshot.png", name: "Homing Shot" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/cyclonarrow.png", name: "Cyclone Arrow" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/verticalair.png", name: "Vertical Air" },
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/multiplehunt.png", name: "Multiple Hunt" },
+    ],
+    DarkPower: [
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/bloodybite.png", name: "Bloody Bite" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/darkstinger.png", name: "Dark Stinger" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/redtear.png", name: "Red Tear" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/soulhunter.png", name: "Soul Hunter" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/sacrifice.png", name: "Sacrifice" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/demonclaw.png", name: "Demon Claw" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/eternalnightmare.png", name: "Eternal Nightmare" },
+    ],
+    MagicBlade: [
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/enchantedspell.png", name: "Enchanted Spell" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/dualbringer.png", name: "Dual Bringer" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/etherflare.png", name: "Ether Flare" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/elementslash.png", name: "Element Slash" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/enchantsword.png", name: "Enchant Sword" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/enchantedburst.png", name: "Enchanted Burst" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/unionsword.png", name: "Union Sword" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/teleport.png", name: "Teleport" },
+    ],
+    Partisan: [
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/lboomerang.png", name: "L Boomerang" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/lboomerangii.png", name: "L Boomerang II" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/lboomerangiii.png", name: "L Boomerang III" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/ndragontooth.png", name: "N Dragon Tooth" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/healingshot.png", name: "Healing Shot" }
+    ], Minstrel: [
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/healing.png", name: "Healing Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fairy.png", name: "Fairy Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", name: "Passion Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", name: "Wisdom Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/life.png", name: "Life Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fantasy.png", name: "Fantasy Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/ad-lib.png", name: "Ad Lib" }
+    ],
+    Dancer: [
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/fairy.png", name: "Fairy Dance" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/frenzy.png", name: "Frenzy Dance" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/astute.png", name: "Astute Dance" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/charming.png", name: "Charming Dance" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/spirited.png", name: "Spirited Dance" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/elegantpoise.png", name: "Elegant Poise" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/natureswonder.png", name: "Nature's Wonder" }
+    ],
+    NinjutsuScroll: [
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/kunaithrow.png", name: "Kunai Throw" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/firerelease.png", name: "Fire Release" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/waterrelease.png", name: "Water Release" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/earthrelease.png", name: "Earth Release" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/windrelease.png", name: "Wind Release" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/demonshuriken.png", name: "Demon Shuriken" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/cloning.png", name: "Cloning" },
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/thunderrelease.png", name: "Thunder Release" }
+    ],
+};
+
+// === Script Canvas ===
 const links = document.querySelectorAll("#skillList a");
 const containers = document.querySelectorAll(".canvasContainer");
 
@@ -88,7 +362,10 @@ links.forEach(link => {
         e.preventDefault();
 
         // sembunyikan semua canvas
-        containers.forEach(c => c.classList.remove("active"));
+        containers.forEach(c => {
+            c.classList.remove("active");
+            c.innerHTML = "<h3>" + c.querySelector("h3").innerText + "</h3>"; // reset isi
+        });
 
         // ambil target id dari href (#Blade, #Shot, dll)
         const targetId = this.getAttribute("href").substring(1);
@@ -96,6 +373,53 @@ links.forEach(link => {
 
         if (targetCanvas) {
             targetCanvas.classList.add("active");
+
+            // jika ada data skill, generate gambar + nama
+            if (skills[targetId]) {
+                const listContainer = document.createElement("div");
+                listContainer.style.display = "flex";
+                listContainer.style.flexDirection = "column";
+                listContainer.style.gap = "10px";
+                listContainer.style.marginTop = "10px";
+
+                skills[targetId].forEach(skill => {
+                    const item = document.createElement("div");
+                    item.style.display = "flex";
+                    item.style.alignItems = "center";
+                    item.style.gap = "15px";
+
+                    // background skill slot
+                    const bgWrapper = document.createElement("div");
+                    bgWrapper.style.width = "60px";
+                    bgWrapper.style.height = "60px";
+                    bgWrapper.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
+                    bgWrapper.style.backgroundSize = "cover";
+                    bgWrapper.style.display = "flex";
+                    bgWrapper.style.justifyContent = "center";
+                    bgWrapper.style.alignItems = "center";
+
+                    const img = document.createElement("img");
+                    img.src = skill.src;
+                    img.alt = skill.name;
+                    img.style.width = "50px";
+                    img.style.height = "50px";
+                    img.style.objectFit = "contain";
+                    img.style.cursor = "pointer";
+
+                    bgWrapper.appendChild(img);
+
+                    const name = document.createElement("span");
+                    name.textContent = skill.name;
+                    name.style.fontSize = "16px";
+                    name.style.fontWeight = "600";
+
+                    item.appendChild(bgWrapper);
+                    item.appendChild(name);
+                    listContainer.appendChild(item);
+                });
+
+                targetCanvas.appendChild(listContainer);
+            }
         }
     });
 });
