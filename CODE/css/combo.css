@@ -314,6 +314,15 @@ footer {
         column-gap: .5rem;
     }
 
+    main {
+        margin-left: 0;
+    }
+
+    .combos {
+        overflow-x: auto;
+        width: 100%;
+    }
+
     /* === Popup Skill Responsif === */
     .popup-content {
         width: 95%;

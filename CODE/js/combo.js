@@ -79,6 +79,7 @@ window.onclick = (e) => {
     if (e.target === popup) popup.style.display = "none";
 };
 
+// === Skill ===
 const links = document.querySelectorAll("#skillList a");
 const containers = document.querySelectorAll(".canvasContainer");
 
