@@ -313,4 +313,38 @@ footer {
         flex-wrap: wrap;
         column-gap: .5rem;
     }
+
+    /* === Popup Skill Responsif === */
+    .popup-content {
+        width: 95%;
+        /* biar gak kepotong di layar kecil */
+    }
+
+    .popup-skill {
+        flex-direction: column;
+        /* dari row jadi kolom */
+        align-items: center;
+    }
+
+    .skill_name,
+    .skill-img {
+        width: 100%;
+        padding: 10px 0;
+    }
+
+    #searchInput {
+        width: 90%;
+        /* lebih fleksibel di hp */
+    }
+
+    #skillList {
+        max-height: 150px;
+        /* biar gak kepanjangan */
+    }
+
+    .skill-img {
+        height: auto;
+        /* biar menyesuaikan isi */
+        min-height: 200px;
+    }
 }
