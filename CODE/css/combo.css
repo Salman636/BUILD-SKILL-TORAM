@@ -181,6 +181,10 @@ main {
     height: 70px;
 }
 
+.else {
+    display: none;
+}
+
 .popup {
     display: none;
     position: fixed;
@@ -367,12 +371,20 @@ main {
 }
 
 .combo-display {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
     border: 3px solid black;
-    height: 100px;
-    width: 75%;
+    height: 120px;
+    width: 90%;
     margin: auto;
     border-radius: 10px;
+    padding: 10px;
+}
+
+.display-skill {
+    margin-right: -20px;
 }
 
 footer {

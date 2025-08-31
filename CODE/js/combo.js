@@ -340,6 +340,17 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/arrowsharpening.png", name: "Arrow Sharpening" },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", name: "Frontliner" }
     ],
+    Necromencer: [
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/gravediggder.png", name: "Grave Digger" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/phantommissile.png", name: "Phantom Missile" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/bloodsiphon.png", name: "Blood Siphon" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/soulstream.png", name: "Soul Stream" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skeletoncall.png", name: "Skeleton Call" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/demonicpact.png", name: "Demonic Pact" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/tomb.png", name: "Tomb" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skullshaker.png", name: "Skull Shaker" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/hazzardstrike.png", name: "Hazzard Strike" }
+    ],
     Support: [
         { src: "/IMG/SKILL/ASSIST_SKILL/SUPPORT/sanctuary.png", name: "Sanctuary" }
     ],
@@ -421,6 +432,8 @@ links.forEach(link => {
                     bgWrapper.style.display = "flex";
                     bgWrapper.style.justifyContent = "center";
                     bgWrapper.style.alignItems = "center";
+                    bgWrapper.style.objectFit = "contain";
+                    bgWrapper.style.cursor = "pointer";
 
                     const img = document.createElement("img");
                     img.src = skill.src;
@@ -444,3 +457,44 @@ links.forEach(link => {
         }
     });
 });
+
+document.addEventListener("click", function (e) {
+    if (e.target.tagName === "IMG" && e.target.closest(".canvasContainer")) {
+        const skillImg = e.target;
+
+        if (skillImg.dataset.used === "true") return;
+
+        // cari slot kosong (div tanpa img di dalamnya)
+        const comboSlots = document.querySelectorAll(".display-skill");
+        for (let slot of comboSlots) {
+            if (!slot.querySelector("img")) {
+
+                slot.style.width = "80px";
+                slot.style.height = "80px";
+                slot.style.backgroundImage = "url('/IMG/COMBO/background3.png')";
+                slot.style.backgroundSize = "cover";
+                slot.style.display = "flex";
+                slot.style.justifyContent = "center";
+                slot.style.alignItems = "center";
+
+                // buat img skill di atas bg
+                const img = document.createElement("img");
+                img.src = skillImg.src;
+                img.alt = skillImg.alt;
+                img.style.width = "30px";
+                img.style.height = "30px";
+
+
+                slot.appendChild(img);
+
+                // tandai skill sudah dipakai
+                skillImg.dataset.used = "true";
+                skillImg.style.opacity = "0.5";
+
+                break;
+            }
+        }
+    }
+});
+
+
