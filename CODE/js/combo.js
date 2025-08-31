@@ -101,7 +101,8 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/aurablade.png", name: "Aura Blade" },
         { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/warcry.png", name: "Warcry" },
         { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/berserk.png", name: "Berserk" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swiftattack.png", name: "Swift Attack" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/swiftattack.png", name: "Swift Attack" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/BLADE/gladiate.png", name: "Gladiate" },
     ],
     Shot: [
         { src: "/IMG/SKILL/WEAPON_SKILL/SHOT/powershot.png", name: "Power Shot" },
@@ -136,6 +137,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/burst.png", name: "Magic: Burst" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magiccannon.png", name: "Magic: Cannon" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/crash.png", name: "Magic: Crash" },
+        { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/magicknife.png", name: "Magic Knife", on: 2 },
         { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/maximizer.png", name: "Maximizer" },
         { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/enchantedbarriers.png", name: "Enchanted Barriers" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", name: "Magic: Guardian Beam" }
@@ -151,6 +153,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/earthbind.png", name: "Earthbind" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/triplekick.png", name: "Triple Kick" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/rush.png", name: "Rush" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/asuraaura.png", name: "Asura Aura", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/seismicstomp.png", name: "Seismic Stomp" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/spinsweep.png", name: "Spin Sweep" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/flashblink.png", name: "Flash Blink" },
@@ -191,6 +194,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/blitzspike.png", name: "Blitz Spike" },
         { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/lightninghail.png", name: "Lightning Hail" },
         { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/thorshammer.png", name: "Thor's Hammer" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/quickaura.png", name: "Quick Aura", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/godspeedwield.png", name: "GodSpeed Wield" },
         { src: "/IMG/SKILL/WEAPON_SKILL/HALBERD/busterlance.png", name: "Buster Lance" },
     ],
@@ -226,6 +230,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/breathwork.png", name: "Breathwork" },
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/floatingkick.png", name: "Floating Kick" },
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/geyserkick.png", name: "Geyser Kick" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/combination.png", name: "Combination", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/terrablast.png", name: "Terra Blast" }
     ],
     Sprite: [
@@ -233,6 +238,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/microheal.png", name: "Micro Heal" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/enhance.png", name: "Enchance" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/stabiliz.png", name: "Stabiliz" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/spriteshield.png", name: "Spirite Shield", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/counterforce.png", name: "Counterforce" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/astrallance.png", name: "Astral Lance" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", name: "Magic Vulcan" }
@@ -292,6 +298,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/deathreception.png", name: "Death Reception" },
     ],
     Wizard: [
+        { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/lightning.png", name: "Lightning", on: 2 },
         { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/blizzard.png", name: "Blizzard" },
         { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/meteorstrike.png", name: "Meteor Strike" },
         { src: "/IMG/SKILL/BUFF_SKILL/WIZARD/imperialray.png", name: "Imperial Ray" },
@@ -323,6 +330,7 @@ const skills = {
     ],
     MagicBlade: [
         { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/swordconversion.png", name: "Conversion" },
+        { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/resonance.png", name: "Resonance", on: 2 },
         { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/dualbringer.png", name: "Dual Bringer" },
         { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/etherflare.png", name: "Ether Flare" },
         { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/elementslash.png", name: "Element Slash" },
@@ -337,6 +345,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/lboomerangii.png", name: "L Boomerang II" },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/lboomerangiii.png", name: "L Boomerang III" },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/ndragontooth.png", name: "N Dragon Tooth" },
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/healingshot.png", name: "Healing Arrow", on: 2 },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/arrowsharpening.png", name: "Arrow Sharpening" },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", name: "Frontliner" }
     ],
@@ -464,30 +473,43 @@ document.addEventListener("click", function (e) {
 
         if (skillImg.dataset.used === "true") return;
 
-        // cari slot kosong (div tanpa img di dalamnya)
+        // ambil nama skill yg diklik
+        const skillName = skillImg.alt;
+        // cari skill object di semua category
+        let skillObj = null;
+        for (let category in skills) {
+            skillObj = skills[category].find(s => s.name === skillName);
+            if (skillObj) break;
+        }
+
+        // cari slot kosong
         const comboSlots = document.querySelectorAll(".display-skill");
-        for (let slot of comboSlots) {
+        for (let i = 0; i < comboSlots.length; i++) {
+            const slot = comboSlots[i];
             if (!slot.querySelector("img")) {
 
-                slot.style.width = "80px";
-                slot.style.height = "80px";
+                // cek jika skill punya "on" requirement
+                if (skillObj?.on && i < (skillObj.on - 1)) {
+                    alert(`${skillObj.name} hanya bisa dipasang mulai slot ${skillObj.on}`);
+                    return; // stop, ga bisa pasang di slot ini
+                }
+
+                slot.style.width = "90px";
+                slot.style.height = "90px";
                 slot.style.backgroundImage = "url('/IMG/COMBO/background3.png')";
                 slot.style.backgroundSize = "cover";
                 slot.style.display = "flex";
                 slot.style.justifyContent = "center";
                 slot.style.alignItems = "center";
 
-                // buat img skill di atas bg
                 const img = document.createElement("img");
                 img.src = skillImg.src;
                 img.alt = skillImg.alt;
-                img.style.width = "30px";
-                img.style.height = "30px";
-
+                img.style.width = "45px";
+                img.style.height = "45px";
 
                 slot.appendChild(img);
 
-                // tandai skill sudah dipakai
                 skillImg.dataset.used = "true";
                 skillImg.style.opacity = "0.5";
 
@@ -496,5 +518,6 @@ document.addEventListener("click", function (e) {
         }
     }
 });
+
 
 
