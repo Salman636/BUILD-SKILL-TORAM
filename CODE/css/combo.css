@@ -381,6 +381,7 @@ main {
     margin: auto;
     border-radius: 10px;
     padding: 10px;
+    overflow-x: auto;
 }
 
 .display-skill {
