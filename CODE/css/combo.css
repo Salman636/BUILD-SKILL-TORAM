@@ -198,7 +198,7 @@ main {
 
 .popup-content {
     background: #fff;
-    margin: 2% auto;
+    margin: 15px auto;
     padding: 20px;
     width: 1000px;
     border-radius: 12px;
@@ -386,6 +386,69 @@ main {
 
 .display-skill {
     margin-right: -20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attribute {
+    position: absolute;
+    top: -3px;
+    left: -5px;
+    width: 30px;
+    height: 30px;
+    background-image: url('/IMG/SKILL/back-off.png');
+    background-size: cover;
+    cursor: pointer;
+    display: none;
+    border-radius: 50%;
+}
+
+#attrPopup {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#attrPopup .popup-content {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    margin: 10% auto;
+    text-align: center;
+}
+
+.attr-options {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.attr-options img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.attr-options img:hover {
+    transform: scale(1.2);
+}
+
+.closeAttr {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 footer {

@@ -1415,3 +1415,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 })
+
+// di dalam loop saat skill dipasang ke slot
+const attrDiv = slot.querySelector(".attribute");
+
+if (skillObj?.on) {
+  attrDiv.textContent = skillObj.on;  // misalnya angka "2"
+  attrDiv.style.display = "block";    // munculkan
+} else {
+  attrDiv.textContent = "";
+  attrDiv.style.display = "none";     // sembunyikan kalau ga ada atribut
+}

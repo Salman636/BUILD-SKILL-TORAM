@@ -510,6 +510,13 @@ document.addEventListener("click", function (e) {
 
                 slot.appendChild(img);
 
+                const attrDiv = slot.querySelector(".attribute");
+                if (attrDiv) {
+                    attrDiv.style.display = "block";
+                    attrDiv.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
+                    attrDiv.dataset.attr = "none";
+                }
+
                 skillImg.dataset.used = "true";
                 skillImg.style.opacity = "0.5";
 
@@ -519,5 +526,55 @@ document.addEventListener("click", function (e) {
     }
 });
 
+// buka popup attribute setelah pilih skill
+document.querySelectorAll(".display-skill").forEach((slot, index) => {
+    slot.addEventListener("click", function () {
+        // kalau slot ada skill (misalnya ada <img> skill di dalamnya)
+        if (slot.querySelector("img")) {
+            // tampilkan popup pilih attribute
+            document.getElementById("attrPopup").style.display = "block";
 
+            // simpan slot yang sedang aktif
+            window.activeSkillSlot = slot;
+        }
+    });
+});
+
+// saat pilih attribute
+document.querySelectorAll("#attrPopup .attr-options img").forEach(attrImg => {
+    attrImg.addEventListener("click", function () {
+        if (!window.activeSkillSlot) return;
+
+        // cari container attribute
+        let attrBox = window.activeSkillSlot.querySelector(".attribute");
+        attrBox.style.display = "block";
+        attrBox.innerHTML = "";
+
+        // masukkan icon attribute
+        let img = document.createElement("img");
+        img.src = this.src;
+        img.alt = this.alt;
+        img.style.width = "100%";
+        img.style.height = "100%";
+        attrBox.appendChild(img);
+
+        // tutup popup
+        document.getElementById("attrPopup").style.display = "none";
+
+    });
+});
+
+// tombol X untuk attrPopup
+const closeAttrBtn = document.querySelector("#attrPopup .closeAttr");
+closeAttrBtn.addEventListener("click", () => {
+    document.getElementById("attrPopup").style.display = "none";
+});
+
+// juga bisa close kalau klik di luar popup
+window.addEventListener("click", (e) => {
+    const attrPopup = document.getElementById("attrPopup");
+    if (e.target === attrPopup) {
+        attrPopup.style.display = "none";
+    }
+});
 
