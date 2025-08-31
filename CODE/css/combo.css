@@ -117,26 +117,34 @@ main {
     padding: 20px;
     box-shadow: 0 2px 8px 2px rgb(8, 107, 255);
     border-radius: 15px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .combo {
     position: relative;
     margin: 25px auto;
     padding: 10px;
-    width: 995px;
+    width: 100%; /*995px*/
     box-shadow: 0 2px 8px 2px rgb(8, 107, 255);
     border-radius: 15px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .combo input {
-    margin-left: 20px;
+    margin-left: 10px;
     border-radius: 8px;
-    width: 310px;
+    width: 31.16%; /*310px*/
     height: 25px;
+    display: flex;
+    flex-direction: column;
 }
 
 .border {
-    width: 950px;
+    width: 95.48%; /*950px*/
     height: 100px;
     margin: 15px auto;
     padding: 20px;
@@ -172,12 +180,27 @@ main {
 }
 
 .border .first {
-    height: 90px;
+    padding: 0 5px;
+    height: auto; /*90px*/
+    max-width: 120px;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    /*display: flex;
+    flex: 1;
+    flex-direction: column;  */  
 }
 
 .border .else {
-    margin: 35px -20px 0 0;
-    height: 70px;
+    margin: 35px 0 0 0;
+    padding: 0 5px
+    height: auto; /*70px*/
+    max-width: 70px;
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    /*flex: 1;
+    flex-direction: column;*/
 }
 
 .popup {
