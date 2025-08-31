@@ -438,6 +438,20 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", x: 50, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", x: 150, y: 425, w: 50, h: 50 }
     ],
+    Necromencer: [
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/gravediggder.png", x: 50, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/phantommissile.png", x: 150, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/bloodsiphon.png", x: 250, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/soulstream.png", x: 350, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skeletoncall.png", x: 250, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/demonicpact.png", x: 350, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/shovel.png", x: 150, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/shovel.png", x: 250, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/shovel.png", x: 350, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/tomb.png", x: 50, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skullshaker.png", x: 250, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/hazzardstrike.png", x: 350, y: 425, w: 50, h: 50 }
+    ],
     Survival: [
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/saferest.png", x: 150, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/SURVIVAL/hpboost.png", x: 250, y: 50, w: 50, h: 50 },
@@ -587,6 +601,7 @@ document.addEventListener("DOMContentLoaded", function () {
     MagicBlade: { width: 625, height: 375 },
     Ninja: { width: 426, height: 250 },
     Partisan: { width: 325, height: 500 },
+    Necromencer: { width: 425, height: 500 },
     Survival: { width: 325, height: 500 },
     Support: { width: 525, height: 375 },
     Minstrel: { width: 425, height: 500 },
@@ -686,6 +701,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Partisan: {
       lines: [[0, 1], [1, 2], [4, 5], [5, 6], [7, 8]],
       splits: []
+    },
+    Necromencer: {
+      lines: [[1, 2], [2, 3], [0, 4], [4, 5], [6, 7], [7, 8], [9, 10], [10, 11], [11, 12]],
+      splits: [[0, 1], [0, 6]]
     },
     Survival: {
       lines: [[0, 2], [3, 4]],
