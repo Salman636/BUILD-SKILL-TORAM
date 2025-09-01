@@ -464,20 +464,63 @@ footer {
     }
 
     main {
+        width: 90%;
         margin: auto;
-        width: 100%;
-        transform: scale(0.8);
-        transform-origin: top center;
-        margin-bottom: -35%;
     }
 
     .combos {
+        margin: 15px auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         overflow-x: auto;
     }
 
-    /* === Popup Skill Responsif === */
+    .combo {
+        width: 95%;
+        max-width: 600px;
+        margin: 15px auto;
+        transform: scale(0.9);
+        transform-origin: top center;
+    }
+
+    .combo input {
+        width: 100%;
+        max-width: 280px;
+        margin: 10px auto;
+        display: block;
+    }
+
+    .border {
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .set-combo-btn {
+        margin: 10px auto;
+        padding: 10px 25px;
+        font-size: 14px;
+    }
+
+    .add-combo {
+        margin: 15px 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .add-combo button {
+        font-size: 22px;
+        padding: 10px 14px;
+    }
+
     .popup-content {
-        width: 75%;
+        width: 95%;
+        max-width: 600px;
     }
 
     .popup-skill {
@@ -500,14 +543,16 @@ footer {
     }
 
     .skill-img {
+        min-height: 150px;
         height: auto;
-        min-height: 200px;
     }
 
     .combo-display {
-        overflow-x: hidden;
+        flex-wrap: wrap;
+        width: 100%;
+        height: auto;
+        min-height: 100px;
     }
-
 }
 
 @media screen and (max-width: 367px) {

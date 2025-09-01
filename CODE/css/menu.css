@@ -394,6 +394,14 @@ footer {
 
 }
 
+@media screen and (max-width: 367px) {
+    body {
+        transform: scale(0.6);
+        transform-origin: top left;
+        width: 167%;
+    }
+}
+
 @media print {
     .hover-line {
         display: none !important;
