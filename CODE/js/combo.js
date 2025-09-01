@@ -491,25 +491,22 @@ document.addEventListener("click", function (e) {
                 // cek jika skill punya "on" requirement
                 if (skillObj?.on && i < (skillObj.on - 1)) {
                     alert(`${skillObj.name} hanya bisa dipasang mulai slot ${skillObj.on}`);
-                    return; // stop, ga bisa pasang di slot ini
+                    return;
                 }
 
-                slot.style.width = "90px";
-                slot.style.height = "90px";
+                // === Background muncul hanya ketika skill masuk ===
                 slot.style.backgroundImage = "url('/IMG/COMBO/background3.png')";
                 slot.style.backgroundSize = "cover";
-                slot.style.display = "flex";
-                slot.style.justifyContent = "center";
-                slot.style.alignItems = "center";
 
+                // tambahkan gambar skill
                 const img = document.createElement("img");
                 img.src = skillImg.src;
                 img.alt = skillImg.alt;
                 img.style.width = "45px";
                 img.style.height = "45px";
-
                 slot.appendChild(img);
 
+                // attribute
                 const attrDiv = slot.querySelector(".attribute");
                 if (attrDiv) {
                     attrDiv.style.display = "block";
@@ -517,12 +514,14 @@ document.addEventListener("click", function (e) {
                     attrDiv.dataset.attr = "none";
                 }
 
+                // tandai skill sudah dipakai
                 skillImg.dataset.used = "true";
                 skillImg.style.opacity = "0.5";
 
                 break;
             }
         }
+
     }
 });
 

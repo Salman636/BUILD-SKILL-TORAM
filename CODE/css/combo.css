@@ -383,10 +383,14 @@ main {
 
 .display-skill {
     margin-right: -20px;
-    position: relative;
+    flex: 0 0 auto;
+    width: 90px;
+    height: 90px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    border-radius: 8px;
 }
 
 .attribute {
@@ -542,30 +546,20 @@ footer {
 
     #skillList {
         max-height: 150px;
+        margin-bottom: -25px;
     }
 
     .skill-img {
-        margin-top: -8%;
         min-height: 150px;
         height: auto;
     }
 
     .combo-display {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
         gap: 10px;
         width: 100%;
         min-height: 100px;
     }
 
-    .combo-display img {
-        flex: 0 0 auto;
-        height: 100px;
-    }
 }
 
 @media screen and (max-width: 367px) {
