@@ -161,12 +161,12 @@ main {
     cursor: pointer;
 }
 
-.set-combo-btn button:hover {
+.set-combo-btn:hover {
     background-color: #0056b3;
     transform: scale(1.05);
 }
 
-.set-combo-btn button:active {
+.set-combo-btn:active {
     background-color: rgb(32, 49, 61);
     transform: scale(0.98);
 }
@@ -316,14 +316,6 @@ main {
 }
 
 .canvasContainer {
-    display: none;
-}
-
-.canvasContainer.active {
-    display: block;
-}
-
-.canvasContainer {
     width: 100%;
     height: 275px;
     border: 2px solid #333;
@@ -331,6 +323,11 @@ main {
     padding: 10px;
     display: none;
     overflow-x: hidden;
+    display: none;
+}
+
+.canvasContainer.active {
+    display: block;
 }
 
 /* Saat aktif ditampilkan */
@@ -398,7 +395,6 @@ main {
     left: -5px;
     width: 30px;
     height: 30px;
-    background-image: url('/IMG/SKILL/back-off.png');
     background-size: cover;
     cursor: pointer;
     display: none;
@@ -468,17 +464,20 @@ footer {
     }
 
     main {
-        margin-left: -50px;
+        margin: auto;
+        width: 100%;
+        transform: scale(0.8);
+        transform-origin: top center;
+        margin-bottom: -35%;
     }
 
     .combos {
         overflow-x: auto;
-        width: 100%;
     }
 
     /* === Popup Skill Responsif === */
     .popup-content {
-        width: 95%;
+        width: 75%;
     }
 
     .popup-skill {
@@ -503,5 +502,18 @@ footer {
     .skill-img {
         height: auto;
         min-height: 200px;
+    }
+
+    .combo-display {
+        overflow-x: hidden;
+    }
+
+}
+
+@media screen and (max-width: 367px) {
+    body {
+        transform: scale(0.6);
+        transform-origin: top left;
+        width: 167%;
     }
 }

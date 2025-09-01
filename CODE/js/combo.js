@@ -554,8 +554,8 @@ document.querySelectorAll("#attrPopup .attr-options img").forEach(attrImg => {
         let img = document.createElement("img");
         img.src = this.src;
         img.alt = this.alt;
-        img.style.width = "100%";
-        img.style.height = "100%";
+        img.style.width = "30px";
+        img.style.height = "30px";
         attrBox.appendChild(img);
 
         // tutup popup
