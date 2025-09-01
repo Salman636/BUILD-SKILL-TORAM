@@ -545,6 +545,7 @@ footer {
     }
 
     .skill-img {
+        margin-top: -8%;
         min-height: 150px;
         height: auto;
     }
