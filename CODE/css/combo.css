@@ -521,6 +521,8 @@ footer {
     .popup-content {
         width: 95%;
         max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
     }
 
     .popup-skill {
@@ -548,10 +550,20 @@ footer {
     }
 
     .combo-display {
-        flex-wrap: wrap;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
         width: 100%;
-        height: auto;
         min-height: 100px;
+    }
+
+    .combo-display img {
+        flex: 0 0 auto;
+        height: 100px;
     }
 }
 
