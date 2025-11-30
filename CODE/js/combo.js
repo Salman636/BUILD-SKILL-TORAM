@@ -823,7 +823,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
             img.id = `${activeComboId}-skill${slotNumber}`;
 
             // Style Slot 1
-            img.style.backgroundImage = "url('IMG/COMBO/background1.png')"
+            img.style.backgroundImage = "url('/IMG/COMBO/background1.png')"
             img.style.backgroundSize = "contain";
             img.style.verticalAlign = "middle";
             img.style.padding = "20px";
@@ -835,7 +835,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
             const elseSlot = document.createElement("div");
             elseSlot.classList.add("else-slot");
 
-            elseSlot.style.backgroundImage = "url('IMG/COMBO/background2.png')"
+            elseSlot.style.backgroundImage = "url('/IMG/COMBO/background2.png')"
             elseSlot.style.backgroundSize = "contain";
             elseSlot.style.verticalAlign = "middle";
             elseSlot.style.padding = "20px";
@@ -862,7 +862,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
             attrDiv.classList.add("display-attribute");
             attrDiv.dataset.attr = skill.attr || "none";
 
-            attrDiv.style.backgroundImage = "url('IMG/SKILL/back-Off.png')";
+            attrDiv.style.backgroundImage = "url('/IMG/SKILL/back-Off.png')";
             attrDiv.style.backgroundSize = "contain";
             attrDiv.style.position = "absolute";
             attrDiv.style.width = "30px";
@@ -882,7 +882,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
                 attrImg.src = sourceImg.src;
                 attrImg.style.display = "block";
             } else {
-                attrImg.src = "IMG/SKILL/back-Off.png";
+                attrImg.src = "/IMG/SKILL/back-Off.png";
                 attrImg.style.display = "none";
             }
 
