@@ -58,7 +58,7 @@ function createCombo() {
                 class="else"
                 id="combo${comboCount}-skill${i}">
                 <div class="display-attribute">
-                <img src="/IMG/SKILL/back-Off.png" 
+                <img src="IMG/SKILL/back-Off.png" 
                     alt="attr-border" 
                     class="attr">
                 </div> 
