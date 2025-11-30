@@ -43,7 +43,7 @@ function createCombo() {
 
     // slot pertama (background1)
     skillsHTML += `
-    <img src="IMG/COMBO/background1.png" 
+    <img src="/IMG/COMBO/background1.png" 
         alt="combo-border" 
         class="first" 
         id="combo${comboCount}-skill1">
@@ -53,12 +53,12 @@ function createCombo() {
     for (let i = 2; i <= 3; i++) {
         skillsHTML += `
         <div class="else-slot">
-            <img src="IMG/COMBO/background2.png" 
+            <img src="/IMG/COMBO/background2.png" 
                 alt="combo-border" 
                 class="else"
                 id="combo${comboCount}-skill${i}">
                 <div class="display-attribute">
-                <img src="IMG/SKILL/back-Off.png" 
+                <img src="/IMG/SKILL/back-Off.png" 
                     alt="attr-border" 
                     class="attr">
                 </div> 
