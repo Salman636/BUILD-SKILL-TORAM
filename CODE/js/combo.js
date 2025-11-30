@@ -58,7 +58,7 @@ function createCombo() {
                 class="else"
                 id="combo${comboCount}-skill${i}">
                 <div class="display-attribute">
-                <img src="IMG/SKILL/back-Off.png" 
+                <img src="/IMG/SKILL/back-off.png" 
                     alt="attr-border" 
                     class="attr">
                 </div> 
@@ -862,7 +862,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
             attrDiv.classList.add("display-attribute");
             attrDiv.dataset.attr = skill.attr || "none";
 
-            attrDiv.style.backgroundImage = "url('/IMG/SKILL/back-Off.png')";
+            attrDiv.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
             attrDiv.style.backgroundSize = "contain";
             attrDiv.style.position = "absolute";
             attrDiv.style.width = "30px";
@@ -882,7 +882,7 @@ document.getElementById("save-combo-skill").addEventListener("click", () => {
                 attrImg.src = sourceImg.src;
                 attrImg.style.display = "block";
             } else {
-                attrImg.src = "/IMG/SKILL/back-Off.png";
+                attrImg.src = "/IMG/SKILL/back-off.png";
                 attrImg.style.display = "none";
             }
 
