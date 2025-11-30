@@ -202,8 +202,6 @@ main {
     left: 0;
     width: 30px;
     height: 30px;
-    background-image: url(/IMG/SKILL/back-off.png);
-    background-size: cover;
 }
 
 .display-skill .attribute {

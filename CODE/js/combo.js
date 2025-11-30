@@ -31,7 +31,6 @@ function updateComboNumbers() {
     comboCount = allCombos.length;
 }
 
-
 function createCombo() {
     comboCount++;
 
@@ -60,12 +59,12 @@ function createCombo() {
                 <div class="display-attribute">
                 <img src="/IMG/SKILL/back-off.png" 
                     alt="attr-border" 
-                    class="attr">
+                    class="attr"
+                    id="combo${comboCount}-attr${i}">                   
                 </div> 
         </div>
     `;
     }
-
 
     const removeButtonHTML = comboCount > 5 ? `<button class="remove-combo">-</button>` : "";
 
@@ -97,7 +96,6 @@ function createCombo() {
     if (typeof attachSetComboEvents === "function") {
         attachSetComboEvents();
     }
-
 }
 
 // === DEFAULT: 5 COMBO PERTAMA ===
@@ -169,7 +167,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magicknife.png", name: "Magic Knife", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/maximizer.png", name: "Maximizer" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/enchantedbarriers.png", name: "Enchanted Barriers" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", name: "Magic: Guardian Beam" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/guardianbeam.png", name: "Magic: Guardian Beam" },
     ],
     Martial: [
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/smash.png", name: "Smash" },
@@ -188,7 +186,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/flashblink.png", name: "Flash Blink" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/chakra.png", name: "Chakra" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/energycontrol.png", name: "Energy Control" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/slide.png", name: "Slide" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/MARTIAL/slide.png", name: "Slide" },
     ],
     DualSword: [
         { src: "/IMG/SKILL/WEAPON_SKILL/DUALSWORD/twinslash.png", name: "Twin Slash" },
@@ -243,14 +241,14 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/kairikiranshin.png", name: "Kairiki Ranshin" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/guts.png", name: "Guts" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/zephyrrush.png", name: "Zephyr Rush" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/bouncingblade.png", name: "Bouncing Blade" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/MONONOFU/bouncingblade.png", name: "Bouncing Blade" },
     ],
     BareHand: [
         { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/qicharge.png", name: "Qi Charge" },
         { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/lionrage.png", name: "Lion Rage" },
         { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/ravingstorm.png", name: "Raving Storm" },
         { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/internalelixir.png", name: "Internal Elixir" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/earthshaker.png", name: "Earthshaker" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/BAREHAND/earthshaker.png", name: "Earthshaker" },
     ],
     Crusher: [
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/forefistpunch.png", name: "Forefist Punch" },
@@ -260,7 +258,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/floatingkick.png", name: "Floating Kick" },
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/geyserkick.png", name: "Geyser Kick" },
         { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/combination.png", name: "Combination", on: 2 },
-        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/terrablast.png", name: "Terra Blast" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/CRUSHER/terrablast.png", name: "Terra Blast" },
     ],
     Sprite: [
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/autodevice.png", name: "Auto Device" },
@@ -270,7 +268,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/spriteshield.png", name: "Spirite Shield", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/counterforce.png", name: "Counterforce" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/astrallance.png", name: "Astral Lance" },
-        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", name: "Magic Vulcan" }
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", name: "Magic Vulcan" },
     ],
     Shield: [
         { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldbash.png", name: "Shield Bash" },
@@ -281,13 +279,13 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/belagerung.png", name: "Belagerung" },
         { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/protection.png", name: "Protection" },
         { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/aegis.png", name: "Aegis" },
-        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardian.png", name: "Guardian" }
+        { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/guardian.png", name: "Guardian" },
     ],
     Dagger: [
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/spikedart.png", name: "Spike Dart" },
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/gatlingknife.png", name: "Gatling Knife" },
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/poisondagger.png", name: "Poison Dagger" },
-        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", name: "Flincher Knife" }
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", name: "Flincher Knife" },
     ],
     Knight: [
         { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/assaultattack.png", name: "Assault Attack" },
@@ -299,7 +297,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/sonicthrust.png", name: "Sonic Thrust" },
         { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/revenir.png", name: "Revenir" },
         { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/knightsstance.png", name: "Knight's Stance" },
-        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/knightpledge.png", name: "Knight's Pledge" }
+        { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/knightpledge.png", name: "Knight's Pledge" },
     ],
     Priest: [
         { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/bless.png", name: "Bless" },
@@ -312,7 +310,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/exorcism.png", name: "Exorcism" },
         { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holybook.png", name: "Holy Book" },
         { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/nemesis.png", name: "Nemesis" },
-        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holygrace.png", name: "Holy Grace" }
+        { src: "/IMG/SKILL/BUFF_SKILL/PRIEST/holygrace.png", name: "Holy Grace" },
     ],
     Assassin: [
         { src: "/IMG/SKILL/BUFF_SKILL/ASSASSIN/assassinstab.png", name: "Assassin Stab" },
@@ -346,7 +344,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/detection.png", name: "Detection" },
         { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/cyclonarrow.png", name: "Cyclone Arrow" },
         { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/verticalair.png", name: "Vertical Air" },
-        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/multiplehunt.png", name: "Multiple Hunt" }
+        { src: "/IMG/SKILL/BUFF_SKILL/HUNTER/multiplehunt.png", name: "Multiple Hunt" },
     ],
     DarkPower: [
         { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/bloodybite.png", name: "Bloody Bite" },
@@ -376,7 +374,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/ndragontooth.png", name: "N Dragon Tooth" },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/healingshot.png", name: "Healing Arrow", on: 2 },
         { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/arrowsharpening.png", name: "Arrow Sharpening" },
-        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", name: "Frontliner" }
+        { src: "/IMG/SKILL/BUFF_SKILL/PARTISAN/frontliner.png", name: "Frontliner" },
     ],
     Necromencer: [
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/gravediggder.png", name: "Grave Digger" },
@@ -387,11 +385,9 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/demonicpact.png", name: "Demonic Pact" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/tomb.png", name: "Tomb" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skullshaker.png", name: "Skull Shaker" },
-        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/hazzardstrike.png", name: "Hazzard Strike" }
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/hazzardstrike.png", name: "Hazzard Strike" },
     ],
-    Support: [
-        { src: "/IMG/SKILL/ASSIST_SKILL/SUPPORT/sanctuary.png", name: "Sanctuary" }
-    ],
+    Support: [{ src: "/IMG/SKILL/ASSIST_SKILL/SUPPORT/sanctuary.png", name: "Sanctuary" }],
     Minstrel: [
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/healing.png", name: "Healing Song" },
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fairy.png", name: "Fairy Song" },
@@ -399,7 +395,7 @@ const skills = {
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fantasy.png", name: "Fantasy Song" },
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/ad-lib.png", name: "Ad Lib" },
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", name: "Passion Song" },
-        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", name: "Wisdom Song" }
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", name: "Wisdom Song" },
     ],
     Dancer: [
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/fairy.png", name: "Fairy Dance" },
@@ -408,7 +404,7 @@ const skills = {
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/astute.png", name: "Astute Dance" },
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/charming.png", name: "Charming Dance" },
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/elegantpoise.png", name: "Elegant Poise" },
-        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/natureswonder.png", name: "Nature's Wonder" }
+        { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/natureswonder.png", name: "Nature's Wonder" },
     ],
     Tamer: [
         { src: "/IMG/SKILL/OTHER_SKILL/TAMER/petheal.png", name: "Pet Heal" },
@@ -422,7 +418,7 @@ const skills = {
         { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/windrelease.png", name: "Wind Release" },
         { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/demonshuriken.png", name: "Demon Wind Shuriken" },
         { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/cloning.png", name: "Cloning" },
-        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/thunderrelease.png", name: "Thunder Release" }
+        { src: "/IMG/SKILL/OTHER_SKILL/NINJUTSUSCROLL/thunderrelease.png", name: "Thunder Release" },
     ],
 };
 
@@ -434,7 +430,7 @@ function addSkillToSlot(skillObj) {
         const slot = comboSlots[i];
         if (!slot.querySelector("img")) {
             // cek "on" requirement
-            if (skillObj?.on && i < (skillObj.on - 1)) {
+            if (skillObj?.on && i < skillObj.on - 1) {
                 alert(`${skillObj.name} hanya bisa dipasang mulai slot ${skillObj.on}`);
                 return;
             }
@@ -468,12 +464,12 @@ function addSkillToSlot(skillObj) {
 const links = document.querySelectorAll("#skillList a");
 const containers = document.querySelectorAll(".canvasContainer");
 
-links.forEach(link => {
+links.forEach((link) => {
     link.addEventListener("click", function (e) {
         e.preventDefault();
 
         // sembunyikan semua canvas
-        containers.forEach(c => {
+        containers.forEach((c) => {
             c.classList.remove("active");
         });
 
@@ -496,7 +492,7 @@ links.forEach(link => {
                 listContainer.style.gap = "10px";
                 listContainer.style.marginTop = "10px";
 
-                skills[targetId].forEach(skill => {
+                skills[targetId].forEach((skill) => {
                     const item = document.createElement("div");
                     item.style.display = "flex";
                     item.style.alignItems = "center";
@@ -545,7 +541,7 @@ document.addEventListener("click", function (e) {
         // 1. Cek Duplikat Lokal
         const currentSlots = document.querySelectorAll(".combo-display .display-skill img");
         let alreadyInCombo = false;
-        currentSlots.forEach(img => {
+        currentSlots.forEach((img) => {
             if (img.alt === skillName) alreadyInCombo = true;
         });
 
@@ -557,7 +553,7 @@ document.addEventListener("click", function (e) {
         // cari skill object di semua category
         let skillObj = null;
         for (let category in skills) {
-            skillObj = skills[category].find(s => s.name === skillName);
+            skillObj = skills[category].find((s) => s.name === skillName);
             if (skillObj) break;
         }
 
@@ -565,14 +561,13 @@ document.addEventListener("click", function (e) {
         for (let i = 0; i < comboSlots.length; i++) {
             const slot = comboSlots[i];
             if (!slot.querySelector("img")) {
-
                 // Cek requirement "on" (posisi skill)
                 let skillObj = null;
                 for (let category in skills) {
-                    skillObj = skills[category].find(s => s.name === skillName);
+                    skillObj = skills[category].find((s) => s.name === skillName);
                     if (skillObj) break;
                 }
-                if (skillObj?.on && i < (skillObj.on - 1)) {
+                if (skillObj?.on && i < skillObj.on - 1) {
                     alert(`${skillObj.name} hanya bisa dipasang mulai slot ${skillObj.on}`);
                     return;
                 }
@@ -619,7 +614,7 @@ document.querySelectorAll(".display-skill").forEach((slot, index) => {
 });
 
 // saat pilih attribute
-document.querySelectorAll("#attrPopup .attr-options img").forEach(attrImg => {
+document.querySelectorAll("#attrPopup .attr-options img").forEach((attrImg) => {
     attrImg.addEventListener("click", function () {
         if (!window.activeSkillSlot) return;
 
@@ -638,7 +633,6 @@ document.querySelectorAll("#attrPopup .attr-options img").forEach(attrImg => {
 
         // tutup popup
         document.getElementById("attrPopup").style.display = "none";
-
     });
 });
 
@@ -671,7 +665,7 @@ function attachSetComboEvents() {
 
             // === A. RESET BERSIH (Agar tidak ada sisa combo sebelumnya) ===
             const allSkillImages = document.querySelectorAll(".canvasContainer img");
-            allSkillImages.forEach(img => img.style.opacity = "1"); // Semua skill jadi terang
+            allSkillImages.forEach((img) => (img.style.opacity = "1")); // Semua skill jadi terang
 
             const popupSlots = document.querySelectorAll(".combo-display .display-skill");
             popupSlots.forEach((slot, i) => {
@@ -727,7 +721,7 @@ function attachSetComboEvents() {
                 }
 
                 // 3. Update Visual List (Bikin Transparan)
-                allSkillImages.forEach(listImg => {
+                allSkillImages.forEach((listImg) => {
                     if (listImg.alt === alt) {
                         listImg.style.opacity = "0.5";
                     }
@@ -745,7 +739,7 @@ function attachSetComboEvents() {
                 const attrDiv = elseSlot.querySelector(".display-attribute"); // Seleksi div atribut
 
                 // BACA DATA YANG DISIMPAN TADI
-                const attrValue = attrDiv ? (attrDiv.dataset.attr || "none") : "none";
+                const attrValue = attrDiv ? attrDiv.dataset.attr || "none" : "none";
 
                 if (img && img.alt && !img.src.includes("background")) {
                     loadSkillToPopup(img.src, img.alt, attrValue, i + 1);
@@ -765,7 +759,6 @@ document.getElementById("remove-combo-skill").addEventListener("click", () => {
 
         // Jika ada isinya, langsung hapus saja
         if (slot.querySelector("img")) {
-
             // Reset Tampilan Slot
             if (i === 0) {
                 slot.innerHTML = "";
@@ -783,122 +776,129 @@ document.getElementById("remove-combo-skill").addEventListener("click", () => {
 document.getElementById("save-combo-skill").addEventListener("click", () => {
     if (!activeComboId) return;
 
+    const popupSlots = document.querySelectorAll(".combo-display .display-skill");
     const combo = document.getElementById(activeComboId);
     const border = combo.querySelector(".border");
-    const popupSlots = document.querySelectorAll(".combo-display .display-skill");
 
-    // 1. AMBIL DATA
-    const chosenSkills = [];
-    popupSlots.forEach(slot => {
-        const popupSkill = slot.querySelector("img");
-        if (popupSkill) {
+    // === 1. Ambil data dari popup ===
+    const chosenSkills = Array.from(popupSlots)
+        .map((slot) => {
+            const img = slot.querySelector("img");
+            if (!img) return null;
+
             const attrDiv = slot.querySelector(".attribute");
-            const attrVal = attrDiv ? attrDiv.dataset.attr : "none";
-            chosenSkills.push({
-                src: popupSkill.src,
-                alt: popupSkill.alt,
-                attr: attrVal || "none"
-            });
-        }
-    });
+            const attrVal = attrDiv?.dataset.attr || "none";
+            return {
+                src: img.src,
+                alt: img.alt,
+                attr: attrVal
+            };
+        })
+        .filter(Boolean);
 
+    // === 2. Validasi ===
     if (chosenSkills.length === 0) {
-        alert("Pilih minimal 1 skill sebelum menyimpan!");
+        alert("⚠️ Pilih minimal 1 skill sebelum menyimpan!");
         return;
     }
 
-    // 2. BERSIHKAN TAMPILAN
+    // Cek apakah ada slot wajib yang kosong (misal: main skill)
+    if (!chosenSkills[0]) {
+        alert("⚠️ Slot pertama wajib diisi sebagai skill utama!");
+        return;
+    }
+
+    // === 3. Bersihkan tampilan combo lama ===
     border.innerHTML = "";
 
-    // 3. RENDER ULANG (LOGIC STABIL)
-    chosenSkills.forEach((skill, i) => {
-        const slotNumber = i + 1;
+    // === 4. Fungsi bantuan untuk rendering ===
+    function renderMainSkill(skill, slotNumber) {
+        const img = document.createElement("img");
+        img.src = skill.src;
+        img.alt = skill.alt;
+        img.classList.add("first");
+        img.id = `${activeComboId}-skill${slotNumber}`;
 
-        if (i === 0) {
-            // === SLOT 1 (SKILL UTAMA) ===
-            const img = document.createElement("img");
-            img.src = skill.src;
-            img.alt = skill.alt;
-            img.classList.add("first");
-            img.id = `${activeComboId}-skill${slotNumber}`;
+        img.style.backgroundImage = "url('/IMG/COMBO/background1.png')";
+        img.style.backgroundSize = "contain";
+        img.style.height = "90px";
+        img.style.width = "90px";
+        img.style.padding = "20px";
 
-            // Style Slot 1
-            img.style.backgroundImage = "url('/IMG/COMBO/background1.png')"
-            img.style.backgroundSize = "contain";
-            img.style.verticalAlign = "middle";
-            img.style.padding = "20px";
-            img.style.height = "90px";
-            img.style.width = "90px";
+        border.appendChild(img);
+    }
 
-            border.appendChild(img);
+    function renderElseSkill(skill, slotNumber) {
+        const elseSlot = document.createElement("div");
+        elseSlot.classList.add("else-slot");
+        elseSlot.style.backgroundImage = "url('/IMG/COMBO/background2.png')";
+        elseSlot.style.backgroundSize = "contain";
+        elseSlot.style.height = "50px";
+        elseSlot.style.width = "50px";
+        elseSlot.style.margin = "10px";
+        elseSlot.style.position = "relative";  // penting!
+
+        // SKILL IMG
+        const img = document.createElement("img");
+        img.src = skill.src;
+        img.alt = skill.alt;
+        img.classList.add("else");
+        img.id = `${activeComboId}-skill${slotNumber}`;
+        img.style.width = "38px";
+        img.style.height = "38px";
+        img.style.position = "absolute";
+        img.style.top = "50%";
+        img.style.left = "50%";
+        img.style.transform = "translate(-50%, -50%)";
+        img.style.zIndex = "5";
+
+        // ATTRIBUTE ICON
+        const attrDiv = document.createElement("div");
+        attrDiv.classList.add("display-attribute");
+        attrDiv.id = `${activeComboId}-attr${slotNumber}`;
+        attrDiv.dataset.attr = skill.attr;
+        attrDiv.style.position = "absolute";
+        attrDiv.style.top = "0";
+        attrDiv.style.left = "0";
+
+        const attrImg = document.createElement("img");
+        attrImg.style.position = "absolute";
+        attrImg.style.width = "30px";
+        attrImg.style.height = "30px";
+        attrImg.style.top = "-15px";
+        attrImg.style.left = "-18px";
+        attrImg.style.zIndex = "10";
+
+        const sourceImg = document.querySelector(`.attr-options img[data-attr="${skill.attr}"]`);
+        if (sourceImg && skill.attr !== "none") {
+            attrImg.src = sourceImg.src;
         } else {
-            const elseSlot = document.createElement("div");
-            elseSlot.classList.add("else-slot");
+            attrImg.src = "/IMG/SKILL/back-off.png";
+        }
 
-            elseSlot.style.backgroundImage = "url('/IMG/COMBO/background2.png')"
-            elseSlot.style.backgroundSize = "contain";
-            elseSlot.style.verticalAlign = "middle";
-            elseSlot.style.padding = "20px";
-            elseSlot.style.top = "10px";
-            elseSlot.style.left = "20px";
-            elseSlot.style.height = "50px";
-            elseSlot.style.width = "50px";
-            elseSlot.style.margin = "10px";
+        attrDiv.appendChild(attrImg);
+        elseSlot.appendChild(attrDiv);
+        elseSlot.appendChild(img);
+        border.appendChild(elseSlot);
+    }
 
-            const borderImg = document.createElement("img");
-            borderImg.src = skill.src;
-            borderImg.alt = skill.alt;
-            borderImg.classList.add("else");
-            borderImg.id = `${activeComboId}-skill${slotNumber}`;
-
-            borderImg.style.position = "absolute";
-            borderImg.style.width = "38px";
-            borderImg.style.height = "38px";
-            borderImg.style.top = "50%";
-            borderImg.style.left = "50%";
-            borderImg.style.transform = "translate(-50%, -50%)";
-
-            const attrDiv = document.createElement("div");
-            attrDiv.classList.add("display-attribute");
-            attrDiv.dataset.attr = skill.attr || "none";
-
-            attrDiv.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
-            attrDiv.style.backgroundSize = "contain";
-            attrDiv.style.position = "absolute";
-            attrDiv.style.width = "30px";
-            attrDiv.style.height = "30px";
-            attrDiv.style.top = "-15px";
-            attrDiv.style.left = "-18px";
-            attrDiv.style.zIndex = "10";
-
-            const attrImg = document.createElement("img");
-            attrImg.classList.add("attr");
-            attrImg.id = `.attr-options img[data-attr="${skill.attr}"]`;
-            attrImg.style.width = "100%";
-            attrImg.style.height = "100%";
-
-            const sourceImg = document.querySelector(`.attr-options img[data-attr="${skill.attr}"]`);
-            if (sourceImg && skill.attr !== "none") {
-                attrImg.src = sourceImg.src;
-                attrImg.style.display = "block";
-            } else {
-                attrImg.src = "/IMG/SKILL/back-off.png";
-                attrImg.style.display = "none";
-            }
-
-            attrDiv.appendChild(attrImg);
-            elseSlot.appendChild(borderImg);
-            elseSlot.appendChild(attrDiv);
-            border.appendChild(elseSlot);
+    // === 5. Render ulang combo secara bersih ===
+    chosenSkills.forEach((skill, index) => {
+        const slotNumber = index + 1;
+        if (index === 0) {
+            renderMainSkill(skill, slotNumber);
+        } else {
+            renderElseSkill(skill, slotNumber);
         }
     });
 
+    // === 6. Tutup popup ===
     popup.style.display = "none";
 });
 
 
 // === POPUP CLOSE ===
-closeBtn.onclick = () => popup.style.display = "none";
+closeBtn.onclick = () => (popup.style.display = "none");
 
 // === KLIK LUAR POPUP ===
 window.onclick = (e) => {
