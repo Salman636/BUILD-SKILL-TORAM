@@ -232,7 +232,7 @@ main {
 
 .popup-content {
     background: #fff;
-    margin: 15px auto;
+    margin: 2px auto;
     padding: 20px;
     width: 1000px;
     border-radius: 12px;
@@ -345,8 +345,10 @@ main {
 
 .skill-img {
     border: 1px solid black;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     border-radius: 10px;
+    min-height: 150px;
+    height: auto;
 }
 
 .canvasContainer {
@@ -606,10 +608,7 @@ footer {
         margin-bottom: -25px;
     }
 
-    .skill-img {
-        min-height: 150px;
-        height: auto;
-    }
+
 
     .combo-display {
         gap: 10px;
