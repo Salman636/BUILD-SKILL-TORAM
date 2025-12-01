@@ -770,13 +770,23 @@ function attachSetComboEvents() {
 document.getElementById("remove-combo-skill").addEventListener("click", () => {
     const slots = document.querySelectorAll(".combo-display .display-skill");
 
-    // cari slot terakhir yang ada skill-nya
     for (let i = slots.length - 1; i >= 0; i--) {
         const slot = slots[i];
 
-        // Jika ada isinya, langsung hapus saja
-        if (slot.querySelector("img")) {
-            // Reset Tampilan Slot
+        // Jika ada skill di slot
+        const imgSkill = slot.querySelector(":scope > img") || slot.querySelector("img:not(.attribute img)");
+        if (imgSkill) {
+            const removedSkillName = imgSkill.alt; // ambil skill name
+
+            // 🔥 KEMBALIKAN OPACITY PADA LIST CANVAS
+            const listImages = document.querySelectorAll(".canvasContainer img");
+            listImages.forEach((listImg) => {
+                if (listImg.alt === removedSkillName) {
+                    listImg.style.opacity = "1"; // NORMALKAN LAGI
+                }
+            });
+
+            // Reset slot
             if (i === 0) {
                 slot.innerHTML = "";
                 slot.style.backgroundImage = "";
@@ -784,10 +794,12 @@ document.getElementById("remove-combo-skill").addEventListener("click", () => {
                 slot.innerHTML = '<div class="attribute"></div>';
                 slot.style.backgroundImage = "";
             }
-            break; // Cuma hapus 1, lalu berhenti
+
+            break; // Hentikan setelah menghapus 1 slot
         }
     }
 });
+
 
 // === SAVE BUTTON ===
 document.getElementById("save-combo-skill").addEventListener("click", () => {
