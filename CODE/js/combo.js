@@ -614,24 +614,35 @@ document.querySelectorAll(".display-skill").forEach((slot, index) => {
 });
 
 // saat pilih attribute
+// === ATTRIBUTE CLICK LISTENER (FIXED) ===
 document.querySelectorAll("#attrPopup .attr-options img").forEach((attrImg) => {
     attrImg.addEventListener("click", function () {
         if (!window.activeSkillSlot) return;
 
-        // cari container attribute
+        // Cari container attribute di slot yang aktif
         let attrBox = window.activeSkillSlot.querySelector(".attribute");
+
+        // Tampilkan box-nya
         attrBox.style.display = "block";
         attrBox.innerHTML = "";
 
-        // masukkan icon attribute
+        // === INI KUNCI PERBAIKANNYA ===
+        // Ambil nama dari data-attr ATAU alt. Jika tidak ada, default ke "none"
+        const attrName = this.getAttribute("data-attr") || this.alt || "none";
+
+        // Simpan ke dataset elemen DOM slot tersebut
+        attrBox.dataset.attr = attrName;
+
+        // Tampilkan gambar icon kecil di popup slot
         let img = document.createElement("img");
         img.src = this.src;
-        img.alt = this.alt;
+        img.alt = attrName;
         img.style.width = "30px";
         img.style.height = "30px";
+
         attrBox.appendChild(img);
 
-        // tutup popup
+        // Tutup popup attribute
         document.getElementById("attrPopup").style.display = "none";
     });
 });
@@ -710,8 +721,14 @@ function attachSetComboEvents() {
 
                         if (attrValue && attrValue !== "none") {
                             // Jika ada atribut (smite, save, dll), tampilkan gambarnya
-                            attrContainer.style.backgroundImage = `url('/IMG/COMBO/${attrValue}.png')`;
+                            attrContainer.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
+                            attrContainer.style.backgroundSize = "contain";
+                            const attrimg = document.createElement("img");
+                            attrimg.src = `/IMG/COMBO/${attrValue}.png`;
+                            attrimg.style.width = "29px";
+                            attrimg.style.height = "29px";
                             attrContainer.dataset.attr = attrValue; // Simpan di dataset popup
+                            attrContainer.appendChild(attrimg);
                         } else {
                             // Jika 'none', tampilkan default
                             attrContainer.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
@@ -776,124 +793,146 @@ document.getElementById("remove-combo-skill").addEventListener("click", () => {
 document.getElementById("save-combo-skill").addEventListener("click", () => {
     if (!activeComboId) return;
 
-    const popupSlots = document.querySelectorAll(".combo-display .display-skill");
-    const combo = document.getElementById(activeComboId);
-    const border = combo.querySelector(".border");
+    try {
+        const popupSlots = document.querySelectorAll(".combo-display .display-skill");
+        const combo = document.getElementById(activeComboId);
+        const border = combo.querySelector(".border");
 
-    // === 1. Ambil data dari popup ===
-    const chosenSkills = Array.from(popupSlots)
-        .map((slot) => {
-            const img = slot.querySelector("img");
-            if (!img) return null;
+        // === 1. Ambil data dari popup dengan AMAN ===
+        const chosenSkills = Array.from(popupSlots)
+            .map((slot) => {
+                // PENTING: Ambil img yang merupakan anak langsung (Direct Child)
+                // Agar tidak tertukar dengan img di dalam div .attribute
+                let img = slot.querySelector(":scope > img");
 
-            const attrDiv = slot.querySelector(".attribute");
-            const attrVal = attrDiv?.dataset.attr || "none";
-            return {
-                src: img.src,
-                alt: img.alt,
-                attr: attrVal
-            };
-        })
-        .filter(Boolean);
+                // Fallback jika browser lama tidak support :scope
+                if (!img) {
+                    const allImgs = slot.querySelectorAll("img");
+                    for (let i = 0; i < allImgs.length; i++) {
+                        if (!allImgs[i].parentElement.classList.contains("attribute")) {
+                            img = allImgs[i];
+                            break;
+                        }
+                    }
+                }
 
-    // === 2. Validasi ===
-    if (chosenSkills.length === 0) {
-        alert("⚠️ Pilih minimal 1 skill sebelum menyimpan!");
-        return;
-    }
+                if (!img) return null; // Slot kosong
 
-    // Cek apakah ada slot wajib yang kosong (misal: main skill)
-    if (!chosenSkills[0]) {
-        alert("⚠️ Slot pertama wajib diisi sebagai skill utama!");
-        return;
-    }
+                const attrDiv = slot.querySelector(".attribute");
+                // Ambil data-attr, jika kosong set "none"
+                const attrVal = attrDiv ? (attrDiv.dataset.attr || "none") : "none";
 
-    // === 3. Bersihkan tampilan combo lama ===
-    border.innerHTML = "";
+                return {
+                    src: img.src,
+                    alt: img.alt,
+                    attr: attrVal
+                };
+            })
+            .filter(Boolean); // Hapus slot yang null
 
-    // === 4. Fungsi bantuan untuk rendering ===
-    function renderMainSkill(skill, slotNumber) {
-        const img = document.createElement("img");
-        img.src = skill.src;
-        img.alt = skill.alt;
-        img.classList.add("first");
-        img.id = `${activeComboId}-skill${slotNumber}`;
-
-        img.style.backgroundImage = "url('/IMG/COMBO/background1.png')";
-        img.style.backgroundSize = "contain";
-        img.style.height = "90px";
-        img.style.width = "90px";
-        img.style.padding = "20px";
-
-        border.appendChild(img);
-    }
-
-    function renderElseSkill(skill, slotNumber) {
-        const elseSlot = document.createElement("div");
-        elseSlot.classList.add("else-slot");
-        elseSlot.style.backgroundImage = "url('/IMG/COMBO/background2.png')";
-        elseSlot.style.backgroundSize = "contain";
-        elseSlot.style.height = "50px";
-        elseSlot.style.width = "50px";
-        elseSlot.style.margin = "10px";
-        elseSlot.style.position = "relative";  // penting!
-
-        // SKILL IMG
-        const img = document.createElement("img");
-        img.src = skill.src;
-        img.alt = skill.alt;
-        img.classList.add("else");
-        img.id = `${activeComboId}-skill${slotNumber}`;
-        img.style.width = "38px";
-        img.style.height = "38px";
-        img.style.position = "absolute";
-        img.style.top = "50%";
-        img.style.left = "50%";
-        img.style.transform = "translate(-50%, -50%)";
-        img.style.zIndex = "5";
-
-        // ATTRIBUTE ICON
-        const attrDiv = document.createElement("div");
-        attrDiv.classList.add("display-attribute");
-        attrDiv.id = `${activeComboId}-attr${slotNumber}`;
-        attrDiv.dataset.attr = skill.attr;
-        attrDiv.style.position = "absolute";
-        attrDiv.style.top = "0";
-        attrDiv.style.left = "0";
-
-        const attrImg = document.createElement("img");
-        attrImg.style.position = "absolute";
-        attrImg.style.width = "30px";
-        attrImg.style.height = "30px";
-        attrImg.style.top = "-15px";
-        attrImg.style.left = "-18px";
-        attrImg.style.zIndex = "10";
-
-        const sourceImg = document.querySelector(`.attr-options img[data-attr="${skill.attr}"]`);
-        if (sourceImg && skill.attr !== "none") {
-            attrImg.src = sourceImg.src;
-        } else {
-            attrImg.src = "/IMG/SKILL/back-off.png";
+        // === 2. Validasi ===
+        if (chosenSkills.length === 0) {
+            alert("⚠️ Pilih minimal 1 skill sebelum menyimpan!");
+            return;
+        }
+        if (!chosenSkills[0]) {
+            alert("⚠️ Slot pertama wajib diisi sebagai skill utama!");
+            return;
         }
 
-        attrDiv.appendChild(attrImg);
-        elseSlot.appendChild(attrDiv);
-        elseSlot.appendChild(img);
-        border.appendChild(elseSlot);
+        // === 3. Bersihkan tampilan combo lama ===
+        border.innerHTML = "";
+
+        // === 4. Fungsi Render Ulang ===
+        chosenSkills.forEach((skill, index) => {
+            const slotNumber = index + 1;
+
+            // Bersihkan nama attribute (hilangkan spasi, ubah ke huruf kecil)
+            // Contoh: "Smite " -> "smite"
+            const safeAttr = skill.attr.trim().toLowerCase();
+
+            if (index === 0) {
+                // --- RENDER SKILL UTAMA (SLOT 1) ---
+                const img = document.createElement("img");
+                img.src = skill.src;
+                img.alt = skill.alt;
+                img.classList.add("first");
+                img.id = `${activeComboId}-skill${slotNumber}`;
+
+                img.style.backgroundImage = "url('/IMG/COMBO/background1.png')";
+                img.style.backgroundSize = "contain";
+                img.style.height = "90px";
+                img.style.width = "90px";
+                img.style.padding = "20px";
+
+                border.appendChild(img);
+
+            } else {
+                // --- RENDER SKILL LANJUTAN (SLOT 2 dst) ---
+                const elseSlot = document.createElement("div");
+                elseSlot.classList.add("else-slot");
+                elseSlot.style.backgroundImage = "url('/IMG/COMBO/background2.png')";
+                elseSlot.style.backgroundSize = "contain";
+                elseSlot.style.height = "50px";
+                elseSlot.style.width = "50px";
+                elseSlot.style.margin = "10px";
+                elseSlot.style.position = "relative";
+
+                // Gambar Skill
+                const img = document.createElement("img");
+                img.src = skill.src;
+                img.alt = skill.alt;
+                img.classList.add("else");
+                img.id = `${activeComboId}-skill${slotNumber}`;
+                img.style.width = "38px";
+                img.style.height = "38px";
+                img.style.position = "absolute";
+                img.style.top = "50%";
+                img.style.left = "50%";
+                img.style.transform = "translate(-50%, -50%)";
+                img.style.zIndex = "5";
+
+                // Gambar Attribute
+                const attrDiv = document.createElement("div");
+                attrDiv.classList.add("display-attribute");
+                attrDiv.id = `${activeComboId}-attr${slotNumber}`;
+                attrDiv.dataset.attr = safeAttr; // Simpan dataset agar bisa diedit lagi nanti
+                attrDiv.style.position = "absolute";
+                attrDiv.style.top = "0";
+                attrDiv.style.left = "0";
+
+                const attrImg = document.createElement("img");
+                attrImg.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
+                attrImg.style.backgroundSize = "contain";
+                attrImg.style.position = "absolute";
+                attrImg.style.width = "30px";
+                attrImg.style.height = "30px";
+                attrImg.style.top = "-15px";
+                attrImg.style.left = "-18px";
+                attrImg.style.zIndex = "10";
+
+                // LOGIKA SOURCE GAMBAR ATTRIBUTE
+                if (safeAttr && safeAttr !== "none" && safeAttr !== "undefined") {
+                    // Pastikan file gambar kamu namanya "smite.png", "save.png" (huruf kecil)
+                    attrImg.src = `/IMG/COMBO/${safeAttr}.png`;
+                } else {
+                    attrImg.src = "/IMG/SKILL/back-off.png";
+                }
+
+                attrDiv.appendChild(attrImg);
+                elseSlot.appendChild(attrDiv);
+                elseSlot.appendChild(img);
+                border.appendChild(elseSlot);
+            }
+        });
+
+        // === 5. Tutup popup ===
+        popup.style.display = "none";
+
+    } catch (error) {
+        console.error("Gagal menyimpan combo:", error);
+        alert("Terjadi kesalahan saat menyimpan. Cek Console (F12) untuk detail.");
     }
-
-    // === 5. Render ulang combo secara bersih ===
-    chosenSkills.forEach((skill, index) => {
-        const slotNumber = index + 1;
-        if (index === 0) {
-            renderMainSkill(skill, slotNumber);
-        } else {
-            renderElseSkill(skill, slotNumber);
-        }
-    });
-
-    // === 6. Tutup popup ===
-    popup.style.display = "none";
 });
 
 

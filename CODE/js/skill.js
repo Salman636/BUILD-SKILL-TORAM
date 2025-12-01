@@ -2,12 +2,6 @@
 const textarea = document.getElementById("deskripsi");
 const maxWords = 50;
 
-textarea.addEventListener("input", () => {
-  const words = textarea.value.trim().split(/\s+/);
-  if (words.length > maxWords) {
-    textarea.value = words.slice(0, maxWords).join(" ");
-  }
-});
 
 // skill sidebar
 document.querySelectorAll(".nested").forEach(function (toggle) {
