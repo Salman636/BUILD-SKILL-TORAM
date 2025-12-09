@@ -609,12 +609,6 @@ footer {
         overflow-x: auto;
     }
 
-    .display-skill,
-    .else-slot {
-        width: 70px;
-        height: 70px;
-    }
-
     .popup-content .combo-display {
         padding: 5px;
     }
@@ -656,10 +650,6 @@ footer {
         flex-wrap: nowrap !important;
     }
 
-    .display-skill,
-    .else-slot {
-        flex: 0 0 auto;
-    }
 
     .popup-content {
         width: 95%;
@@ -699,7 +689,7 @@ footer {
     }
 
     .combo input {
-        width: 175px;
+        width: 15px;
         height: 28px;
     }
 
@@ -714,11 +704,6 @@ footer {
         overflow-x: auto;
     }
 
-    .display-skill,
-    .else-slot {
-        width: 60px;
-        height: 60px;
-    }
 }
 
 @media (max-width: 480px) {
@@ -789,12 +774,6 @@ footer {
 
     .set-combo-btn {
         padding: 6px 10px;
-    }
-
-    .display-skill,
-    .else-slot {
-        width: 50px;
-        height: 50px;
     }
 
     #btnSavePDF {
