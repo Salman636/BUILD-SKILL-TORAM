@@ -954,169 +954,169 @@ window.onclick = (e) => {
     if (e.target === popup) popup.style.display = "none";
 };
 
-// // === SAVE PDF (PRINT PREVIEW) ===
-// document.addEventListener("DOMContentLoaded", function () {
-//     const btnPDF = document.getElementById("btnSavePDF");
-//     if (!btnPDF) return;
+// === SAVE PDF (PRINT PREVIEW) ===
+document.addEventListener("DOMContentLoaded", function () {
+    const btnPDF = document.getElementById("btnSavePDF");
+    if (!btnPDF) return;
 
-//     btnPDF.addEventListener("click", async () => {
-//         const { jsPDF } = window.jspdf;
-//         const doc = new jsPDF({
-//             orientation: "p",
-//             unit: "mm",
-//             format: "a4",
-//             compress: true
-//         });
+    btnPDF.addEventListener("click", async () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+            orientation: "p",
+            unit: "mm",
+            format: "a4",
+            compress: true
+        });
 
-//         const fileName = "Combo_Build.pdf";
+        const fileName = "Combo_Build.pdf";
 
-//         const marginX = 15;
-//         let currentY = 5;
-//         const pageWidth = doc.internal.pageSize.getWidth();
-
-
-//         // ===================== HEADER =====================
-//         const logo = new Image();
-//         logo.src = "/IMG/LOGO/logo1.png";
-//         await new Promise(res => logo.onload = res);
-
-//         doc.addImage(logo, "PNG", marginX, currentY, 40, 40);
-
-//         doc.setFont("times", "bold");
-//         doc.setFontSize(30);
-//         doc.setTextColor(0, 135, 181);
-
-//         const titleText = "SHARE YOUR BUILD";
-//         const titleWidth = doc.getTextWidth(titleText);
-//         doc.text(titleText, pageWidth / 2 - titleWidth / 2 + 15, currentY + 23);
-
-//         doc.setDrawColor(0, 135, 181);
-//         doc.setLineWidth(1);
-//         doc.line(marginX, currentY + 40, pageWidth - marginX, currentY + 40);
-//         doc.setLineWidth(0.5);
-//         doc.line(marginX, currentY + 42, pageWidth - marginX, currentY + 42);
-
-//         currentY += 55;
-
-//         // ===================== ISI =====================
-//         const combos = document.querySelectorAll(".combo");
-
-//         for (let c = 0; c < combos.length; c++) {
-//             const combo = combos[c];
-//             const border = combo.querySelector(".border");
-
-//             const firstSkill = border.querySelector("img.first");
-//             const elseSkills = border.querySelectorAll("img.else");
-
-//             // ==== SKIP COMBO TANPA SKILL ====
-//             if (!firstSkill && elseSkills.length === 0) continue;
+        const marginX = 15;
+        let currentY = 5;
+        const pageWidth = doc.internal.pageSize.getWidth();
 
 
-//             // ==== NAMA COMBO ====
-//             const nameInput = combo.querySelector("input[type=text]");
-//             const comboName = nameInput?.value || "(Tanpa Nama)";
+        // ===================== HEADER =====================
+        const logo = new Image();
+        logo.src = "/IMG/LOGO/logo1.png";
+        await new Promise(res => logo.onload = res);
 
-//             doc.setFillColor(0, 135, 181);
-//             doc.rect(marginX, currentY, pageWidth - marginX * 2, 10, "F");
+        doc.addImage(logo, "PNG", marginX, currentY, 40, 40);
 
-//             doc.setFontSize(14);
-//             doc.setTextColor(255, 255, 255);
-//             doc.text(`COMBO ${c + 1} : ${comboName}`, marginX + 3, currentY + 7);
+        doc.setFont("times", "bold");
+        doc.setFontSize(30);
+        doc.setTextColor(0, 135, 181);
 
-//             currentY += 20;
+        const titleText = "SHARE YOUR BUILD";
+        const titleWidth = doc.getTextWidth(titleText);
+        doc.text(titleText, pageWidth / 2 - titleWidth / 2 + 15, currentY + 23);
 
+        doc.setDrawColor(0, 135, 181);
+        doc.setLineWidth(1);
+        doc.line(marginX, currentY + 40, pageWidth - marginX, currentY + 40);
+        doc.setLineWidth(0.5);
+        doc.line(marginX, currentY + 42, pageWidth - marginX, currentY + 42);
 
-//             // ==== RENDER SKILL ====
-//             const slots = Array.from(border.children);
-//             let x = marginX;
-//             let y = currentY;
+        currentY += 55;
 
-//             for (let s = 0; s < slots.length; s++) {
-//                 const slot = slots[s];
+        // ===================== ISI =====================
+        const combos = document.querySelectorAll(".combo");
 
-//                 // ===== SLOT UTAMA (1) =====
-//                 if (slot.tagName === "IMG" && slot.classList.contains("first")) {
+        for (let c = 0; c < combos.length; c++) {
+            const combo = combos[c];
+            const border = combo.querySelector(".border");
 
-//                     const bg1 = new Image();
-//                     bg1.src = "/IMG/COMBO/background1.png";
-//                     await new Promise(res => bg1.onload = res);
+            const firstSkill = border.querySelector("img.first");
+            const elseSkills = border.querySelectorAll("img.else");
 
-//                     const skillImg = new Image();
-//                     skillImg.src = slot.src;
-//                     await new Promise(res => skillImg.onload = res);
-
-//                     // background kotak besar
-//                     doc.addImage(bg1, "PNG", x, y, 20, 20);
-//                     doc.addImage(skillImg, "PNG", x, y, 20, 20);
-
-//                     x += 100;
-//                     continue;
-//                 }
-
-//                 // ===== SLOT 2+ =====
-//                 if (slot.classList.contains("else-slot")) {
-
-//                     const bg2 = new Image();
-//                     bg2.src = "/IMG/COMBO/background2.png";
-//                     await new Promise(res => bg2.onload = res);
-
-//                     doc.addImage(bg2, "PNG", x, y, 20, 20);
-
-//                     const img = slot.querySelector("img.else");
-//                     const skillImg = new Image();
-//                     skillImg.src = img.src;
-//                     await new Promise(res => skillImg.onload = res);
-
-//                     doc.addImage(skillImg, "PNG", x, y, 20, 20);
-
-//                     const attrEl = slot.querySelector(".display-attribute img");
-//                     if (attrEl) {
-//                         const attrImg = new Image();
-//                         attrImg.src = attrEl.src;
-//                         await new Promise(res => attrImg.onload = res);
-
-//                         doc.addImage(attrImg, "PNG", x - 10, y - 3, 30, 30);
-//                     }
-
-//                     x += 60;
-
-//                     if (x > pageWidth - marginX - 60) {
-//                         x = marginX;
-//                         y += 70;
-//                     }
-//                 }
-//             }
-
-//             currentY = y + 95;
-
-//             if (currentY > 250) {
-//                 doc.addPage();
-//                 currentY = 15;
-//             }
-//         }
+            // ==== SKIP COMBO TANPA SKILL ====
+            if (!firstSkill && elseSkills.length === 0) continue;
 
 
-//         // ===================== FOOTER =====================
-//         const pageCount = doc.internal.getNumberOfPages();
+            // ==== NAMA COMBO ====
+            const nameInput = combo.querySelector("input[type=text]");
+            const comboName = nameInput?.value || "(Tanpa Nama)";
 
-//         for (let i = 1; i <= pageCount; i++) {
-//             doc.setPage(i);
+            doc.setFillColor(0, 135, 181);
+            doc.rect(marginX, currentY, pageWidth - marginX * 2, 10, "F");
 
-//             doc.setFillColor(0, 135, 181);
-//             doc.rect(0, 287, pageWidth, 10, "F");
+            doc.setFontSize(14);
+            doc.setTextColor(255, 255, 255);
+            doc.text(`COMBO ${c + 1} : ${comboName}`, marginX + 3, currentY + 7);
 
-//             doc.setFontSize(10);
-//             doc.setTextColor(255, 255, 255);
-//             doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", 15, 293);
-//         }
+            currentY += 20;
 
-//         // === OPEN PRINT PREVIEW ===
-//         const pdfBlob = doc.output("bloburl");
-//         window.open(pdfBlob, "_blank");
 
-//         // Jika mau langsung DOWNLOAD → ganti dengan:
-//         // doc.save(fileName);
-//     });
-// });
+            // ==== RENDER SKILL ====
+            const slots = Array.from(border.children);
+            let x = marginX;
+            let y = currentY;
+
+            for (let s = 0; s < slots.length; s++) {
+                const slot = slots[s];
+
+                // ===== SLOT UTAMA (1) =====
+                if (slot.tagName === "IMG" && slot.classList.contains("first")) {
+
+                    const bg1 = new Image();
+                    bg1.src = "/IMG/COMBO/background1.png";
+                    await new Promise(res => bg1.onload = res);
+
+                    const skillImg = new Image();
+                    skillImg.src = slot.src;
+                    await new Promise(res => skillImg.onload = res);
+
+                    // background kotak besar
+                    doc.addImage(bg1, "PNG", x, y, 20, 20);
+                    doc.addImage(skillImg, "PNG", x, y, 20, 20);
+
+                    x += 100;
+                    continue;
+                }
+
+                // ===== SLOT 2+ =====
+                if (slot.classList.contains("else-slot")) {
+
+                    const bg2 = new Image();
+                    bg2.src = "/IMG/COMBO/background2.png";
+                    await new Promise(res => bg2.onload = res);
+
+                    doc.addImage(bg2, "PNG", x, y, 20, 20);
+
+                    const img = slot.querySelector("img.else");
+                    const skillImg = new Image();
+                    skillImg.src = img.src;
+                    await new Promise(res => skillImg.onload = res);
+
+                    doc.addImage(skillImg, "PNG", x, y, 20, 20);
+
+                    const attrEl = slot.querySelector(".display-attribute img");
+                    if (attrEl) {
+                        const attrImg = new Image();
+                        attrImg.src = attrEl.src;
+                        await new Promise(res => attrImg.onload = res);
+
+                        doc.addImage(attrImg, "PNG", x - 10, y - 3, 30, 30);
+                    }
+
+                    x += 60;
+
+                    if (x > pageWidth - marginX - 60) {
+                        x = marginX;
+                        y += 70;
+                    }
+                }
+            }
+
+            currentY = y + 95;
+
+            if (currentY > 250) {
+                doc.addPage();
+                currentY = 15;
+            }
+        }
+
+
+        // ===================== FOOTER =====================
+        const pageCount = doc.internal.getNumberOfPages();
+
+        for (let i = 1; i <= pageCount; i++) {
+            doc.setPage(i);
+
+            doc.setFillColor(0, 135, 181);
+            doc.rect(0, 287, pageWidth, 10, "F");
+
+            doc.setFontSize(10);
+            doc.setTextColor(255, 255, 255);
+            doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", 15, 293);
+        }
+
+        // === OPEN PRINT PREVIEW ===
+        const pdfBlob = doc.output("bloburl");
+        window.open(pdfBlob, "_blank");
+
+        // Jika mau langsung DOWNLOAD → ganti dengan:
+        // doc.save(fileName);
+    });
+});
 
 
