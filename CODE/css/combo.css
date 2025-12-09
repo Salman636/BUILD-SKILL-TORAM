@@ -220,7 +220,7 @@ main {
 .popup {
     display: none;
     position: fixed;
-    z-index: 999;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
@@ -242,6 +242,18 @@ main {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
+.popup-skill .display-skill {
+    display: inline-block;
+    width: 90px;
+    height: 90px;
+    margin-right: 12px;
 }
 
 .skill-name,
@@ -401,18 +413,24 @@ main {
     background: #888;
 }
 
-.combo-display {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.popup-content .combo-display {
+    margin: auto;
+    padding: 10px;
     gap: 10px;
     border: 3px solid black;
-    height: 120px;
-    width: 90%;
-    margin: auto;
     border-radius: 10px;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
     padding: 10px;
-    overflow-x: auto;
+}
+
+.popup-content .combo-display:has(.display-skill:nth-child(n+8)) {
+    justify-content: flex-start !important;
 }
 
 .display-skill {
@@ -514,87 +532,138 @@ footer {
     background-color: rgb(8, 107, 255);
 }
 
-@media screen and (max-width: 1100px) {
+#btnSavePDF {
+    position: fixed;
+    right: 15px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: orange;
+    margin-bottom: 15px;
+    padding: 10px 10px;
+    border: black solid 1px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    z-index: 999;
+}
+
+@media (max-width: 1100px) {
     header.navbar-container {
         flex-direction: column;
+        padding: 1rem 2rem;
     }
 
     header.navbar-container .nav-list ul {
         flex-wrap: wrap;
-        column-gap: .5rem;
-    }
-
-    main {
-        width: 90%;
-        margin: auto;
-    }
-
-    .combos {
-        margin: 15px auto;
-        padding: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-x: auto;
+        gap: 1rem;
     }
 
     .combo {
-        width: 95%;
-        max-width: 600px;
-        margin: 15px auto;
-        transform: scale(0.9);
-        transform-origin: top center;
-    }
-
-    .combo input {
-        width: 100%;
-        max-width: 280px;
-        margin: 10px auto;
-        display: block;
+        width: 90%;
     }
 
     .border {
-        width: 100%;
-        height: auto;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 15px;
+        width: 90%;
+        overflow-x: auto;
+    }
+
+    .popup-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    header.navbar-container {
+        padding: 1rem;
+    }
+
+    header.navbar-container .logo img {
+        width: 200px;
+    }
+
+    header.navbar-container .nav-list ul {
+        gap: 0.7rem;
+    }
+
+    header.navbar-container .nav-list li a span {
+        padding: .4rem 1rem;
+        font-size: 1rem;
+    }
+
+    .combo input {
+        width: 250px;
     }
 
     .set-combo-btn {
-        margin: 10px auto;
-        padding: 10px 25px;
-        font-size: 14px;
+        padding: 10px 30px;
     }
 
-    .add-combo {
-        margin: 15px 0;
-        display: flex;
+    .border {
+        height: auto;
+        padding: 15px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+    }
+
+    .display-skill,
+    .else-slot {
+        width: 70px;
+        height: 70px;
+    }
+
+    .popup-content .combo-display {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 850px) {
+    header.navbar-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 1.5rem;
+    }
+
+    header.navbar-container .logo img {
+        width: 210px;
+        /* mengecil sedikit */
+    }
+
+    header.navbar-container .nav-list ul {
+        flex-wrap: wrap;
         justify-content: center;
-        width: 100%;
+        gap: 0.7rem 1rem;
+        /* kecil tapi tetap rapi */
     }
 
-    .add-combo button {
-        font-size: 22px;
-        padding: 10px 14px;
+    .combo {
+        padding: 10px;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+    }
+
+    .combo input {
+        width: 180px;
+        margin-left: 10px;
+    }
+
+    .border {
+        width: 950px !important;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+    }
+
+    .display-skill,
+    .else-slot {
+        flex: 0 0 auto;
     }
 
     .popup-content {
         width: 95%;
-        max-width: 600px;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    .popup-skill {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .skill-name,
-    .skill-img {
-        width: 100%;
-        padding: 10px 0;
+        padding: 15px;
     }
 
     #searchInput {
@@ -602,24 +671,140 @@ footer {
     }
 
     #skillList {
-        max-height: 150px;
-        margin-bottom: -25px;
+        height: 200px;
     }
-
-
-
-    .combo-display {
-        gap: 10px;
-        width: 100%;
-        min-height: 100px;
-    }
-
 }
 
-@media screen and (max-width: 367px) {
-    body {
-        transform: scale(0.6);
-        transform-origin: top left;
-        width: 167%;
+@media (max-width: 600px) {
+    header.navbar-container {
+        padding: 1rem;
+        border-radius: 60px;
+    }
+
+    header.navbar-container .logo img {
+        width: 170px;
+    }
+
+    header.navbar-container .nav-list ul {
+        gap: 0.5rem;
+    }
+
+    header.navbar-container .nav-list li a span {
+        font-size: 0.9rem;
+        padding: .35rem .9rem;
+    }
+
+    .combo {
+        width: 95%;
+    }
+
+    .combo input {
+        width: 150px;
+        height: 28px;
+    }
+
+    .set-combo-btn {
+        padding: 8px 20px;
+        font-size: 14px;
+    }
+
+    .border {
+        padding: 10px;
+        gap: 8px;
+        overflow-x: auto;
+    }
+
+    .display-skill,
+    .else-slot {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    header.navbar-container {
+        padding: 1rem;
+        border-radius: 40px;
+    }
+
+    header.navbar-container .logo img {
+        width: 160px;
+    }
+
+    header.navbar-container .nav-list ul {
+        gap: 0.5rem;
+    }
+
+    header.navbar-container .nav-list li a span {
+        padding: .3rem .8rem;
+        font-size: 0.9rem;
+    }
+
+    .combo input {
+        width: 130px;
+    }
+
+    .set-combo-btn {
+        padding: 8px 15px;
+        font-size: 13px;
+    }
+
+    .border {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: auto;
+    }
+
+    .popup-content {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .popup-skill {
+        gap: 10px;
+    }
+
+    .skill-img {
+        min-height: 120px;
+    }
+}
+
+@media (max-width: 360px) {
+    header.navbar-container .logo img {
+        width: 140px;
+    }
+
+    header.navbar-container .nav-list li a span {
+        padding: .25rem .6rem;
+        font-size: 0.8rem;
+    }
+
+    header.navbar-container .dropdown .dropdown-content {
+        min-width: 120px;
+    }
+
+    .combo input {
+        width: 110px;
+    }
+
+    .set-combo-btn {
+        padding: 6px 10px;
+    }
+
+    .display-skill,
+    .else-slot {
+        width: 50px;
+        height: 50px;
+    }
+
+    #btnSavePDF {
+        right: 5px;
+        bottom: 10px;
+    }
+}
+
+@media print {
+    .hover-line {
+        display: none !important;
     }
 }
