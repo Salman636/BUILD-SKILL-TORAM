@@ -650,7 +650,6 @@ footer {
         flex-wrap: nowrap !important;
     }
 
-
     .popup-content {
         width: 95%;
         padding: 15px;
@@ -732,12 +731,6 @@ footer {
     .set-combo-btn {
         padding: 8px 15px;
         font-size: 13px;
-    }
-
-    .border {
-        flex-wrap: wrap;
-        justify-content: center;
-        overflow-x: auto;
     }
 
     .popup-content {
