@@ -429,10 +429,6 @@ main {
     padding: 10px;
 }
 
-.popup-content .combo-display:has(.display-skill:nth-child(n+8)) {
-    justify-content: flex-start !important;
-}
-
 .display-skill {
     margin-right: -20px;
     flex: 0 0 auto;

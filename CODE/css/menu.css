@@ -296,7 +296,6 @@ input[type="number"] {
     color: white;
     min-height: 425px;
     background-color: black;
-    display: flex;
     justify-content: center;
     align-items: center;
     overflow-x: auto;
@@ -488,7 +487,6 @@ footer {
     }
 
     .stat div {
-        flex-direction: column;
         align-items: flex-start;
     }
 
