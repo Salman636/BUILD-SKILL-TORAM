@@ -608,6 +608,11 @@ footer {
     .popup-content .combo-display {
         padding: 5px;
     }
+
+    .popup-content .combo-display:has(.display-skill:nth-child(n+8)) {
+        justify-content: flex-start !important;
+    }
+
 }
 
 @media (max-width: 850px) {
