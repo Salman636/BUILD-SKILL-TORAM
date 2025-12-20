@@ -972,6 +972,7 @@ window.onclick = (e) => {
 
 // === SAVE PDF (PRINT PREVIEW) ===
 document.addEventListener("DOMContentLoaded", function () {
+    const fileName = "Combo_Build.pdf";
 
     // ===================== IMAGE CACHE =====================
     const imageCache = {};
