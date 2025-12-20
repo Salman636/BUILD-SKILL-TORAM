@@ -433,14 +433,16 @@ function addSkillToSlot(skillObj) {
                 return;
             }
 
-            // bg slot
+            const oldSkillImg = slot.querySelector(":scope > img");
+            if (oldSkillImg) oldSkillImg.remove();
+
+            // === MASUKKAN SKILL BARU ===
             slot.style.backgroundImage = "url('/IMG/COMBO/background3.png')";
             slot.style.backgroundSize = "cover";
 
-            // gambar skill
             const img = document.createElement("img");
-            img.src = skillObj.src;
-            img.alt = skillObj.name;
+            img.src = skillImg.src;
+            img.alt = skillImg.alt;
             img.style.width = "45px";
             img.style.height = "45px";
             slot.appendChild(img);
@@ -485,7 +487,8 @@ links.forEach((link) => {
             // jika ada data skill, generate gambar + nama
             if (skills[targetId]) {
                 const listContainer = document.createElement("div");
-                listContainer.style.display = "flex";
+                listContainer.classList.add("generated-skill-list");
+                listContainer.style.display = "flex"; listContainer.style.display = "flex";
                 listContainer.style.flexDirection = "column";
                 listContainer.style.gap = "10px";
                 listContainer.style.marginTop = "10px";
@@ -556,15 +559,15 @@ document.addEventListener("click", function (e) {
         }
 
         const comboSlots = document.querySelectorAll(".display-skill");
+        let inserted = false;
+
         for (let i = 0; i < comboSlots.length; i++) {
             const slot = comboSlots[i];
+
+            // cari slot kosong
             if (!slot.querySelector("img")) {
-                // Cek requirement "on" (posisi skill)
-                let skillObj = null;
-                for (let category in skills) {
-                    skillObj = skills[category].find((s) => s.name === skillName);
-                    if (skillObj) break;
-                }
+
+                // Cek requirement "on"
                 if (skillObj?.on && i < skillObj.on - 1) {
                     alert(`${skillObj.name} hanya bisa dipasang mulai slot ${skillObj.on}`);
                     return;
@@ -588,12 +591,19 @@ document.addEventListener("click", function (e) {
                     attrDiv.dataset.attr = "none";
                 }
 
-                // === VISUAL TRANSPARAN (LOKAL) ===
-                skillImg.style.opacity = "0.5"; // Bikin pudar agar terlihat terpilih
+                // visual skill terpilih
+                skillImg.style.opacity = "0.5";
 
+                inserted = true;
                 break;
             }
         }
+
+        // 🔥 JIKA TIDAK ADA SLOT KOSONG
+        if (!inserted) {
+            alert("Combo skill sudah penuh!");
+        }
+
     }
 });
 
@@ -698,6 +708,10 @@ function attachSetComboEvents() {
                 const slot = popupSlots[slotIndex];
                 slot.style.backgroundImage = "url('/IMG/COMBO/background3.png')";
                 slot.style.backgroundSize = "cover";
+
+                // === HAPUS DULU SKILL LAMA DI SLOT ===
+                const old = slot.querySelector(":scope > img");
+                if (old) old.remove();
 
                 // 1. Masukkan Gambar Skill
                 const skillImg = document.createElement("img");
@@ -954,41 +968,67 @@ window.onclick = (e) => {
     if (e.target === popup) popup.style.display = "none";
 };
 
+
+
 // === SAVE PDF (PRINT PREVIEW) ===
 document.addEventListener("DOMContentLoaded", function () {
+
+    // ===================== IMAGE CACHE =====================
+    const imageCache = {};
+
+    async function loadImage(src) {
+        if (imageCache[src]) return imageCache[src];
+
+        const img = new Image();
+        img.src = src;
+        await img.decode();
+        imageCache[src] = img;
+        return img;
+    }
+
+    // ===================== BUTTON =====================
     const btnPDF = document.getElementById("btnSavePDF");
     if (!btnPDF) return;
 
     btnPDF.addEventListener("click", async () => {
+
+        btnPDF.disabled = true;
+
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF({
             orientation: "p",
             unit: "mm",
             format: "a4",
-            compress: true
+            compress: false
         });
-
-        const fileName = "Combo_Build.pdf";
 
         const marginX = 15;
         let currentY = 5;
         const pageWidth = doc.internal.pageSize.getWidth();
 
+        // ===================== PRELOAD ASSET =====================
+        await Promise.all([
+            loadImage("/IMG/LOGO/logo1.png"),
+            loadImage("/IMG/COMBO/background1.png"),
+            loadImage("/IMG/COMBO/background2.png"),
+            loadImage("/IMG/SKILL/back-off.png")
+        ]);
+
+        const logo = imageCache["/IMG/LOGO/logo1.png"];
+        const bg1 = imageCache["/IMG/COMBO/background1.png"];
+        const bg2 = imageCache["/IMG/COMBO/background2.png"];
+        const bg3 = imageCache["/IMG/SKILL/back-off.png"];
 
         // ===================== HEADER =====================
-        const logo = new Image();
-        logo.src = "/IMG/LOGO/logo1.png";
-        await new Promise(res => logo.onload = res);
-
         doc.addImage(logo, "PNG", marginX, currentY, 40, 40);
 
         doc.setFont("times", "bold");
         doc.setFontSize(30);
         doc.setTextColor(0, 135, 181);
 
-        const titleText = "SHARE YOUR BUILD";
-        const titleWidth = doc.getTextWidth(titleText);
-        doc.text(titleText, pageWidth / 2 - titleWidth / 2 + 15, currentY + 23);
+        const title = "SHARE YOUR BUILD";
+        const titleWidth = doc.getTextWidth(title);
+        doc.text(title, pageWidth / 2 - titleWidth / 2 + 15, currentY + 23);
 
         doc.setDrawColor(0, 135, 181);
         doc.setLineWidth(1);
@@ -1000,19 +1040,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // ===================== ISI =====================
         const combos = document.querySelectorAll(".combo");
+        let printedCombo = 0;
 
         for (let c = 0; c < combos.length; c++) {
+
             const combo = combos[c];
             const border = combo.querySelector(".border");
 
-            const firstSkill = border.querySelector("img.first");
-            const elseSkills = border.querySelectorAll("img.else");
+            const hasFirst = border.querySelector("img.first");
+            const hasElse = border.querySelector("img.else");
 
-            // ==== SKIP COMBO TANPA SKILL ====
-            if (!firstSkill && elseSkills.length === 0) continue;
+            // combo kosong → skip
+            if (!hasFirst && !hasElse) continue;
 
+            // ========== PAGE BREAK TIAP 5 COMBO ==========
+            if (printedCombo > 0 && printedCombo % 5 === 0) {
+                doc.addPage();
+                currentY = 15;
+            }
 
-            // ==== NAMA COMBO ====
+            printedCombo++;
+
+            // ========== NAMA COMBO ==========
             const nameInput = combo.querySelector("input[type=text]");
             const comboName = nameInput?.value || "(Tanpa Nama)";
 
@@ -1021,101 +1070,96 @@ document.addEventListener("DOMContentLoaded", function () {
 
             doc.setFontSize(14);
             doc.setTextColor(255, 255, 255);
-            doc.text(`COMBO ${c + 1} : ${comboName}`, marginX + 3, currentY + 7);
+            doc.text(`COMBO ${printedCombo} : ${comboName}`, marginX + 3, currentY + 7);
 
-            currentY += 20;
+            currentY += 15;
 
-
-            // ==== RENDER SKILL ====
+            // ========== RENDER SKILL ==========
             const slots = Array.from(border.children);
             let x = marginX;
             let y = currentY;
 
-            for (let s = 0; s < slots.length; s++) {
+            const bgSize = 15;
+            const iconSize = 12;
+            const gap = 3;
+
+            let rendered = 0;
+
+            for (let s = 0; s < slots.length && rendered < 10; s++) {
+
                 const slot = slots[s];
 
-                // ===== SLOT UTAMA (1) =====
+                // ---- SLOT UTAMA ----
                 if (slot.tagName === "IMG" && slot.classList.contains("first")) {
 
-                    const bg1 = new Image();
-                    bg1.src = "/IMG/COMBO/background1.png";
-                    await new Promise(res => bg1.onload = res);
+                    const skillImg = await loadImage(slot.src);
 
-                    const skillImg = new Image();
-                    skillImg.src = slot.src;
-                    await new Promise(res => skillImg.onload = res);
+                    doc.addImage(bg1, "PNG", x - 3, y - 3, bgSize + 5, bgSize + 5);
+                    doc.addImage(
+                        skillImg,
+                        "PNG",
+                        x + (bgSize - iconSize) / 2,
+                        y + (bgSize - iconSize) / 2,
+                        iconSize,
+                        iconSize
+                    );
 
-                    // background kotak besar
-                    doc.addImage(bg1, "PNG", x, y, 20, 20);
-                    doc.addImage(skillImg, "PNG", x, y, 20, 20);
-
-                    x += 100;
+                    x += bgSize + gap;
+                    rendered++;
                     continue;
                 }
 
-                // ===== SLOT 2+ =====
+                // ---- SLOT KE-2+ ----
                 if (slot.classList.contains("else-slot")) {
 
-                    const bg2 = new Image();
-                    bg2.src = "/IMG/COMBO/background2.png";
-                    await new Promise(res => bg2.onload = res);
-
-                    doc.addImage(bg2, "PNG", x, y, 20, 20);
-
                     const img = slot.querySelector("img.else");
-                    const skillImg = new Image();
-                    skillImg.src = img.src;
-                    await new Promise(res => skillImg.onload = res);
+                    if (!img) continue;
 
-                    doc.addImage(skillImg, "PNG", x, y, 20, 20);
+                    const skillImg = await loadImage(img.src);
+
+                    doc.addImage(bg2, "PNG", x, y, bgSize, bgSize);
+                    doc.addImage(
+                        skillImg,
+                        "PNG",
+                        x + (bgSize - iconSize) / 2,
+                        y + (bgSize - iconSize) / 2,
+                        iconSize,
+                        iconSize
+                    );
+
+                    doc.addImage(bg3, "PNG", x - 4, y - 3, 8, 8);
 
                     const attrEl = slot.querySelector(".display-attribute img");
                     if (attrEl) {
-                        const attrImg = new Image();
-                        attrImg.src = attrEl.src;
-                        await new Promise(res => attrImg.onload = res);
-
-                        doc.addImage(attrImg, "PNG", x - 10, y - 3, 30, 30);
+                        const attrImg = await loadImage(attrEl.src);
+                        doc.addImage(attrImg, "PNG", x - 4, y - 3, 8, 8);
                     }
 
-                    x += 60;
-
-                    if (x > pageWidth - marginX - 60) {
-                        x = marginX;
-                        y += 70;
-                    }
+                    x += bgSize + gap;
+                    rendered++;
                 }
             }
 
-            currentY = y + 95;
-
-            if (currentY > 250) {
-                doc.addPage();
-                currentY = 15;
-            }
+            currentY = y + bgSize + 15;
         }
-
 
         // ===================== FOOTER =====================
         const pageCount = doc.internal.getNumberOfPages();
 
         for (let i = 1; i <= pageCount; i++) {
             doc.setPage(i);
-
             doc.setFillColor(0, 135, 181);
             doc.rect(0, 287, pageWidth, 10, "F");
-
             doc.setFontSize(10);
             doc.setTextColor(255, 255, 255);
             doc.text("© 2025 LUCIS_CAELUM. ALL RIGHTS RESERVED.", 15, 293);
         }
 
-        // === OPEN PRINT PREVIEW ===
-        const pdfBlob = doc.output("bloburl");
-        window.open(pdfBlob, "_blank");
+        // ===================== OUTPUT =====================
+        const blob = doc.output("blob");
+        window.open(URL.createObjectURL(blob), "_blank");
 
-        // Jika mau langsung DOWNLOAD → ganti dengan:
-        // doc.save(fileName);
+        btnPDF.disabled = false;
     });
 });
 
