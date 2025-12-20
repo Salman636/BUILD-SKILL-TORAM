@@ -1156,8 +1156,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // ===================== OUTPUT =====================
-        const blob = doc.output("blob");
-        window.open(URL.createObjectURL(blob), "_blank");
+        doc.save(fileName);
 
         btnPDF.disabled = false;
     });
