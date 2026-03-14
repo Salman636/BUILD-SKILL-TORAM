@@ -262,7 +262,14 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/spriteshield.png", x: 350, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/counterforce.png", x: 150, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/astrallance.png", x: 250, y: 362.5, w: 50, h: 50 },
-      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", x: 350, y: 425, w: 50, h: 50 }
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", x: 350, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/autodevice.png", x: 450, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/cursealtar.png", x: 450, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/ignition.png", x: 50, y: 550, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/terrawrym.png", x: 150, y: 550, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/fauxweapon.png", x: 250, y: 550, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/slashreaper.png", x: 350, y: 550, w: 50, h: 50 },
+      { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/lebenglanz.png", x: 450, y: 550, w: 50, h: 50 }
     ],
     Guard: [
       { src: "/IMG/SKILL/BUFF_SKILL/GUARD/heavyarmor.png", x: 50, y: 112.5, w: 50, h: 50 },
@@ -478,8 +485,11 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", x: 350, y: 50, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", x: 350, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/life.png", x: 150, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fantasy.png", x: 250, y: 300, w: 50, h: 50 },
-      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/ad-lib.png", x: 250, y: 425, w: 50, h: 50 }
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/fantasy.png", x: 250, y: 237.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/ad-lib.png", x: 250, y: 487.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/beatblast.png", x: 250, y: 362.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/sounveil.png", x: 350, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/battleanthem.png", x: 350, y: 425, w: 50, h: 50 }
     ],
     Dancer: [
       { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/fairy.png", x: 50, y: 50, w: 50, h: 50 },
@@ -507,6 +517,18 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/ASSIST_SKILL/BATTLE/defensemastery.png", x: 350, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/BATTLE/supergrip.png", x: 450, y: 300, w: 50, h: 50 }
     ],
+    Golem: [
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/golemcall.png", x: 50, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/neolancer.png", x: 150, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/attackboost.png", x: 250, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/neoshield.png", x: 150, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/shieldboost.png", x: 250, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/neobuster.png", x: 150, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/speedboost.png", x: 250, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/magicgrenade.png", x: 50, y: 487.5, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/frostgrenade.png", x: 150, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", x: 250, y: 425, w: 50, h: 50 }
+    ],
     Smith: [
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/refineeq.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/noviceanvil.png", x: 150, y: 50, w: 50, h: 50 },
@@ -526,7 +548,7 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/accuratecustomization.png", x: 550, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/processmaterials.png", x: 50, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/metalcompassion.png", x: 650, y: 50, w: 50, h: 50 },
-      { src: "/IMG/SKILL/OTHER_SKILL/SMITH/fabriccompassion.png", x: 650, y: 125, w: 50, h: 50 },
+      { src: "/IMG/SKILL/OTHER_SKILL/SMITH/fabriccompassion.png", x: 650, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/beastcompassion.png", x: 650, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/woodcompassion.png", x: 650, y: 425, w: 50, h: 50 },
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/medicinecompassion.png", x: 650, y: 550, w: 50, h: 50 },
@@ -582,9 +604,9 @@ document.addEventListener("DOMContentLoaded", function () {
     Mononofu: { width: 625, height: 750 },
     BareHand: { width: 425, height: 500 },
     Crusher: { width: 425, height: 375 },
-    Sprite: { width: 425, height: 500 },
+    Sprite: { width: 525, height: 625 },
     Guard: { width: 325, height: 375 },
-    Shield: { width: 425, height: 500 },
+    Shield: { width: 525, height: 500 },
     Dagger: { width: 425, height: 500 },
     Knight: { width: 625, height: 500 },
     Priest: { width: 525, height: 375 },
@@ -598,9 +620,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Necromencer: { width: 425, height: 500 },
     Survival: { width: 325, height: 500 },
     Support: { width: 525, height: 375 },
-    Minstrel: { width: 425, height: 500 },
+    Minstrel: { width: 425, height: 575 },
     Dancer: { width: 425, height: 312.5 },
     Battle: { width: 525, height: 375 },
+    Golem: { width: 325, height: 562.5 },
     Smith: { width: 725, height: 750 },
     Alchemy: { width: 625, height: 375 },
     Tamer: { width: 325, height: 375 },
@@ -645,7 +668,7 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: [[4, 7]]
     },
     Sprite: {
-      lines: [],
+      lines: [[5, 10], [9, 11], [12, 13], [13, 14], [14, 15], [15, 16]],
       splits: [[0, 1], [1, 2], [2, 3], [1, 4], [4, 5], [4, 6], [0, 7], [7, 8], [8, 9]]
     },
     Guard: {
@@ -653,7 +676,7 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: []
     },
     Shield: {
-      lines: [[1, 2], [2, 3], [0, 4], [4, 5], [6, 7], [7, 8], [10, 11], [11, 12]],
+      lines: [[1, 2], [2, 3], [0, 4], [4, 5], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12]],
       splits: [[0, 1], [0, 6]]
     },
     Dagger: {
@@ -709,8 +732,8 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: []
     },
     Minstrel: {
-      lines: [[0, 1], [1, 2], [1, 3], [4, 5]],
-      splits: [[0, 4]]
+      lines: [[0, 1], [1, 3]],
+      splits: [[1, 2], [0, 4], [4, 5], [4, 7], [7, 8], [7, 9]]
     },
     Dancer: {
       lines: [[0, 1], [1, 2], [1, 3], [5, 6]],
@@ -719,6 +742,10 @@ document.addEventListener("DOMContentLoaded", function () {
     Battle: {
       lines: [[0, 1], [1, 2], [2, 3], [3, 4], [5, 6], [6, 7], [7, 8], [8, 9], [10, 11], [11, 12], [12, 13], [13, 14]],
       splits: []
+    },
+    Golem: {
+      lines: [[1, 2], [3, 4], [5, 6], [8, 9]],
+      splits: [[0, 1], [0, 3], [0, 5], [7, 8]]
     },
     Smith: {
       lines: [[1, 2], [2, 3], [3, 4], [4, 5], [0, 6], [6, 7], [7, 8], [9, 10], [10, 11], [12, 13], [13, 14], [14, 15]],
@@ -740,7 +767,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let hoveredSkillIndex = null;
   let temporarilyDisableHover = false;
-  let selectedSkillIndex = null;
   let isLevelUpMode = true;
   const globalSkillLevels = {};
   const globalSkillStates = {};
