@@ -267,6 +267,12 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/counterforce.png", name: "Counterforce" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/astrallance.png", name: "Astral Lance" },
         { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/magicvulcan.png", name: "Magic Vulcan" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/cursealtar.png", name: "Magic Vulcan" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/ignition.png", name: "Ignition" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/terrawrym.png", name: "Terrawrym" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/fauxweapon.png", name: "Faux weapon" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/slashreaper.png", name: "Slash reaper" },
+        { src: "/IMG/SKILL/WEAPON_SKILL/SPRITE/lebenglanz.png", name: "Lebenglanz" }
     ],
     Shield: [
         { src: "/IMG/SKILL/BUFF_SKILL/SHIELD/shieldbash.png", name: "Shield Bash" },
@@ -379,8 +385,7 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/phantommissile.png", name: "Phantom Missile" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/bloodsiphon.png", name: "Blood Siphon" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/soulstream.png", name: "Soul Stream" },
-        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skeletoncall.png", name: "Skeleton Call" },
-        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/demonicpact.png", name: "Demonic Pact" },
+        { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skeletoncall.png", name: "Skeleton Call", on: 2 },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/tomb.png", name: "Tomb" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/skullshaker.png", name: "Skull Shaker" },
         { src: "/IMG/SKILL/BUFF_SKILL/NECROMENCER/hazzardstrike.png", name: "Hazzard Strike" },
@@ -394,6 +399,9 @@ const skills = {
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/ad-lib.png", name: "Ad Lib" },
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/passion.png", name: "Passion Song" },
         { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/wisdom.png", name: "Wisdom Song" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/beatblast.png", name: "Beat Blast" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/sounveil.png", name: "Sound Veil" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/MINSTREL/battleanthem.png", name: "Battle Anthem" }
     ],
     Dancer: [
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/fairy.png", name: "Fairy Dance" },
@@ -403,6 +411,11 @@ const skills = {
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/charming.png", name: "Charming Dance" },
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/elegantpoise.png", name: "Elegant Poise" },
         { src: "/IMG/SKILL/ASSIST_SKILL/DANCER/natureswonder.png", name: "Nature's Wonder" },
+    ],
+    Golem: [
+        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/magicgrenade.png", name: "Magic Grenade" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/frostgrenade.png", name: "Frost Grenade" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", name: "Flash Grenade" }
     ],
     Tamer: [
         { src: "/IMG/SKILL/OTHER_SKILL/TAMER/petheal.png", name: "Pet Heal" },
