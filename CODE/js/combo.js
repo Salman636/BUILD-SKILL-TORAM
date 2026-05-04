@@ -290,6 +290,8 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/gatlingknife.png", name: "Gatling Knife" },
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/poisondagger.png", name: "Poison Dagger" },
         { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", name: "Flincher Knife" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/rollingbite.png", name: "Rolling Bite" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/maddagger.png", name: "Mad Dagger" },
     ],
     Knight: [
         { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/assaultattack.png", name: "Assault Attack" },
@@ -358,6 +360,10 @@ const skills = {
         { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/demonclaw.png", name: "Demon Claw" },
         { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/regretless.png", name: "Regretless" },
         { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/eternalnightmare.png", name: "Eternal Nightmare" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/intimidatingEE.png", name: "Intimidating Evil Eye" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/bewitching.png", name: "Bewitching Evil Eye" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/blackflame.png", name: "Black Flame Evil Eye" },
+        { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/chaoticEE.png", name: "chaotic Evil Eye" },
     ],
     MagicBlade: [
         { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/swordconversion.png", name: "Conversion" },
@@ -415,7 +421,8 @@ const skills = {
     Golem: [
         { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/magicgrenade.png", name: "Magic Grenade" },
         { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/frostgrenade.png", name: "Frost Grenade" },
-        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", name: "Flash Grenade" }
+        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", name: "Flash Grenade" },
+        { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/barrier.png", name: "Barrier Screen" }
     ],
     Tamer: [
         { src: "/IMG/SKILL/OTHER_SKILL/TAMER/petheal.png", name: "Pet Heal" },
