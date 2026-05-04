@@ -305,7 +305,9 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/intenseknife.png", x: 150, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/mailbreaker.png", x: 350, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/knifecombat.png", x: 250, y: 425, w: 50, h: 50 },
-      { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", x: 350, y: 425, w: 50, h: 50 }
+      { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/flincherknife.png", x: 350, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/maddagger.png", x: 450, y: 50, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DAGGER/rollingbite.png", x: 450, y: 425, w: 50, h: 50 }
     ],
     Knight: [
       { src: "/IMG/SKILL/BUFF_SKILL/KNIGHT/assaultattack.png", x: 50, y: 50, w: 50, h: 50 },
@@ -402,7 +404,11 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/sacrifice.png", x: 50, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/demonclaw.png", x: 150, y: 175, w: 50, h: 50 },
       { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/regretless.png", x: 250, y: 175, w: 50, h: 50 },
-      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/eternalnightmare.png", x: 350, y: 175, w: 50, h: 50 }
+      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/eternalnightmare.png", x: 350, y: 175, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/intimidatingEE.png", x: 50, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/bewitching.png", x: 150, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/blackflame.png", x: 250, y: 300, w: 50, h: 50 },
+      { src: "/IMG/SKILL/BUFF_SKILL/DARKPOWER/chaoticEE.png", x: 350, y: 300, w: 50, h: 50 }
     ],
     MagicBlade: [
       { src: "/IMG/SKILL/BUFF_SKILL/MAGICBLADE/magicwarriormastery.png", x: 50, y: 50, w: 50, h: 50 },
@@ -527,7 +533,9 @@ document.addEventListener("DOMContentLoaded", function () {
       { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/speedboost.png", x: 250, y: 300, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/magicgrenade.png", x: 50, y: 487.5, w: 50, h: 50 },
       { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/frostgrenade.png", x: 150, y: 425, w: 50, h: 50 },
-      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", x: 250, y: 425, w: 50, h: 50 }
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/flashgrenade.png", x: 250, y: 425, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/barrier.png", x: 150, y: 550, w: 50, h: 50 },
+      { src: "/IMG/SKILL/ASSIST_SKILL/GOLEM/barrier.png", x: 250, y: 550, w: 50, h: 50 }
     ],
     Smith: [
       { src: "/IMG/SKILL/OTHER_SKILL/SMITH/refineeq.png", x: 50, y: 175, w: 50, h: 50 },
@@ -607,13 +615,13 @@ document.addEventListener("DOMContentLoaded", function () {
     Sprite: { width: 525, height: 625 },
     Guard: { width: 325, height: 375 },
     Shield: { width: 525, height: 500 },
-    Dagger: { width: 425, height: 500 },
+    Dagger: { width: 525, height: 500 },
     Knight: { width: 625, height: 500 },
     Priest: { width: 525, height: 375 },
     Assassin: { width: 525, height: 500 },
     Wizard: { width: 625, height: 500 },
     Hunter: { width: 525, height: 500 },
-    DarkPower: { width: 425, height: 250 },
+    DarkPower: { width: 425, height: 375 },
     MagicBlade: { width: 625, height: 375 },
     Ninja: { width: 426, height: 250 },
     Partisan: { width: 325, height: 500 },
@@ -623,7 +631,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Minstrel: { width: 425, height: 575 },
     Dancer: { width: 425, height: 312.5 },
     Battle: { width: 525, height: 375 },
-    Golem: { width: 325, height: 562.5 },
+    Golem: { width: 325, height: 625 },
     Smith: { width: 725, height: 750 },
     Alchemy: { width: 625, height: 375 },
     Tamer: { width: 325, height: 375 },
@@ -680,7 +688,7 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: [[0, 1], [0, 6]]
     },
     Dagger: {
-      lines: [[1, 2], [2, 3], [4, 5], [6, 7], [7, 8], [9, 10]],
+      lines: [[1, 2], [2, 3], [4, 5], [6, 7], [7, 8], [9, 10], [3, 11], [10, 12]],
       splits: [[0, 1], [0, 4], [7, 9]]
     },
     Knight: {
@@ -704,7 +712,7 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: [[11, 12], [11, 14]]
     },
     DarkPower: {
-      lines: [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7]],
+      lines: [[0, 1], [1, 2], [2, 3], [4, 5], [5, 6], [6, 7], [8, 9], [9, 10], [10, 11], [11, 12]],
       splits: []
     },
     MagicBlade: {
@@ -744,8 +752,8 @@ document.addEventListener("DOMContentLoaded", function () {
       splits: []
     },
     Golem: {
-      lines: [[1, 2], [3, 4], [5, 6], [8, 9]],
-      splits: [[0, 1], [0, 3], [0, 5], [7, 8]]
+      lines: [[1, 2], [3, 4], [5, 6], [8, 9], [10, 11]],
+      splits: [[0, 1], [0, 3], [0, 5], [7, 8], [7, 10]]
     },
     Smith: {
       lines: [[1, 2], [2, 3], [3, 4], [4, 5], [0, 6], [6, 7], [7, 8], [9, 10], [10, 11], [12, 13], [13, 14], [14, 15]],

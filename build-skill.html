@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CODE/css/menu.css" />
+    <link rel="stylesheet" href="/CODE/css/menu.css">
+    <link rel="stylesheet" href="/CODE/css/image.css">
     <title>Build Skill Toram</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -87,9 +88,33 @@
             </div>
 
             <!-- Image -->
-            <!-- <div class="image">
+            <div class="image">
                 <h1>Image (optional)</h1>
-            </div> -->
+                <div class="container">
+                    <input type="file" multiple id="upload"><br><br>
+                    <div id="gallery"></div>
+                </div>
+
+                <div class="modal" id="modal">
+                    <div class="modal-content">
+                        <span class="close" id="close">X</span>
+
+                        <div class="canvas-wrap">
+                            <canvas id="canvas"></canvas>
+
+                            <div class="frame" id="frame">
+                                <div class="handle tl"></div>
+                                <div class="handle tr"></div>
+                                <div class="handle bl"></div>
+                                <div class="handle br"></div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <button id="save-crop">Save Crop</button>
+                    </div>
+                </div>
+            </div>
 
             <!-- SKILL -->
             <div class="skl">
@@ -327,6 +352,7 @@
 </body>
 
 <script src="/CODE/js/skill.js"></script>
+<script src="/CODE/js/image.js"></script>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
