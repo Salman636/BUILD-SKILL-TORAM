@@ -1003,6 +1003,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           drawAllSkills();
           updateSPDisplay(skillId, skillLevels);
+          updateTotalSP();
         };
 
         function updateSPDisplay(skillId, skillLevels) {
@@ -1422,6 +1423,52 @@ document.addEventListener("DOMContentLoaded", function () {
       doc.setTextColor(0, 0, 0);
     });
 
+    // === UPLOADED IMAGES SECTION ===
+    const galleryImages = Array.from(document.querySelectorAll("#gallery img")).map(img => img.src);
+    const savedImages = galleryImages;
+    if (savedImages.length > 0) {
+      doc.addPage();
+      currentY = 20;
+      currentY += 5;
+      doc.setFontSize(13);
+      doc.setTextColor(0, 135, 181);
+      doc.text("UPLOADED IMAGES :", marginX, currentY);
+      currentY += 10;
+
+      const imgSize = 80;
+      const imagesPerRow = 2;
+      const spacing = 10;
+      let imgIndex = 0;
+
+      savedImages.forEach((dataURL) => {
+        const col = imgIndex % imagesPerRow;
+        const row = Math.floor(imgIndex / imagesPerRow);
+
+        const x = marginX + col * (imgSize + spacing);
+        const y = currentY + row * (imgSize + spacing);
+
+        if (y + imgSize > 280) {
+          doc.addPage();
+          currentY = 20;
+          imgIndex = 0;
+          // Recalculate for new page
+          const newCol = imgIndex % imagesPerRow;
+          const newRow = Math.floor(imgIndex / imagesPerRow);
+          const newX = marginX + newCol * (imgSize + spacing);
+          const newY = currentY + newRow * (imgSize + spacing);
+          doc.addImage(dataURL, 'PNG', newX, newY, imgSize, imgSize);
+        } else {
+          doc.addImage(dataURL, 'PNG', x, y, imgSize, imgSize);
+        }
+
+        imgIndex++;
+      });
+
+      // Adjust currentY after images
+      const rows = Math.ceil(savedImages.length / imagesPerRow);
+      currentY += rows * (imgSize + spacing) + 10;
+    }
+
     // === FOOTER ===
     const footerHeight = 10;
     const pageCount = doc.internal.getNumberOfPages();
@@ -1444,3 +1491,193 @@ document.addEventListener("DOMContentLoaded", function () {
 
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+  const upload = document.getElementById('upload');
+  const gallery = document.getElementById('gallery');
+  const modal = document.getElementById('modal');
+  const cropCanvas = document.getElementById('canv'); // Pastikan ID sesuai dengan HTML (canv)
+  const ctx = cropCanvas ? cropCanvas.getContext('2d') : null;
+  const frame = document.getElementById('frame');
+  const saveCrop = document.getElementById('save-crop');
+  const closeCrop = document.getElementById('close');
+
+  let image = new Image();
+  let currentImg;
+
+  let boxX = 0, boxY = 0, boxW = 0, boxH = 0;
+  let mode = null;
+  let startX = 0, startY = 0;
+
+  function render() {
+    if (!ctx || !cropCanvas) return;
+    ctx.clearRect(0, 0, cropCanvas.width, cropCanvas.height);
+    ctx.drawImage(image, 0, 0, cropCanvas.width, cropCanvas.height);
+  }
+
+  function updateBox() {
+    if (!frame) return;
+    frame.style.left = boxX + 'px';
+    frame.style.top = boxY + 'px';
+    frame.style.width = boxW + 'px';
+    frame.style.height = boxH + 'px';
+  }
+
+  function getMousePos(e) {
+    if (!cropCanvas) return { x: 0, y: 0 };
+    const rect = cropCanvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  }
+
+  if (upload) {
+    upload.addEventListener('change', e => {
+      [...e.target.files].forEach(file => {
+        const src = URL.createObjectURL(file);
+        const container = document.createElement('div');
+        container.className = 'item';
+
+        const img = document.createElement('img');
+        img.src = src;
+
+        img.addEventListener('click', () => {
+          image.src = src;
+          currentImg = img;
+
+          image.onload = () => {
+            if (!cropCanvas) return;
+            cropCanvas.width = image.naturalWidth;
+            cropCanvas.height = image.naturalHeight;
+            render();
+
+            requestAnimationFrame(() => {
+              const rect = cropCanvas.getBoundingClientRect();
+              boxX = 0;
+              boxY = 0;
+              boxW = rect.width;
+              boxH = rect.height;
+              updateBox();
+            });
+
+            if (modal) modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+          };
+        });
+
+        container.appendChild(img);
+        gallery?.appendChild(container);
+      });
+    });
+  }
+
+  frame?.addEventListener('mousedown', e => {
+    e.preventDefault();
+    startX = e.clientX;
+    startY = e.clientY;
+
+    if (e.target.classList.contains('handle')) {
+      mode = e.target.classList[1];
+    } else {
+      mode = 'move';
+    }
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!mode || !cropCanvas) return;
+
+    const rect = cropCanvas.getBoundingClientRect();
+    let dx = e.clientX - startX;
+    let dy = e.clientY - startY;
+
+    if (mode === 'move') {
+      boxX += dx;
+      boxY += dy;
+    } else if (mode === 'br') {
+      boxW += dx;
+      boxH += dy;
+    } else if (mode === 'bl') {
+      boxX += dx;
+      boxW -= dx;
+      boxH += dy;
+    } else if (mode === 'tr') {
+      boxY += dy;
+      boxH -= dy;
+      boxW += dx;
+    } else if (mode === 'tl') {
+      boxX += dx;
+      boxY += dy;
+      boxW -= dx;
+      boxH -= dy;
+    }
+
+    const minSize = 30;
+    boxW = Math.max(minSize, boxW);
+    boxH = Math.max(minSize, boxH);
+
+    if (boxX < 0) {
+      boxW += boxX;
+      boxX = 0;
+    }
+    if (boxY < 0) {
+      boxH += boxY;
+      boxY = 0;
+    }
+
+    boxW = Math.max(minSize, Math.min(boxW, rect.width - boxX));
+    boxH = Math.max(minSize, Math.min(boxH, rect.height - boxY));
+    boxX = Math.max(0, Math.min(boxX, rect.width - boxW));
+    boxY = Math.max(0, Math.min(boxY, rect.height - boxH));
+
+    startX = e.clientX;
+    startY = e.clientY;
+    updateBox();
+  });
+
+  window.addEventListener('mouseup', () => { mode = null; });
+
+  saveCrop?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!currentImg || !cropCanvas) return;
+
+    const rect = cropCanvas.getBoundingClientRect();
+    const scaleX = image.naturalWidth / rect.width;
+    const scaleY = image.naturalHeight / rect.height;
+    const realX = Math.max(0, Math.min(boxX * scaleX, image.naturalWidth));
+    const realY = Math.max(0, Math.min(boxY * scaleY, image.naturalHeight));
+    const realW = Math.max(1, Math.min(boxW * scaleX, image.naturalWidth - realX));
+    const realH = Math.max(1, Math.min(boxH * scaleY, image.naturalHeight - realY));
+
+    if (realW <= 0 || realH <= 0) return;
+
+    const destW = Math.round(boxW * 0.5);
+    const destH = Math.round(boxH * 0.5);
+    const temp = document.createElement('canvas');
+    temp.width = destW;
+    temp.height = destH;
+    const tctx = temp.getContext('2d');
+
+    tctx.drawImage(
+      image,
+      realX, realY, realW, realH,
+      0, 0, destW, destH
+    );
+
+    const dataURL = temp.toDataURL('image/png');
+    currentImg.src = dataURL;
+
+    const saved = JSON.parse(localStorage.getItem('images') || '[]');
+    saved.push(dataURL);
+    localStorage.setItem('images', JSON.stringify(saved));
+
+    if (modal) modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    mode = null;
+  });
+
+  closeCrop?.addEventListener('click', () => {
+    if (modal) modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    mode = null;
+  });
+});
