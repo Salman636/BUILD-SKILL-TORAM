@@ -1,7 +1,7 @@
 const gallery = document.getElementById('gallery');
 const modal = document.getElementById('modal');
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
+const canv = document.getElementById('canv');
+const ctx = canv.getContext('2d');
 const frame = document.getElementById('frame');
 
 let image = new Image();
@@ -13,7 +13,7 @@ let mode = null;
 let startX, startY;
 
 function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canv.width, canv.height);
     ctx.drawImage(image, 0, 0);
 }
 
@@ -39,13 +39,13 @@ upload.onchange = e => {
             currentImg = img;
 
             image.onload = () => {
-                canvas.width = image.naturalWidth;
-                canvas.height = image.naturalHeight;
+                canv.width = image.naturalWidth;
+                canv.height = image.naturalHeight;
 
                 render();
 
                 requestAnimationFrame(() => {
-                    const rect = canvas.getBoundingClientRect();
+                    const rect = canv.getBoundingClientRect();
                     boxX = 0;
                     boxY = 0;
                     boxW = rect.width;
@@ -81,7 +81,7 @@ function clamp(v, min, max) {
 window.onmousemove = e => {
     if (!mode) return;
 
-    const rect = canvas.getBoundingClientRect();
+    const rect = canv.getBoundingClientRect();
     let dx = e.clientX - startX;
     let dy = e.clientY - startY;
 
@@ -134,8 +134,8 @@ document.getElementById('save-crop').onclick = () => {
     if (!currentImg) return;
 
     const rect = {
-        width: canvas.width,
-        height: canvas.height
+        width: canv.width,
+        height: canv.height
     };
 
     const scaleX = image.naturalWidth / rect.width;
@@ -148,7 +148,7 @@ document.getElementById('save-crop').onclick = () => {
 
     if (realW <= 0 || realH <= 0) return;
 
-    const temp = document.createElement('canvas');
+    const temp = document.createElement('canv');
     temp.width = realW;
     temp.height = realH;
 
