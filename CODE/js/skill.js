@@ -1426,10 +1426,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // === UPLOADED IMAGES SECTION ===
     const galleryImages = Array.from(document.querySelectorAll("#gallery img")).map(img => img.src);
     const savedImages = galleryImages;
+
     if (savedImages.length > 0) {
       doc.addPage();
       currentY = 20;
-      currentY += 5;
+
       doc.setFontSize(13);
       doc.setTextColor(0, 135, 181);
       doc.text("UPLOADED IMAGES :", marginX, currentY);
@@ -1438,35 +1439,30 @@ document.addEventListener("DOMContentLoaded", function () {
       const imgSize = 80;
       const imagesPerRow = 2;
       const spacing = 10;
-      let imgIndex = 0;
+      const pageBottom = 280;
+
+      let col = 0;
+      let rowStartY = currentY;
 
       savedImages.forEach((dataURL) => {
-        const col = imgIndex % imagesPerRow;
-        const row = Math.floor(imgIndex / imagesPerRow);
-
-        const x = marginX + col * (imgSize + spacing);
-        const y = currentY + row * (imgSize + spacing);
-
-        if (y + imgSize > 280) {
+        // Jika mulai baris baru, cek apakah masih muat di halaman ini
+        if (col === 0 && rowStartY + imgSize > pageBottom) {
           doc.addPage();
-          currentY = 20;
-          imgIndex = 0;
-          // Recalculate for new page
-          const newCol = imgIndex % imagesPerRow;
-          const newRow = Math.floor(imgIndex / imagesPerRow);
-          const newX = marginX + newCol * (imgSize + spacing);
-          const newY = currentY + newRow * (imgSize + spacing);
-          doc.addImage(dataURL, 'PNG', newX, newY, imgSize, imgSize);
-        } else {
-          doc.addImage(dataURL, 'PNG', x, y, imgSize, imgSize);
+          rowStartY = 20;
         }
 
-        imgIndex++;
+        const x = marginX + col * (imgSize + spacing);
+        doc.addImage(dataURL, 'PNG', x, rowStartY, imgSize, imgSize);
+
+        col++;
+        if (col >= imagesPerRow) {
+          col = 0;
+          rowStartY += imgSize + spacing;
+        }
       });
 
-      // Adjust currentY after images
-      const rows = Math.ceil(savedImages.length / imagesPerRow);
-      currentY += rows * (imgSize + spacing) + 10;
+      // currentY setelah semua gambar
+      currentY = rowStartY + (col > 0 ? imgSize + spacing : 0) + 10;
     }
 
     // === FOOTER ===
@@ -1492,10 +1488,11 @@ document.addEventListener("DOMContentLoaded", function () {
 })
 
 document.addEventListener('DOMContentLoaded', () => {
+
   const upload = document.getElementById('upload');
   const gallery = document.getElementById('gallery');
   const modal = document.getElementById('modal');
-  const cropCanvas = document.getElementById('canv'); // Pastikan ID sesuai dengan HTML (canv)
+  const cropCanvas = document.getElementById('canv');
   const ctx = cropCanvas ? cropCanvas.getContext('2d') : null;
   const frame = document.getElementById('frame');
   const saveCrop = document.getElementById('save-crop');
@@ -1503,10 +1500,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let image = new Image();
   let currentImg;
-
   let boxX = 0, boxY = 0, boxW = 0, boxH = 0;
   let mode = null;
   let startX = 0, startY = 0;
+
+  /* ── Helper: ambil posisi dari event mouse ATAU touch ── */
+  function getEventPos(e) {
+    if (e.touches && e.touches.length > 0) {
+      return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY };
+    }
+    return { clientX: e.clientX, clientY: e.clientY };
+  }
 
   function render() {
     if (!ctx || !cropCanvas) return;
@@ -1522,47 +1526,21 @@ document.addEventListener('DOMContentLoaded', () => {
     frame.style.height = boxH + 'px';
   }
 
-  function getMousePos(e) {
-    if (!cropCanvas) return { x: 0, y: 0 };
-    const rect = cropCanvas.getBoundingClientRect();
-    return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    };
-  }
-
+  /* ── Upload & gallery ── */
   if (upload) {
     upload.addEventListener('change', e => {
       [...e.target.files].forEach(file => {
         const src = URL.createObjectURL(file);
         const container = document.createElement('div');
         container.className = 'item';
-
         const img = document.createElement('img');
         img.src = src;
 
-        img.addEventListener('click', () => {
-          image.src = src;
-          currentImg = img;
-
-          image.onload = () => {
-            if (!cropCanvas) return;
-            cropCanvas.width = image.naturalWidth;
-            cropCanvas.height = image.naturalHeight;
-            render();
-
-            requestAnimationFrame(() => {
-              const rect = cropCanvas.getBoundingClientRect();
-              boxX = 0;
-              boxY = 0;
-              boxW = rect.width;
-              boxH = rect.height;
-              updateBox();
-            });
-
-            if (modal) modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-          };
+        img.addEventListener('click', () => openModal(src, img));
+        /* touch tap untuk gallery */
+        img.addEventListener('touchend', ev => {
+          ev.preventDefault();
+          openModal(src, img);
         });
 
         container.appendChild(img);
@@ -1571,72 +1549,99 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  frame?.addEventListener('mousedown', e => {
+  function openModal(src, img) {
+    image.src = src;
+    currentImg = img;
+    image.onload = () => {
+      if (!cropCanvas) return;
+      cropCanvas.width = image.naturalWidth;
+      cropCanvas.height = image.naturalHeight;
+      render();
+
+      requestAnimationFrame(() => {
+        const rect = cropCanvas.getBoundingClientRect();
+        boxX = 0; boxY = 0;
+        boxW = rect.width; boxH = rect.height;
+        updateBox();
+      });
+
+      if (modal) modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    };
+  }
+
+  /* ── Unified pointer start (mouse + touch) ── */
+  function onPointerStart(e) {
     e.preventDefault();
-    startX = e.clientX;
-    startY = e.clientY;
+    const pos = getEventPos(e);
+    startX = pos.clientX;
+    startY = pos.clientY;
 
     if (e.target.classList.contains('handle')) {
-      mode = e.target.classList[1];
+      mode = e.target.classList[1]; /* tl | tr | bl | br */
     } else {
       mode = 'move';
     }
-  });
+  }
 
-  window.addEventListener('mousemove', e => {
+  /* ── Unified pointer move ── */
+  function onPointerMove(e) {
     if (!mode || !cropCanvas) return;
+    e.preventDefault();
 
+    const pos = getEventPos(e);
     const rect = cropCanvas.getBoundingClientRect();
-    let dx = e.clientX - startX;
-    let dy = e.clientY - startY;
+    const dx = pos.clientX - startX;
+    const dy = pos.clientY - startY;
 
     if (mode === 'move') {
-      boxX += dx;
-      boxY += dy;
+      boxX += dx; boxY += dy;
     } else if (mode === 'br') {
-      boxW += dx;
-      boxH += dy;
+      boxW += dx; boxH += dy;
     } else if (mode === 'bl') {
-      boxX += dx;
-      boxW -= dx;
-      boxH += dy;
+      boxX += dx; boxW -= dx; boxH += dy;
     } else if (mode === 'tr') {
-      boxY += dy;
-      boxH -= dy;
-      boxW += dx;
+      boxY += dy; boxH -= dy; boxW += dx;
     } else if (mode === 'tl') {
-      boxX += dx;
-      boxY += dy;
-      boxW -= dx;
-      boxH -= dy;
+      boxX += dx; boxY += dy; boxW -= dx; boxH -= dy;
     }
 
     const minSize = 30;
     boxW = Math.max(minSize, boxW);
     boxH = Math.max(minSize, boxH);
 
-    if (boxX < 0) {
-      boxW += boxX;
-      boxX = 0;
-    }
-    if (boxY < 0) {
-      boxH += boxY;
-      boxY = 0;
-    }
+    if (boxX < 0) { boxW += boxX; boxX = 0; }
+    if (boxY < 0) { boxH += boxY; boxY = 0; }
 
     boxW = Math.max(minSize, Math.min(boxW, rect.width - boxX));
     boxH = Math.max(minSize, Math.min(boxH, rect.height - boxY));
     boxX = Math.max(0, Math.min(boxX, rect.width - boxW));
     boxY = Math.max(0, Math.min(boxY, rect.height - boxH));
 
-    startX = e.clientX;
-    startY = e.clientY;
+    startX = pos.clientX;
+    startY = pos.clientY;
     updateBox();
-  });
+  }
 
-  window.addEventListener('mouseup', () => { mode = null; });
+  function onPointerEnd() { mode = null; }
 
-  saveCrop?.addEventListener('click', (e) => {
+  /* ── Pasang listener ke frame (drag box + handles) ── */
+  if (frame) {
+    /* Mouse */
+    frame.addEventListener('mousedown', onPointerStart);
+    /* Touch */
+    frame.addEventListener('touchstart', onPointerStart, { passive: false });
+  }
+
+  /* ── Pasang listener global untuk move & end ── */
+  window.addEventListener('mousemove', onPointerMove);
+  window.addEventListener('mouseup', onPointerEnd);
+  window.addEventListener('touchmove', onPointerMove, { passive: false });
+  window.addEventListener('touchend', onPointerEnd);
+  window.addEventListener('touchcancel', onPointerEnd);
+
+  /* ── Simpan crop ── */
+  saveCrop?.addEventListener('click', e => {
     e.preventDefault();
     if (!currentImg || !cropCanvas) return;
 
@@ -1655,29 +1660,36 @@ document.addEventListener('DOMContentLoaded', () => {
     const temp = document.createElement('canvas');
     temp.width = destW;
     temp.height = destH;
-    const tctx = temp.getContext('2d');
-
-    tctx.drawImage(
-      image,
-      realX, realY, realW, realH,
-      0, 0, destW, destH
-    );
+    temp.getContext('2d').drawImage(image, realX, realY, realW, realH, 0, 0, destW, destH);
 
     const dataURL = temp.toDataURL('image/png');
     currentImg.src = dataURL;
 
-    const saved = JSON.parse(localStorage.getItem('images') || '[]');
-    saved.push(dataURL);
-    localStorage.setItem('images', JSON.stringify(saved));
+    try {
+      const saved = JSON.parse(localStorage.getItem('images') || '[]');
+      saved.push(dataURL);
+      localStorage.setItem('images', JSON.stringify(saved));
+    } catch (_) { /* storage penuh — abaikan */ }
 
+    closeModal();
+  });
+
+  /* Touch-friendly: tombol simpan juga merespons touchend */
+  saveCrop?.addEventListener('touchend', e => {
+    e.preventDefault();
+    saveCrop.click();
+  });
+
+  closeCrop?.addEventListener('click', closeModal);
+  closeCrop?.addEventListener('touchend', e => {
+    e.preventDefault();
+    closeModal();
+  });
+
+  function closeModal() {
     if (modal) modal.style.display = 'none';
     document.body.style.overflow = 'auto';
     mode = null;
-  });
+  }
 
-  closeCrop?.addEventListener('click', () => {
-    if (modal) modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
-    mode = null;
-  });
 });
