@@ -1555,23 +1555,26 @@ document.addEventListener('DOMContentLoaded', () => {
     image.onload = () => {
       if (!cropCanvas) return;
 
-      // Ukuran canvas tetap, BUKAN natural size
       const DISPLAY_W = 700;
       const DISPLAY_H = Math.round(DISPLAY_W * image.naturalHeight / image.naturalWidth);
       cropCanvas.width = DISPLAY_W;
       cropCanvas.height = DISPLAY_H;
 
-      render();
-
-      requestAnimationFrame(() => {
-        const rect = cropCanvas.getBoundingClientRect();
-        boxX = 0; boxY = 0;
-        boxW = rect.width; boxH = rect.height;
-        updateBox();
-      });
-
+      // Tampilkan modal DULU sebelum render & set frame
       if (modal) modal.style.display = 'flex';
       document.body.style.overflow = 'hidden';
+
+      // Render setelah modal visible, baru set frame
+      requestAnimationFrame(() => {
+        render(); // gambar ke canvas
+
+        requestAnimationFrame(() => {
+          const rect = cropCanvas.getBoundingClientRect();
+          boxX = 0; boxY = 0;
+          boxW = rect.width; boxH = rect.height;
+          updateBox();
+        });
+      });
     };
   }
 
