@@ -1554,8 +1554,13 @@ document.addEventListener('DOMContentLoaded', () => {
     currentImg = img;
     image.onload = () => {
       if (!cropCanvas) return;
-      cropCanvas.width = image.naturalWidth;
-      cropCanvas.height = image.naturalHeight;
+
+      // Ukuran canvas tetap, BUKAN natural size
+      const DISPLAY_W = 700;
+      const DISPLAY_H = Math.round(DISPLAY_W * image.naturalHeight / image.naturalWidth);
+      cropCanvas.width = DISPLAY_W;
+      cropCanvas.height = DISPLAY_H;
+
       render();
 
       requestAnimationFrame(() => {
@@ -1645,22 +1650,31 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     if (!currentImg || !cropCanvas) return;
 
+    // Scale dari canvas display ke natural image
+    const scaleX = image.naturalWidth / cropCanvas.width;
+    const scaleY = image.naturalHeight / cropCanvas.height;
+
     const rect = cropCanvas.getBoundingClientRect();
-    const scaleX = image.naturalWidth / rect.width;
-    const scaleY = image.naturalHeight / rect.height;
-    const realX = Math.max(0, Math.min(boxX * scaleX, image.naturalWidth));
-    const realY = Math.max(0, Math.min(boxY * scaleY, image.naturalHeight));
-    const realW = Math.max(1, Math.min(boxW * scaleX, image.naturalWidth - realX));
-    const realH = Math.max(1, Math.min(boxH * scaleY, image.naturalHeight - realY));
+    // boxX/boxY dalam px layar → konversi ke px canvas dulu
+    const cssToCanvasX = cropCanvas.width / rect.width;
+    const cssToCanvasY = cropCanvas.height / rect.height;
+
+    const canvasBoxX = boxX * cssToCanvasX;
+    const canvasBoxY = boxY * cssToCanvasY;
+    const canvasBoxW = boxW * cssToCanvasX;
+    const canvasBoxH = boxH * cssToCanvasY;
+
+    const realX = Math.max(0, canvasBoxX * scaleX);
+    const realY = Math.max(0, canvasBoxY * scaleY);
+    const realW = Math.min(canvasBoxW * scaleX, image.naturalWidth - realX);
+    const realH = Math.min(canvasBoxH * scaleY, image.naturalHeight - realY);
 
     if (realW <= 0 || realH <= 0) return;
 
-    const destW = Math.round(boxW * 0.5);
-    const destH = Math.round(boxH * 0.5);
     const temp = document.createElement('canvas');
-    temp.width = destW;
-    temp.height = destH;
-    temp.getContext('2d').drawImage(image, realX, realY, realW, realH, 0, 0, destW, destH);
+    temp.width = Math.round(realW);
+    temp.height = Math.round(realH);
+    temp.getContext('2d').drawImage(image, realX, realY, realW, realH, 0, 0, temp.width, temp.height);
 
     const dataURL = temp.toDataURL('image/png');
     currentImg.src = dataURL;
@@ -1669,7 +1683,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const saved = JSON.parse(localStorage.getItem('images') || '[]');
       saved.push(dataURL);
       localStorage.setItem('images', JSON.stringify(saved));
-    } catch (_) { /* storage penuh — abaikan */ }
+    } catch (_) { }
 
     closeModal();
   });
