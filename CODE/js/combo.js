@@ -990,7 +990,7 @@ window.onclick = (e) => {
 
 
 
-// === SAVE PDF (PRINT PREVIEW) ===
+// === SAVE PDF ===
 document.addEventListener("DOMContentLoaded", function () {
     const fileName = "Combo_Build.pdf";
 
@@ -1068,11 +1068,18 @@ document.addEventListener("DOMContentLoaded", function () {
             const combo = combos[c];
             const border = combo.querySelector(".border");
 
-            const hasFirst = border.querySelector("img.first");
-            const hasElse = border.querySelector("img.else");
+            // Cek apakah skill pertama sudah di-set (bukan placeholder)
+            const firstImg = border.querySelector("img.first");
+            const firstIsSet = firstImg && !firstImg.src.includes("background1.png");
+
+            // Cek apakah minimal 1 slot else sudah di-set (bukan placeholder)
+            const elseImgs = border.querySelectorAll("img.else");
+            const anyElseIsSet = Array.from(elseImgs).some(
+                img => !img.src.includes("background2.png")
+            );
 
             // combo kosong → skip
-            if (!hasFirst && !hasElse) continue;
+            if (!firstIsSet && !anyElseIsSet) continue;
 
             // ========== PAGE BREAK TIAP 5 COMBO ==========
             if (printedCombo > 0 && printedCombo % 5 === 0) {
