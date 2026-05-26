@@ -1191,3 +1191,113 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+// === SEARCH SKILL ===
+const searchInput = document.getElementById("searchInput");
+const searchResultContainer = document.createElement("div");
+searchResultContainer.id = "canvas_Search";
+searchResultContainer.classList.add("canvasContainer");
+searchResultContainer.innerHTML = "<h3>Hasil Pencarian</h3>";
+document.querySelector(".skill-img").prepend(searchResultContainer);
+
+searchInput.addEventListener("input", function () {
+    const query = this.value.trim().toLowerCase();
+
+    // Kalau kosong, kembali ke tampilan normal (tutup search result)
+    if (!query) {
+        searchResultContainer.classList.remove("active");
+
+        // Tampilkan kembali skillList
+        document.getElementById("skillList").style.display = "";
+        return;
+    }
+
+    // Sembunyikan skillList & semua canvas category
+    document.getElementById("skillList").style.display = "none";
+    containers.forEach((c) => c.classList.remove("active"));
+
+    // Aktifkan panel hasil pencarian
+    searchResultContainer.classList.add("active");
+
+    // Hapus hasil lama
+    const oldList = searchResultContainer.querySelector(".search-result-list");
+    if (oldList) oldList.remove();
+
+    // Kumpulkan semua skill yang cocok
+    const resultList = document.createElement("div");
+    resultList.classList.add("search-result-list");
+    resultList.style.display = "flex";
+    resultList.style.flexDirection = "column";
+    resultList.style.gap = "10px";
+    resultList.style.marginTop = "10px";
+
+    let found = 0;
+
+    for (const category in skills) {
+        skills[category].forEach((skill) => {
+            if (skill.name.toLowerCase().includes(query)) {
+                found++;
+
+                const item = document.createElement("div");
+                item.style.display = "flex";
+                item.style.alignItems = "center";
+                item.style.gap = "15px";
+
+                const bgWrapper = document.createElement("div");
+                bgWrapper.style.width = "50px";
+                bgWrapper.style.height = "50px";
+                bgWrapper.style.backgroundImage = "url('/IMG/SKILL/back-off.png')";
+                bgWrapper.style.backgroundSize = "cover";
+                bgWrapper.style.display = "flex";
+                bgWrapper.style.justifyContent = "center";
+                bgWrapper.style.alignItems = "center";
+                bgWrapper.style.cursor = "pointer";
+
+                const img = document.createElement("img");
+                img.src = skill.src;
+                img.alt = skill.name;
+                img.style.width = "40px";
+                img.style.height = "40px";
+
+                bgWrapper.appendChild(img);
+
+                const nameSpan = document.createElement("span");
+                nameSpan.style.fontSize = "14px";
+                nameSpan.style.fontWeight = "600";
+
+                // Highlight kata yang cocok
+                const regex = new RegExp(`(${query})`, "gi");
+                nameSpan.innerHTML = skill.name.replace(
+                    regex,
+                    `<mark style="background:#ffe066;border-radius:3px;padding:0 2px;">$1</mark>`
+                );
+
+                // Label category kecil
+                const catLabel = document.createElement("span");
+                catLabel.textContent = category;
+                catLabel.style.fontSize = "11px";
+                catLabel.style.color = "#888";
+                catLabel.style.marginLeft = "4px";
+
+                const textWrap = document.createElement("div");
+                textWrap.style.display = "flex";
+                textWrap.style.flexDirection = "column";
+                textWrap.appendChild(nameSpan);
+                textWrap.appendChild(catLabel);
+
+                item.appendChild(bgWrapper);
+                item.appendChild(textWrap);
+                resultList.appendChild(item);
+            }
+        });
+    }
+
+    if (found === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = "Skill tidak ditemukan.";
+        empty.style.color = "#aaa";
+        empty.style.fontStyle = "italic";
+        resultList.appendChild(empty);
+    }
+
+    searchResultContainer.appendChild(resultList);
+});
