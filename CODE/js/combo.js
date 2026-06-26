@@ -163,6 +163,7 @@ const skills = {
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magiccannon.png", name: "Magic: Cannon" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/crash.png", name: "Magic: Crash" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/magicknife.png", name: "Magic Knife", on: 2 },
+        { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/qadal.png", name: "Qadal" },
         { src: "IMG/SKILL/WEAPON_SKILL/MAGIC/mpcharge.png", name: "MP Charge", on: 2 },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/maximizer.png", name: "Maximizer" },
         { src: "/IMG/SKILL/WEAPON_SKILL/MAGIC/enchantedbarriers.png", name: "Enchanted Barriers" },
